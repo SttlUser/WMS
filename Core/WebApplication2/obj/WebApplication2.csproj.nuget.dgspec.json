@@ -1,0 +1,277 @@
+{
+  "format": 1,
+  "restore": {
+    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj": {}
+  },
+  "projects": {
+    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj",
+        "projectName": "Models",
+        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
+        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj",
+        "projectName": "PostgresDBHelper",
+        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj",
+        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
+        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
+                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+              },
+              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj": {
+                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
+        "projectName": "Repositories",
+        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
+        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
+                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj",
+        "projectName": "WebApplication2",
+        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj",
+        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
+        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
+                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+              },
+              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj": {
+                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj"
+              },
+              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj": {
+                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

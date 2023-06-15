@@ -1,0 +1,19 @@
+<div class="card" style="width: 18rem">
+  <ul class="list-group list-group-flush p-3">
+    <li class="list-group-item">
+      <input type="text" class="form-control" placeholder="Role Name" />
+    </li>
+    <li class="list-group-item">
+      <select class="form-select" aria-label="Default select example">
+        <option selected>select</option>
+        <div *ngFor="let item; in: roleMasterList">
+          <option value="{{ item.id }}">{{ item.name }}</option>
+        </div>
+        <!-- <option value="1">One</option> -->
+      </select>
+    </li>
+    <li class="list-group-item">
+      <button class="btn btn-primary">Create</button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,25 @@
+<form #Form="ngForm" (ngSubmit)="Authenticate(Form)">
+  <div class="mb-3">
+    <input
+      ngModel
+      type="text"
+      class="form-control"
+      id="username"
+      name="username"
+      placeholder="User Name"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      ngModel
+      type="text"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Password"
+    />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+<!-- <a routerLink="/">Submit</a> -->
