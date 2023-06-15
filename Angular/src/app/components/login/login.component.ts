@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { environment } from 'src/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,9 +16,12 @@ export class LoginComponent {
     this.http.post(`${environment.api.server}/Login/UserLogin`, Form.value).subscribe((res: any) => {
       localStorage.setItem('error', JSON.stringify({ code: res?.errorInfo?.code, message: res?.errorInfo?.message }));
       if (res?.errorInfo?.code !== 0) {
-        alert(res?.errorInfo?.message);
+        alert(res?.errorInfo?.message + res?.errorInfo?.code);
       } else {
         console.log("loggin in")
+        
+        localStorage.setItem('loginStatus','true')
+          
         this.router.navigate(['/']);
       }
     })

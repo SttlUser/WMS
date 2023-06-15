@@ -11,10 +11,11 @@ export class RoleMasterComponent {
   constructor(private router: Router) {
     let item = [{ "id": 1, "name": "admin" }, { "id": 2, "name": "user" }]
     const err = JSON.parse(localStorage.getItem('error') || '{}');
-
+    
     if (err.code !== 0) {
       console.log("Error", err);
       this.router.navigate(['/login']);
     }
+    
   }
 }

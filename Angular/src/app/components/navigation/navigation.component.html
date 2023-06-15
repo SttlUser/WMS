@@ -27,7 +27,7 @@
         </li>
       </ul>
 
-      <div *ngIf="loginText; else loggedOut">
+      <div *ngIf="loginStatus; else loggedOut">
         <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
           Logout
         </button>

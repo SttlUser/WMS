@@ -9,16 +9,18 @@ export class NavigationComponent {
   // loginState = JSON.parse(localStorage.getItem('error') || "{}")?.code
   // loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? 'Logout' : 'Login';
   loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? true : false;
+  loginStatus = localStorage.getItem('loginStatus') === 'true' ? true : false;
   constructor(private router: Router) { }
   goToLogin() {
-    this.loginText = true;
+    this.loginText = false;
     // console.log("logging in");
     this.router.navigate(['/login']);
 
   }
   logout() {
     localStorage.removeItem('error');
-    this.loginText = false;
+    localStorage.removeItem('loginStatus');
+    this.loginText = true;
     console.log("logging out");
     this.router.navigate(['/']);
   }
