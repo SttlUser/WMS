@@ -7,6 +7,8 @@ import { LoginComponent } from './components/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FormsModule } from '@angular/forms';
 import { RoleMasterComponent } from './components/roleMaster/roleMaster.component';
+import {CustomerService} from './customer.service';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { RoleMasterComponent } from './components/roleMaster/roleMaster.componen
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
