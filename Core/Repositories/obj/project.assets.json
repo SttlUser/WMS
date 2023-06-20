@@ -27,19 +27,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\stadmin\\.nuget\\packages\\": {}
+    "C:\\Users\\bapsd\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
+      "projectUniqueName": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj",
       "projectName": "Repositories",
-      "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
-      "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
-      "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\obj\\",
+      "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj",
+      "packagesPath": "C:\\Users\\bapsd\\.nuget\\packages\\",
+      "outputPath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bapsd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -53,8 +58,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
-              "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+            "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj": {
+              "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj"
             }
           }
         }

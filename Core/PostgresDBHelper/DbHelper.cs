@@ -26,7 +26,7 @@ namespace PostgresDBHelper
         #region "Role Management"
         public async Task<List<RoleType>> GetRoleType()
         {
-            return await _pgDbDapperHelperRepo.GetAll<RoleType>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"RolteTypes\"");
+            return await _pgDbDapperHelperRepo.GetAll<RoleType>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"RoleTypes\"");
             //return await _pgDbDapperHelperRepo.GetAll<RoleType>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"ManageRoleMaster\"(@roletypeid = null, @rolename=null,@flag=2)");
 
             //return await _pgDbDapperHelperRepo.GetAll<RoleType>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"RoleTypes\"");
@@ -36,10 +36,12 @@ namespace PostgresDBHelper
         {
             return await _pgDbDapperHelperRepo.GetId<RoleType>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"RoleTypes\" where \"Id\" = " + id, 0);
         }
-        public async Task<RoleMaster> CreateRole(string name, int roleTypeId, int flag = 1)
+        public async Task<RoleMaster> CreateRole(int flag,string roleName, int roletype,int createdBy)
         {
-            return await _pgDbDapperHelperRepo.GetAsync<RoleMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"ManageRoleMaster\" (@roletypeid,@name, @flag)", new { roleTypeId, name, flag });
+            return await _pgDbDapperHelperRepo.GetAsync<RoleMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetRoleMasterDetails\"(@flag,@roleName,@roletype,@CreatedBy) ", new {flag,roleName , roletype , createdBy });
         }
         #endregion
     }
 }
+
+//int createdBy, String roleName, int roletype ,int flag = 1

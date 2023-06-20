@@ -87,9 +87,11 @@ namespace WebApplication2.Controllers
             try
             {
                 //JsonObject obj = JsonNode.Parse(role).AsObject();
-                int roleid = (int)role["roleid"];
-                string name = (string)role["name"];
-                roleMaster = await _dBHelperRepo.CreateRole(name, roleid, 1);
+                int roletype = Convert.ToInt32(role["roleid"].ToString()); // (int)role["roleid"];
+                string roleName = (string)role["name"];
+                //roleMaster = await _dBHelperRepo.CreateRole(2,roleName,roletype);
+                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype,1);
+
                 roleMaster.Error = ReturnError(0, string.Empty);
             }
             catch (Exception ex)

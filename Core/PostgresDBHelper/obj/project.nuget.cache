@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "LdN3HTydiDRMQeyEOlcAtPP2L6oGD8fPYtRh7aOEWUB8T+d6+Z0FBJZ/4PAVrMKrliMgJ3Ibzj8jB/+1HT2QRw==",
+  "dgSpecHash": "vl7SJQMltlvOJ+rnk4VAHyDlCWLCTwalLgqFmAhFMuG9QWAWIMVCzcFRq0osbPX/MZjscz+mIS5LzXP4NojOQw==",
   "success": true,
-  "projectFilePath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj",
+  "projectFilePath": "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\stadmin\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
-    "C:\\Users\\stadmin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\stadmin\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
-    "C:\\Users\\stadmin\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\bapsd\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\bapsd\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\bapsd\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
+    "C:\\Users\\bapsd\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

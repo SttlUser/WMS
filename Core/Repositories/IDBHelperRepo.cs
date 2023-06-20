@@ -13,6 +13,6 @@ namespace Repositories
         Task<UserMaster> GetUser(string username, string password);
         Task<List<RoleType>> GetRoleType();
         Task <RoleType> GetRoleTypeById(int id);
-        Task<RoleMaster> CreateRole(string name, int roleId, int flag);
+        Task<RoleMaster> CreateRole(  int flag, string name, int roletype,int createdBy);
     }
 }
