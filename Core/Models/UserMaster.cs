@@ -20,5 +20,6 @@ namespace Models
         public int ? DeletedBy { get; set; }
         public int? CreatedBy { get; set; }
         public int? LastModifiedBy { get; set; }
+        public Error Error { get; set; }
     }
 }
