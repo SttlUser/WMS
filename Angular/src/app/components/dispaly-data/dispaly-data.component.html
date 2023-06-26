@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>Role Master Detail</h4>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="btn-outline-secondary me-3 p-2" style="float: right">
+            <button type="button" class="btn btn-primary" (click)="GotoRoleMaster()" >Primary</button>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Role Type ID</th>
+                    <th>Created By</th>
+                    <th>Last Modifier</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr *ngFor="let data of data">
+                    <td>{{data.id}}</td>
+                    <td>{{data.s_type}}</td>
+                    <td>{{data.f_name}}</td>
+                    <td>{{data.l_name}}</td>
+                    <td>{{data.description}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.mobile}}</td>
+                    <td>
+                         <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a> 
+                        
+                        <button class="edit" title="Edit" (click)="updateUser(data)"data-toggle="modal" data-target="#modalSubscriptionForm"><i
+                                class="material-icons">&#xE254;</i></button>&nbsp;
+                        <button class="delete" title="Delete" (click)="deleteUser(data.id)" data-toggle="tooltip"><i
+                                class="material-icons">&#xE872;</i></button>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Update</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

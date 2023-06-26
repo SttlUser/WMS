@@ -1,0 +1,42 @@
+<article>
+    <section class="listing-apply">
+      <h2 class="section-heading">Create User</h2>
+      <form [formGroup]="applyForm" (ngSubmit)="PostUserData()">
+        <input hidden type="text"   name="cb_pk_id"  formControlName="cb_pk_id" >
+        <label for="first-name">First Name</label>
+        <input id="firstname" type="text"   name="firstname" formControlName="firstname">
+        <br>
+        <br>
+        <label for="middlename">Middle Name</label>
+        <input id="middlename" type="text"  name="Middlename" formControlName="middlename">
+        <br>
+        <br>
+        <label for="lastname">Last Name</label>
+        <input id="lastname" type="text"   name="lastname" formControlName="lastname">
+        <br> 
+        <br>   
+        <label for="username">User name</label>
+        <input id="username" type="text"   name="username" formControlName="username">
+        <br> 
+        <br>   
+        <label for="username">Password</label>
+        <input id="password" type="password"   name="password" formControlName="password">
+        <br>
+        <br>
+        <label for="email">Email</label>
+        <input id="email" type="email"   name="email" formControlName="email">
+        <br>
+        <br>
+        <label for="phone">Phone</label>
+        <input id="phone" type="text"  name="phone" formControlName="phone">
+        <br>
+        <br>
+          <select for="select-role" id="ins_del_id" formControlName="ins_del_id">
+        <option  name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
+          </select>
+          <br>
+          <br>
+        <button type="submit" class="primary"  >Create</button>
+      </form>
+    </section>
+  </article>
