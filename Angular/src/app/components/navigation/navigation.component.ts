@@ -21,4 +21,16 @@ export class NavigationComponent {
     this.loginText = false;
     this.router.navigate(['/']);
   }
+  updateForm(){
+    this.router.navigate(['']); 
+  }
+  editRow(row: any){
+    this.router.navigate(['/edit-usermaster']);
+  }
+
+  deletebtn(){
+
+  }
+
+
 }

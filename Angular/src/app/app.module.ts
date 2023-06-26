@@ -10,6 +10,12 @@ import { RoleMasterComponent } from './components/roleMaster/roleMaster.componen
 import {CustomerService} from './customer.service';
 import { DispalyDataComponent } from './components/dispaly-data/dispaly-data.component';
 import { HomeComponent } from './components/home/home.component';
+import { EditUsermasterComponent } from './components/edit-usermaster/edit-usermaster.component';
+import { UsermasterComponent } from './components/usermaster/usermaster.component';
+import { CommonModule } from '@angular/common';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+
+
 
 @NgModule({
   declarations: [
@@ -19,13 +25,21 @@ import { HomeComponent } from './components/home/home.component';
     RoleMasterComponent,
     DispalyDataComponent,
     HomeComponent,
+    UsermasterComponent,
+    EditUsermasterComponent,
+    CreateUserComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [CustomerService],
   bootstrap: [AppComponent]
