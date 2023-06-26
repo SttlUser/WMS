@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EYRGvlttBq3kZxa21rUYOltlU6eRvVFbrAPxqjn+jzL4R682ipTlClmi4p5SlaDv524sbyss2hBAV2SACbTkCA==",
+  "dgSpecHash": "CYiJMTC+vKp4fyvZV8MbIsJ40Oue/XEeDR/QVd+xlzh7Yv4yMEPmokt5YmkX4AU7cmx6LQal2uENgHv451i+nw==",
   "success": true,
-  "projectFilePath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
+  "projectFilePath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

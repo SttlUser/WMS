@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,Input} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,15 +11,26 @@ export class NavigationComponent {
   loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? true : false;
   constructor(private router: Router) { }
   goToLogin() {
-    this.loginText = true;
+    //this.loginText = true;
     // console.log("logging in");
     this.router.navigate(['/login']);
-
   }
   logout() {
     localStorage.removeItem('error');
-    this.loginText = false;
     console.log("logging out");
+    this.loginText = false;
     this.router.navigate(['/']);
   }
+  updateForm(){
+    this.router.navigate(['']); 
+  }
+  editRow(row: any){
+    this.router.navigate(['/edit-usermaster']);
+  }
+
+  deletebtn(){
+
+  }
+
+
 }

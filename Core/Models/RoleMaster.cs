@@ -11,6 +11,7 @@ namespace Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string createdBy { get; set; }
         public Error Error{ get; set; }
     }
 }
