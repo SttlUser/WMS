@@ -7,8 +7,8 @@ import {CustomerService} from '../../customer.service'
 
 @Component({
   selector: 'app-role-master',
-  templateUrl: './rolemaster.component.html',
-  styleUrls: ['./rolemaster.component.css']
+  templateUrl: './roleMaster.component.html',
+  styleUrls: ['./roleMaster.component.css']
 })
 export class RoleMasterComponent {
   ngForm=new FormGroup({
