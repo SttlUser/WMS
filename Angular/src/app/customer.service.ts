@@ -28,7 +28,8 @@ export class CustomerService {
 
   public DeletUserData(num:any,id:any){
     console.log(num,id);
-    return this.http.post(this.Dispaly_url+'UserMaster/DeleteUserMaster',num,id);
+    const usr = [id, num]
+    return this.http.post(this.Dispaly_url+'UserMaster/DeleteUserMaster',usr);
   }
 
   public UpdateUserData(data:any){
