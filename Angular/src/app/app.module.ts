@@ -5,23 +5,43 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RoleMasterComponent } from './components/roleMaster/roleMaster.component';
+import {CustomerService} from './customer.service';
+import { DispalyDataComponent } from './components/dispaly-data/dispaly-data.component';
+import { HomeComponent } from './components/home/home.component';
+import { EditUsermasterComponent } from './components/edit-usermaster/edit-usermaster.component';
+import { UsermasterComponent } from './components/usermaster/usermaster.component';
+import { CommonModule } from '@angular/common';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavigationComponent,
-    RoleMasterComponent
+    RoleMasterComponent,
+    DispalyDataComponent,
+    HomeComponent,
+    UsermasterComponent,
+    EditUsermasterComponent,
+    CreateUserComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

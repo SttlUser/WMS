@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>Role Master Detail</h4>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="btn-outline-secondary me-3 p-2" style="float: right">
+            <button type="button" class="btn btn-primary" (click)="GotoRoleMaster()">Add</button>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>RoleType</th>
+                    <th>CreatedDate</th>
+                    <th>CreatedByName</th>
+                    <th>Last Modifier</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let rol of RoleData">
+                    <tr>
+                        <td>{{rol?.id}}</td>
+                        <td>{{rol?.name}}</td>
+                        <td>{{rol?.roleName}}</td>
+                        <td>{{rol?.createdDate}}</td>
+                        <td>{{rol?.createdByName}}</td>
+                        <td>{{rol?.lastModifiedByName}}</td>
+                        <td>
+                            {{rol?.isActive ? 'Active' : 'InActive' }}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" (click)="UpdateRole(rol)">Edit</button>
+                            <button *ngIf="rol.isActive; else activeButton" (click)=" DeleteRole(rol)"
+                                class="btn btn-outline-danger">Delete</button>
+
+                            <ng-template #activeButton>
+                                <button class="btn btn-outline-success" (click)=" ActiveRole(rol)">Activate</button>
+                            </ng-template>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Update</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Role</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form #RoleUpdateForm="ngForm" (ngSubmit)="UpdatedRoleData(RoleUpdateForm.value)">
+
+                    <input hidden class="form-control form-control-sm" type="text" #id [(ngModel)]="RoledataUpdate.id"
+                        name="id" aria-label=".form-control-sm example">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Role Name</label>
+                        <input class="form-control form-control-sm" type="text" #name [(ngModel)]="RoledataUpdate.name"
+                            name="name" placeholder="name" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Role</label>
+                        <select class="form-select" aria-label="Default select example" #roleTypeid name="roleTypeid"
+                            [(ngModel)]="RoledataUpdate.roleTypeid">
+                            <option value="Default">select</option>
+                            <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
+                        </select>
+                        <input hidden class="form-control form-control-sm" type="text" #roleTypeid
+                            formControlName="roleTypeid" [(ngModel)]="RoledataUpdate.roleTypeid" name="roleTypeid"
+                            aria-label=".form-control-sm example">
+                    </div>
+                    <input hidden class="form-control form-control-sm" type="text" #lastModifier
+                        [(ngModel)]="RoledataUpdate.lastModifier" name="lastModifier"
+                        aria-label=".form-control-sm example">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
