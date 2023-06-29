@@ -50,6 +50,13 @@ namespace WebApplication2.Controllers
         public async Task<RoleMaster> Get(int id)
         {
             RoleMaster roleMaster = new RoleMaster();
+
+            //List<RoleMaster> lstroleMaster = new List<RoleMaster>();
+
+            //lstroleMaster.Add(new RoleMaster { Id = 1,Name="Role1" });
+            //lstroleMaster.Add(new RoleMaster { Id = 2, Name = "Role2" });
+            //lstroleMaster.Add(new RoleMaster { Id = 3 , Name = "Role3" });
+
             try
             {
                 RoleType roleType = await _dBHelperRepo.GetRoleTypeById(id);
@@ -81,15 +88,18 @@ namespace WebApplication2.Controllers
 
         // POST api/<ValuesController>
         [HttpPost("CreateRole")]
-        public async Task<RoleMaster> Post([FromBody] JsonObject role)
+        public async Task<RoleMasterData> Post([FromBody] JsonObject role)
         {
-             RoleMaster roleMaster = new RoleMaster();
+            RoleMasterData roleMaster = new RoleMasterData();
             try
             {
                 //JsonObject obj = JsonNode.Parse(role).AsObject();
-                int roleid = (int)role["roleid"];
-                string name = (string)role["name"];
-                roleMaster = await _dBHelperRepo.CreateRole(name, roleid, 1);
+                int roletype = Convert.ToInt32(role["roleid"].ToString()); // (int)role["roleid"];
+                string roleName = (string)role["name"];
+                //string CURRENT_DATE = (string)role["CreatedDate"];
+                //roleMaster = await _dBHelperRepo.CreateRole(2,roleName,roletype);
+                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype,  42);
+
                 roleMaster.Error = ReturnError(0, string.Empty);
             }
             catch (Exception ex)
@@ -106,10 +116,63 @@ namespace WebApplication2.Controllers
         }
 
         // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost("DeleteRoleMaster")]
+        public async Task<RoleMasterData> DeleteRole([FromBody] JsonArray usr)
         {
+
+            RoleMasterData roleMaster = new RoleMasterData();
+            int id = (int)usr[1];
+            int LastModifiedById = (int)usr[0]; 
+            try
+            {
+                roleMaster = await _dBHelperRepo.DeleteRole(4,LastModifiedById, id);   //1 is the dummy data for lastModified field                
+            }
+            catch (Exception ex)
+            {                
+                roleMaster.Error = ReturnError(404, ex.Message);              
+            }
+            return roleMaster;
+
         }
+
+
+        [HttpGet("GetRoleMasterData")]
+        public async Task<List<RoleMasterData>> GetAllRoleMaster(int flag)
+        {
+            List<RoleMasterData> lstroleMaster = new List<RoleMasterData>();
+
+            //lstroleMaster.Add(new RoleMaster { Id = 1, Name = "Role1" });
+            //lstroleMaster.Add(new RoleMaster { Id = 2, Name = "Role2" });
+            //lstroleMaster.Add(new RoleMaster { Id = 3, Name = "Role3" });
+            try
+            {
+                lstroleMaster = await _dBHelperRepo.GetAllRoleMaster(1);
+            }
+            catch  (Exception ex){
+            }
+            return lstroleMaster;
+        }
+
+        [HttpPut("UpdateRoleMaster")]
+        public async Task<RoleMasterData> UpdateRoleMaster([FromBody] JsonObject user)
+        {
+            RoleMasterData rolemasterdata = new RoleMasterData();
+            try
+            {
+                string roleName = (string)user["Name"];
+                int roletype = Convert.ToInt32(user["RoleTypeid"].ToString());
+                int cb_pk_id = Convert.ToInt32(user["Id"].ToString());
+                //int lastModifiedBy = Convert.ToInt32(user["LastModifiedById"].ToString());
+                rolemasterdata = await _dBHelperRepo.UpdateRoleData(3, roleName, roletype, cb_pk_id, 42);
+                rolemasterdata.Error = ReturnError(0, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                rolemasterdata.Error = ReturnError(400, ex.ToString());
+            }
+            return rolemasterdata;
+        }
+
 
         private Error ReturnError(int code, string strError)
         {
@@ -121,3 +184,4 @@ namespace WebApplication2.Controllers
         }
     }
 }
+

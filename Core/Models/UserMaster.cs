@@ -18,7 +18,14 @@ namespace Models
         public bool ? IsActive { get; set; }
         public bool ? IsDelete { get; set; }
         public int ? DeletedBy { get; set; }
-        public int? CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
+        public string CreatedDate { get; set; }
         public int? LastModifiedBy { get; set; }
+        public int? RoleId { get; set; }
+        public string createdByName { get; set; }
+        public string lastModifiedByName { get; set; }
+        public string deletedByName { get; set; }
+        public string roleName { get; set; }
+        public Error Error { get; set; }
     }
 }
