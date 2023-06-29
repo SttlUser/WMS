@@ -14,41 +14,43 @@ import { CustomerService } from '../../customer.service'
 })
 
 export class UsermasterComponent {
- 
 
+  
   @Input() data: any[] = [];
   @Output() editRowEvent = new EventEmitter<any>();
 
-  
 
-  UserdataUpdate={
-    cb_pk_id:Number,
-    Firstname:"",
-    Lastname:"",
-    Email:"",
-    Phone:"",
-    ins_del_id:"",
-    Password:"",
+
+  UserdataUpdate = {
+    cb_pk_id: Number,
+    Firstname: "",
+    Lastname: "",
+    Email: "",
+    Phone: "",
+    ins_del_id: "",
+    Password: "",
+    roleName:""
   }
-  
+
   ngForm = new FormGroup({
-    cb_pk_id:new FormControl('1'),
+    cb_pk_id: new FormControl('1'),
     firstname: new FormControl(''),
     middlename: new FormControl(''),
     lastname: new FormControl(''),
     username: new FormControl(''),
     email: new FormControl(''),
     phone: new FormControl(''),
-    ins_del_id: new FormControl(''),  
+    ins_del_id: new FormControl(''),
+    roleName:new FormControl('')
   });
 
   Userdata: any;
-  Editdata:any;
-  items:any = [];
-  
-  url:string=`${environment.api.server}/RoleMater/GetRoleMasterData`;
+  Editdata: any;
+  items: any = [];
 
-  constructor(private router: Router, private resto: CustomerService,public http:HttpClient) {
+  url: string = `${environment.api.server}/RoleMater/GetRoleMasterData`;
+
+  constructor(private router: Router, private resto: CustomerService, public http: HttpClient) {
     this.GetUserDetail();
     this.Getdata(http);
     const err = JSON.parse(localStorage.getItem('error') || '{}');
@@ -59,7 +61,9 @@ export class UsermasterComponent {
     }
   }
 
-  GetUserDetail(){
+
+
+  GetUserDetail() {
     console.log("receving table data");
     this.resto.getdata().subscribe(
       (response: any) => {
@@ -75,74 +79,84 @@ export class UsermasterComponent {
   updateForm() {
     this.router.navigate(['/create-user']);
   }
-   navigationExtras: NavigationExtras = {
+  navigationExtras: NavigationExtras = {
     state: {
       data: this.UserdataUpdate
     }
   };
 
   UpdateUser(row: any) {
-    this.UserdataUpdate.cb_pk_id= row.id;
-    this.UserdataUpdate.Firstname =row.firstName;
-    this.UserdataUpdate.Lastname =row.lastName;
-    this.UserdataUpdate.Email =row.email;
-    this.UserdataUpdate.Phone =row.phone;
-    this.UserdataUpdate.ins_del_id =row.ins_del_id;
-    this.UserdataUpdate.Password =row.password;
+    this.UserdataUpdate.cb_pk_id = row.id;
+    this.UserdataUpdate.Firstname = row.firstName;
+    this.UserdataUpdate.Lastname = row.lastName;
+    this.UserdataUpdate.Email = row.email;
+    this.UserdataUpdate.Phone = row.phone;
+    this.UserdataUpdate.ins_del_id = row.ins_del_id;
+    this.UserdataUpdate.Password = row.password;
+    this.UserdataUpdate.roleName = row.roleName;
   }
 
-  PostUpdateUserData(UpdateUser:any){
+  PostUpdateUserData(UpdateUser: any) {
     console.log(UpdateUser);
     this.resto.UpdateUserData(UpdateUser).subscribe(
-      (res)=>{
+      (res) => {
         console.log(res);
         alert("data has been updated./")
       },
-      (err)=>{
+      (err) => {
         console.log(err);
       }
     )
   }
 
-  deletebtn(usr:any) {
-    this.resto.DeletUserData(1,usr.id).subscribe(
-      (res)=>{
+  deletebtn(usr: any) {
+    if (window.confirm("Do you really want to delete?")) {
+      this.resto.DeletUserData(1, usr.id, 4).subscribe(
+        (res) => {
+          console.log(res);
+          this.GetUserDetail();
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
+
+    // this.resto.DeletUserData(1, usr.id, 4).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //     this.GetUserDetail();
+    //   },
+    //   (err) => {
+    //     console.log(err);c
+    //   }
+    // )
+
+  }
+
+  activebtn(usr: any) {
+    this.resto.DeletUserData(1, usr.id, 5).subscribe(
+      (res) => {
         console.log(res);
         this.GetUserDetail();
       },
-      (err)=>{
+      (err) => {
         console.log(err);
       }
     )
-    
   }
 
-  addNewUserMaster(){
+  addNewUserMaster() {
     this.router.navigate(['/create-user'])
   }
 
-  Getdata(http:HttpClient){
+  Getdata(http: HttpClient) {
     http.get(this.url).subscribe((res: any) => {
       this.items = res;
       return this.items
     });
   }
-  
-
-
-  // Authenticate(Form: NgForm) {
-  //   console.log('ngForm.value', Form.value)
-  //   this.resto.getdata(Form.value).subscribe((res: any) => {
-  //     localStorage.setItem('error', JSON.stringify({ code: res?.errorInfo?.code, message: res?.errorInfo?.message }));
-  //     if (res?.errorInfo?.code !== 0) {
-  //       alert(res?.errorInfo?.message);
-  //     } else {
-  //       console.log("usermaster")
-  //       this.router.navigate(['/usermaster']);
-  //     }
-  //   })
-  //   console.log("Authenticated, Now navigating to usermaster", this.router)
-  // }
+ 
 
 }
 

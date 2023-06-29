@@ -16,9 +16,14 @@ export class RoleMasterComponent {
     roleid:new FormControl(1)
   })
 
+
+  
+
   items:any = [];
   url:string=`${environment.api.server}/RoleMater/GetRoleTypes`;
   url2:string=`${environment.api.server}/RoleMater/CreateRole`;
+  
+
   constructor(private router: Router, http:HttpClient,private resto:CustomerService) {
     this.Getdata(http)
     const err = JSON.parse(localStorage.getItem('error') || '{}');
@@ -26,9 +31,6 @@ export class RoleMasterComponent {
       console.log("Error", err);
       this.router.navigate(['/login']);
     }
-    // else{
-    //   this.router.navigate(['dispay-rolemaster-data'])
-    // }
   }
   Getdata(http:HttpClient){
       http.get(this.url).subscribe((res: any) => {
@@ -39,13 +41,15 @@ export class RoleMasterComponent {
 
   PostDataForm(){
     const formData = { ...this.ngForm.value };
-
+    console.log(formData)
     if (formData.name && formData.roleid !== undefined) {
-      // formData.roleid = parseInt(formData.roleid , 10);
-
       this.resto.postdata(formData).subscribe((data) => {
         console.log("get data", data);
       });
     }
   }
 }
+function GetRolesDetail() {
+  throw new Error('Function not implemented.');
+}
+
