@@ -1,3 +1,5 @@
+
+
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
@@ -25,6 +27,7 @@
                     <!-- <th>LastmodifiedDate</th> -->
                     <!-- <th>LastmodifiedBy</th> -->
                     <th>Role</th>
+                    <th>Status</th>
                     <th>Actions</th>
 
                 </tr>
@@ -37,17 +40,26 @@
                         <td>{{usr?.userName}}</td>
                         <td>{{usr?.email}}</td>
                         <td>{{usr?.phone}}</td>
-                        <td>{{usr?.CreatedDate}}</td>
-                        <td>{{usr?.createdBy}}</td>
+                        <td>{{usr?.createdDate}}</td>
+                        <td>{{usr?.createdByName}}</td>
                         <!-- <td>{{usr?.LastmodifiedDate}}</td>
                         <td>{{usr?.lastModifiedBy}}</td> -->
-                        <td>{{usr?.Role}}</td>
+                        <td>{{usr?.roleName}}</td>
+                        <td>
+                            {{usr?.isDelete ? 'Inactive' : 'Active' }}
+                        </td>
 
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>
-                            <button type="button" (click)="deletebtn(usr)"
-                                class="btn btn-outline-danger">Delete</button>
+                                
+                            <!-- <button type="button" (click)="deletebtn(usr)"
+                                class="btn btn-outline-danger">Delete</button> -->
+
+                                <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" class="btn btn-outline-danger">Delete</button>
+                                <ng-template #activeButton>
+                                <button class="btn btn-outline-success" (click)="activebtn(usr)">Activate</button>
+                                </ng-template>
                         </td>
                     </tr>
                 </ng-container>
@@ -124,7 +136,7 @@
                         <select class="form-select" aria-label="Default select example" #ins_del_id 
                             name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
                             <option value="Default">select</option>
-                            <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.id}}</option>
+                            <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.roleName}}</option>
                         </select>
                         <input hidden class="form-control form-control-sm" type="text" #ins_del_id formControlName="ins_del_id"
                             [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
