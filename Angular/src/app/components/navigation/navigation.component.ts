@@ -1,4 +1,4 @@
-import { Component ,Input} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,15 @@ export class NavigationComponent {
   loginStatus = localStorage.getItem('loginStatus') === 'true' ? true : false;
   constructor(private router: Router) { }
   goToLogin() {
-    //this.loginText = true;
+    this.loginText = true;
     // console.log("logging in");
     this.router.navigate(['/login']);
+
   }
   logout() {
     localStorage.removeItem('error');
-    console.log("logging out");
     this.loginText = false;
+    console.log("logging out");
     this.router.navigate(['/']);
   }
   updateForm(){
