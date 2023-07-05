@@ -1,0 +1,72 @@
+<div class="container">
+    <h2>Register Company</h2>
+    <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="companyName">Company Name:</label>
+            <input type="text" class="form-control" id="companyName" formControlName="companyName" name="companyName" required>
+          </div>
+          <div class="form-group">
+            <label for="phoneNo">Phone No:</label>
+            <input type="tel" class="form-control" id="phoneNo" formControlName="phoneNo" name="phoneNo" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" formControlName="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="liveServiceLayerUrl">Live Service Layer URL:</label>
+            <input type="text" class="form-control" id="liveServiceLayerUrl" formControlName="liveServiceLayerUrl" name="liveServiceLayerUrl" required>
+          </div>
+          <div class="form-group">
+            <label for="databaseType">Database type:</label>
+            <select class="form-control" id="databaseType"  formControlName="databaseType" name="databaseType" required>
+              <option value="hana">HANA</option>
+              <option value="sql">SQL</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="companyRegistrationNo">Company Registration No (User Name):</label>
+            <input type="text" class="form-control" id="companyRegistrationNo" formControlName="companyRegistrationNo" name="companyRegistrationNo" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" formControlName="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="button" class="btn btn-danger" >Clear</button>
+        </div>
+        
+        <div class="col">
+          <div class="form-group">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>DB Names</th>
+                  <th>SAP Company Names</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="tableData">
+                <tr *ngFor="let row of tableData.controls; let i = index" [formGroupName]="i">
+                  <td><input type="text" formControlName="dbName"></td>
+                  <td><input type="text" formControlName="sapCompanyName"></td>
+                  <td>
+                    <img *ngIf="row.get('status')?.value" src="success.png" alt="Success">
+                    <img *ngIf="!row.get('status')?.value" src="error.png" alt="Error">
+                  </td>
+                  <td>
+                    <button class="btn btn-primary" (click)="addRow()">Add</button>
+                    <button class="btn btn-danger" (click)="deleteRow(i)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </form>
+  </div>

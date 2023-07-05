@@ -7,6 +7,8 @@ import{EditUsermasterComponent} from './components/edit-usermaster/edit-usermast
 import{CreateUserComponent} from './components/create-user/create-user.component';
 import { DispalyDataComponent } from './components/dispaly-data/dispaly-data.component';
 import { RoleMasterComponent } from './components/roleMaster/roleMaster.component';
+import { RegisterCompanyComponent } from './components/register-company/register-company.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // { path: '',( err?.code === 0) ? (redirectTo: `${err?.code === 0 ? '' : "/login"}`, pathMatch: 'full'): null },
@@ -15,7 +17,8 @@ const routes: Routes = [
   {path:'dispay-rolemaster-data',component:DispalyDataComponent },
   {path:'usermaster',component:UsermasterComponent},
   {path:'edit-usermaster',component:EditUsermasterComponent},
-  {path:'create-user',component:CreateUserComponent}
+  {path:'create-user',component:CreateUserComponent},
+  {path:'register-company',component:RegisterCompanyComponent}
   
 ];
 

@@ -14,6 +14,7 @@ import { EditUsermasterComponent } from './components/edit-usermaster/edit-userm
 import { UsermasterComponent } from './components/usermaster/usermaster.component';
 import { CommonModule } from '@angular/common';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { RegisterCompanyComponent } from './components/register-company/register-company.component';
 
 
 
@@ -28,6 +29,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     UsermasterComponent,
     EditUsermasterComponent,
     CreateUserComponent,
+    RegisterCompanyComponent,
     
     
   ],

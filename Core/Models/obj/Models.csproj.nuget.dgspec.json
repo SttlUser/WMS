@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj": {}
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {}
   },
   "projects": {
-    "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj": {
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\bapsd\\.nuget\\packages\\",
-        "outputPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\obj\\",
+        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
+        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\bapsd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
