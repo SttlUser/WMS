@@ -49,10 +49,10 @@ export class EditRegisterCompanyComponent {
 
 
   GetDataById() {
-    //console.log(this.id);
+    console.log(this.id);
     this.resto.GetComapnyDataById(this.id).subscribe(
       (res) => {
-        //console.log(res)
+        console.log(res)
         this.applyForm.patchValue(res);
         const tableData = this.applyForm.get('tableData') as FormArray;
         // console.log("tbledata",tableData)

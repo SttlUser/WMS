@@ -4,6 +4,7 @@ import {CustomerService} from '../../customer.service'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
+import { ToastService } from '../toast/toast.service';
 
 @Component({
   selector: 'app-create-user',
@@ -11,9 +12,11 @@ import { environment } from 'src/environment';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent {
+  isLoggedIn: boolean = true;
+  message = "USER CREATED SUCCESSFULLY";
   items:any=[];
   url:string=`${environment.api.server}/RoleMater/GetRoleMasterData?id=`+1;
-  constructor(private resto:CustomerService, private router: Router ,public http:HttpClient){
+  constructor(private resto:CustomerService, private router: Router ,public http:HttpClient,private toastService: ToastService){
     this.Getdata(http);
   }
   applyForm = new FormGroup({
@@ -40,7 +43,8 @@ export class CreateUserComponent {
     this.resto.PostUserData(formData).subscribe(
     (res)=>{
     console.log(res);  
-    this.router.navigate(['/usermaster']);
+    this.toastService.recieve(this.message);
+    this.router.navigate(['/UserMaster']);
     },
     (err)=>{
       console.log(err);

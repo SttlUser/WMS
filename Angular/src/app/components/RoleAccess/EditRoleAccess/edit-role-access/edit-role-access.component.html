@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>Role Based Access Control</h4>
+                </div>
+            </div>
+        </div>
+        <br><br>
+       
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th>FormName</th>
+                    <th>AccessType</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let rol of   Accessdata">
+                    <tr>
+                        <td>{{rol?.documentmasterfield}}</td>
+                        <td><input class="form-check-input mt-0" type="checkbox"  [(ngModel)]="rol.checked" (change)="rbacCheckBox(rol)" value="" aria-label="Checkbox for following text input" style="border: solid black; height: 20px; width: 20px;"></td>
+                       
+                    </tr>
+                </ng-container>
+                <br>
+                <button type="submit" class="btn btn-primary" (click)="PostrbacData()">Save</button>
+                
+                <button type="button" class="btn btn-secondary" (click)="CloseBtn()">Close</button>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
