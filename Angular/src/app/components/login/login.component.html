@@ -1,26 +1,17 @@
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="card">
+    <div class="card-body">
+      <form #Form="ngForm" (ngSubmit)="Authenticate(Form)">
+        <div class="mb-3">
+          <input ngModel type="text" class="form-control" id="username" name="username" placeholder="User Name" />
+        </div>
+        <div class="mb-3">
+          <input ngModel type="text" class="form-control" id="password" name="password" placeholder="Password" />
+        </div>
 
-<form #Form="ngForm" (ngSubmit)="Authenticate(Form)">
-  <div class="mb-3">
-    <input
-      ngModel
-      type="text"
-      class="form-control"
-      id="username"
-      name="username"
-      placeholder="User Name"
-    />
+        <button type="submit">Submit</button>
+      </form>
+      <!-- <a routerLink="/">Submit</a> -->
+    </div>
   </div>
-  <div class="mb-3">
-    <input
-      ngModel
-      type="text"
-      class="form-control"
-      id="password"
-      name="password"
-      placeholder="Password"
-    />
-  </div>
-  
-  <button type="submit">Submit</button>
-</form>
-<!-- <a routerLink="/">Submit</a> -->
+</div>z 

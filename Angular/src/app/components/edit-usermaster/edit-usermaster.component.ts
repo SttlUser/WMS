@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CustomerService } from '../../customer.service'
 
 @Component({
@@ -25,8 +25,20 @@ export class EditUsermasterComponent {
 
   });
   housingService: any;
+  showNavbar: boolean=true;
 
-  constructor( private resto: CustomerService){}
+  constructor( private resto: CustomerService,private router:Router){
+        //for navbar hiding
+        router.events.subscribe(
+          (val)=>{
+            if(val instanceof NavigationEnd){
+              if(val.url=='/login'){
+                this.showNavbar=true;
+              }
+            }
+          }
+        )
+  }
   submitApplication() {
     this.housingService.submitApplication(
       this.applyForm.value.firstName ?? '',

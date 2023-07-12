@@ -1,9 +1,13 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router'
+import { NavigationEnd, NavigationExtras, Router } from '@angular/router'
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { CustomerService } from '../../customer.service'
+import { ToastService } from '../toast/toast.service';
+import { Pipe, PipeTransform } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastComponent } from '../toast/toast.component';
 
 
 
@@ -13,8 +17,14 @@ import { CustomerService } from '../../customer.service'
   styleUrls: ['./usermaster.component.css']
 })
 
-export class UsermasterComponent {
 
+
+export class UsermasterComponent {
+  isLoggedIn: boolean = true;
+  myString:any;
+  update = "UPDATE API SUCCESS";
+  activate = "Activate API SUCCESS";
+  
   
   @Input() data: any[] = [];
   @Output() editRowEvent = new EventEmitter<any>();
@@ -49,8 +59,9 @@ export class UsermasterComponent {
   items: any = [];
 
   url: string = `${environment.api.server}/RoleMater/GetRoleMasterData`;
+  showNavbar: boolean=true;
 
-  constructor(private router: Router, private resto: CustomerService, public http: HttpClient) {
+  constructor(private router: Router, private resto: CustomerService, public http: HttpClient,private toastService: ToastService,private snackBar: MatSnackBar) {
     this.GetUserDetail();
     this.Getdata(http);
     const err = JSON.parse(localStorage.getItem('error') || '{}');
@@ -59,6 +70,17 @@ export class UsermasterComponent {
       this.router.navigate(['/login']);
       // console.log(this.data);
     }
+
+        //for navbar hiding
+        router.events.subscribe(
+          (val)=>{
+            if(val instanceof NavigationEnd){
+              if(val.url=='/usermaster'){
+                this.showNavbar=true;
+              }
+            }
+          }
+        )
   }
 
 
@@ -101,7 +123,14 @@ export class UsermasterComponent {
     this.resto.UpdateUserData(UpdateUser).subscribe(
       (res) => {
         console.log(res);
-        alert("data has been updated./")
+        const message = 'User Updated Successfully';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        // this.toastService.recieve(this.update);
       },
       (err) => {
         console.log(err);
@@ -115,6 +144,14 @@ export class UsermasterComponent {
         (res) => {
           console.log(res);
           this.GetUserDetail();
+          const message = 'User Deleted Successfully';
+          this.snackBar.openFromComponent(ToastComponent, {
+            data: { message },
+            duration: 2000, // Toast duration in milliseconds
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+          // this.UsersendString(this.myString);
         },
         (err) => {
           console.log(err);
@@ -135,19 +172,28 @@ export class UsermasterComponent {
   }
 
   activebtn(usr: any) {
+    if (window.confirm("Do you really want to Activate?")){
     this.resto.DeletUserData(1, usr.id, 5).subscribe(
       (res) => {
         console.log(res);
         this.GetUserDetail();
+        const message = 'User Activated Successfully';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        // this.toastService.recieve(this.activate);
       },
       (err) => {
         console.log(err);
       }
     )
   }
-
+  }
   addNewUserMaster() {
-    this.router.navigate(['/create-user'])
+    this.router.navigate(['/AddUser'])
   }
 
   Getdata(http: HttpClient) {
@@ -155,6 +201,11 @@ export class UsermasterComponent {
       this.items = res;
       return this.items
     });
+  }
+
+  UsersendString(myString:any){
+    myString = "DELETE API SUCCESS";
+   this.toastService.recieve(myString);
   }
  
 

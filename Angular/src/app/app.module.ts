@@ -14,6 +14,15 @@ import { EditUsermasterComponent } from './components/edit-usermaster/edit-userm
 import { UsermasterComponent } from './components/usermaster/usermaster.component';
 import { CommonModule } from '@angular/common';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { RoleAcessListComponent } from './components/RoleAccess/ListingOfData/role-acess-list/role-acess-list.component';
+import { EditRoleAccessComponent } from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component';
+import { ToastComponent } from './components/toast/toast.component';
+import { ToastService } from './components/toast/toast.service';
+import { CapitalizePipe } from './capitalize.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 
 
@@ -28,7 +37,12 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     UsermasterComponent,
     EditUsermasterComponent,
     CreateUserComponent,
+    RoleAcessListComponent,
+    EditRoleAccessComponent,
+    ToastComponent,
+    CapitalizePipe,
     
+      
     
   ],
   imports: [
@@ -39,9 +53,15 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     CommonModule,
     ReactiveFormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
+  
+    
+   
+   
   ],
-  providers: [CustomerService],
+  providers: [CustomerService, ToastService, { provide: MAT_SNACK_BAR_DATA, useValue: {} } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

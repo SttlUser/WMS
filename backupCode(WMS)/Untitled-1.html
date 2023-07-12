@@ -1,5 +1,3 @@
-
-
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
@@ -27,36 +25,29 @@
                     <!-- <th>LastmodifiedDate</th> -->
                     <!-- <th>LastmodifiedBy</th> -->
                     <th>Role</th>
-                    <th>Status</th>
                     <th>Actions</th>
 
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let usr of Userdata | capitalize">
+                <ng-container *ngFor="let usr of Userdata">
                     <tr>
                         <td>{{usr?.firstName}}</td>
                         <td>{{usr?.lastName}}</td>
                         <td>{{usr?.userName}}</td>
                         <td>{{usr?.email}}</td>
                         <td>{{usr?.phone}}</td>
-                        <td>{{usr?.createdDate}}</td>
-                        <td>{{usr?.createdByName}}</td>
+                        <td>{{usr?.CreatedDate}}</td>
+                        <td>{{usr?.createdBy}}</td>
                         <!-- <td>{{usr?.LastmodifiedDate}}</td>
                         <td>{{usr?.lastModifiedBy}}</td> -->
-                        <td>{{usr?.roleName}}</td>
-                        <td>
-                            {{usr?.isDelete ? 'Inactive' : 'Active' }}
-                        </td>
+                        <td>{{usr?.Role}}</td>
 
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>                         
-                            
-                                <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" class="btn btn-outline-danger">Delete</button>
-                                <ng-template #activeButton>
-                                <button class="btn btn-outline-success" (click)="activebtn(usr)">Activate</button>
-                                </ng-template>
+                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>
+                            <button type="button" (click)="deletebtn(usr)"
+                                class="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
                 </ng-container>
@@ -91,7 +82,7 @@
             </div>
             <div class="modal-body">
 
-                <form #updateForm="ngForm" (ngSubmit)="PostUpdateUserData(updateForm.value)">
+                <form [formGroup]="ngForm" (ngSubmit)="PostUpdateUserData()">
                     <input hidden class="form-control form-control-sm" type="text" #cb_pk_id
                         [(ngModel)]="UserdataUpdate.cb_pk_id" name="cb_pk_id" aria-label=".form-control-sm example">
 
@@ -127,27 +118,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Role</label>
-                        <!-- <input class="form-control form-control-sm" type="text" #ins_del_id
-                            [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" placeholder="Role"
-                            aria-label=".form-control-sm example"> -->
-                        <select class="form-select" aria-label="Default select example" #ins_del_id 
-                            name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
+                        <select class="form-select" aria-label="Default select example" formControlName="ins_del_id">
                             <option value="Default">select</option>
-                            <option name="select"*ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
+                            <option *ngFor="let i of items" [value]="i.id">{{ i.id }}</option>
                         </select>
-                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id formControlName="ins_del_id"
-                            [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </form>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
             </div>
-            <!-- <div class="modal-footer">
-                
-                <button type="button" class="btn btn-primary"
-                    (click)="PostUpdateUserData(updateForm.value)">Update</button>
-            </div> -->
+
         </div>
     </div>
 </div>

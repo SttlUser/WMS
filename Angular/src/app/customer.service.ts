@@ -43,14 +43,31 @@ export class CustomerService {
   public getRoleMaster(): Observable<any> {
     return this.http.get(this.Dispaly_url + 'RoleMater/GetRoleMasterData');
   }
-  //delet role master data
-  public DeleteRoleMasterData(id:any,deletbyid:any): Observable<any> {
-    const para=[id,deletbyid];
+  //delete role master data
+  public DeleteRoleMasterData(id:any, deletbyid:any, flag:any): Observable<any> {
+    console.log(deletbyid,id );
+    const para=[deletbyid, id, flag];
     return this.http.post(this.Dispaly_url + 'RoleMater/DeleteRoleMaster',para);
   }
   ///update role master data
   public UpdateRoleMasdterData(data:any): Observable<any> {
     return this.http.put(this.Dispaly_url+'RoleMater/UpdateRoleMaster',data);
   }
+
+  ////// role access get api
+  public GetRoleAccessData(): Observable<any>{
+    return this.http.get(this.Dispaly_url+'RoleBasedAccess/GetRoleBasedAccessData');
+  }
+
+  /////RoleEditacess post Api
+  public PostRoleAccessData(roleid:any,documentid:any):Observable<any> {
+    console.log("post id",roleid)
+    const requestBody = {
+      roleid: roleid,
+      Documentid: documentid
+    };
+    return this.http.post(this.Dispaly_url+'RoleBasedAccess/UpdateRoleAccessData',requestBody);
+  }
+
 
 }
