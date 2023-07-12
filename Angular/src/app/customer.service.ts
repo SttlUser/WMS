@@ -53,4 +53,45 @@ export class CustomerService {
     return this.http.put(this.Dispaly_url+'RoleMater/UpdateRoleMaster',data);
   }
 
+//display company data 
+  public GetCompanyData():Observable<any>{
+    return this.http.get(this.Dispaly_url+'CompanyMaster/GetCompanyDetails');
+  }
+
+  //Company registration
+  public postRegisterCompany(data: any,header: any): Observable<any>{
+    return this.http.post(this.Dispaly_url+'CompanyMaster/UpdateCompanyDetail',data,{ headers: header });
+  }
+  
+  public DeleteCompanyData(flag:any,lastmodifiedby:any,comp_id:any): Observable<any> {
+    const obj=[4,lastmodifiedby,comp_id];
+    return this.http.post(this.Dispaly_url +'CompanyMaster/DeleteCompanyDb',obj);
+  }
+
+  public ActivateCompanyData(flag:any,lastmodifiedby:any,comp_id:any): Observable<any> {
+    const obj=[flag,lastmodifiedby,comp_id];
+    return this.http.post(this.Dispaly_url +'CompanyMaster/DeleteCompanyDb',obj);
+  }
+
+
+  public GetComapnyDataById(id:Number): Observable<any>{
+    return this.http.get(this.Dispaly_url+'CompanyMaster/GetCompanyDataById?id=' + id);
+  }
+
+
+  private myObject: any;
+
+  setObject(obj: any) {
+    this.myObject = obj;
+  }
+
+  getObject() {
+    return this.myObject;
+  }
+
 }
+
+
+
+
+

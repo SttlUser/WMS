@@ -13,13 +13,13 @@
     <li class="nav-item">
       <a
         class="nav-link"
-        [class.active]="'checkboxTab'"
+        [class.active]="activeTab === 'checkboxTab'"
         (click)="activeTab = 'checkboxTab'"
         >WMS</a
       >
     </li>
   </ul>
-  <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="applyForm" (ngSubmit)="onSubmit()" >
     <!-- First Tab -->
     <div *ngIf="activeTab === 'checkboxTab'" class="tab-pane">
       <div class="row">
@@ -93,14 +93,13 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="companyName">Company Name:</label>
+            <label for="name">Company Name:</label>
             <input
               type="text"
               class="form-control"
-              id="companyName"
-              formControlName="companyName"
-              name="companyName"
-              
+              id="name"
+              formControlName="name"
+              name="name"
               required
             />
           </div>
@@ -112,7 +111,6 @@
               id="phone"
               formControlName="phone"
               name="phone"
-              
               required
             />
           </div>
@@ -124,7 +122,6 @@
               id="email"
               formControlName="email"
               name="email"
-              
               required
             />
           </div>
@@ -133,10 +130,9 @@
             <input
               type="text"
               class="form-control"
-              id="SLUrl"
-              formControlName="SLUrl"
-              name="SLUrl"
-              
+              id="slUrl"
+              formControlName="slUrl"
+              name="slUrl"
               required
             />
           </div>
@@ -144,14 +140,13 @@
             <label for="db_type">Database type:</label>
             <select
               class="form-control"
-              id="db_type"
-              formControlName="db_type"
-              name="db_type"
-            
+              id="sldbName"
+              formControlName="sldbName"
+              name="sldbName"
               required
             >
-              <option value="hana"  selected >HANA</option>
-              <option value="sql">SQL</option>
+              <option value="HANA" selected>HANA</option>
+              <option value="SQL">sql</option>
             </select>
           </div>
           <div class="form-group">
@@ -162,7 +157,6 @@
               id="slusername"
               formControlName="slusername"
               name="slusername"
-             
               required
             />
           </div>
@@ -171,14 +165,14 @@
             <input
               type="password"
               class="form-control"
-              id="SLPassword"
-              formControlName="SLPassword"
-              name="SLPassword"
-              
+              id="slPassword"
+              formControlName="slPassword"
+              name="slPassword"
+              autocomplete="off"
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary" id="register">Register</button>
           <button type="button" class="btn btn-danger">Clear</button>
         </div>
 
@@ -195,60 +189,25 @@
                 </tr>
               </thead>
               <tbody formArrayName="tableData">
-                <tr
-                  *ngFor="let row of tableData.controls; let i = index"
-                  [formGroupName]="i"
-                >
+                <tr *ngFor="let row of getTableDataControls().controls; let i = index;" [formGroupName]="i">
                   <td>{{ i + 1 }}</td>
                   <td>
-                    <input
-                      type="text"
-                      formControlName="dbName"
-                      class="dbName"
-                    />
+                    <input type="text"  formControlName="dbName" class="dbName" />
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      formControlName="sapCompanyName"
-                      class="sapCompanyName"
-                    />
+                    <input type="text" formControlName="sapCompanyName" class="sapCompanyName" />
                   </td>
                   <td>
-                    false
-                    <!-- <img
-                        *ngIf="row.get('status')?.value"
-                        src=""
-                        alt="Success"
-                      /> -->
-                    <!-- <img
-                        *ngIf="!row.get('status')?.value"
-                        src=""
-                        alt="Error"
-                      /> -->
+                   <input type="text" formControlName="flag" class="flag" />
                   </td>
                   <td>
-                    <!-- <button class="btn btn-primary" (click)="addRow()"> -->
-                    <button
-                      id="register"
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="addRow()"
-                    >
-                      Add
-                    </button>
-                    <!-- <button class="btn btn-danger" (click)="deleteRow(i)"> -->
-                    <button
-                      id="delet"
-                      type="button"
-                      class="btn btn-danger"
-                      (click)="deleteRow(i)"
-                    >
-                      Delete
-                    </button>
+                    <button  type="button" class="btn btn-primary" (click)="addRow()">Add</button>
+                    <button  type="button" class="btn btn-danger" (click)="deleteRow(i)">Delete</button>
                   </td>
                 </tr>
               </tbody>
+              
+              
             </table>
           </div>
         </div>
@@ -259,9 +218,10 @@
 </div>
 
 <!-- 
-[(ngModel)]="objectData.companyName"
-[(ngModel)]="objectData.phone"
-[(ngModel)]="objectData.SLPassword"
-[(ngModel)]="objectData.slusername"
-[(ngModel)]="objectData.db_type"
-[(ngModel)]="objectData.slUrl" -->
+    [(ngModel)]="objectData.companyName"
+  [(ngModel)]="objectData.companyName"
+  [(ngModel)]="objectData.phone"
+  [(ngModel)]="objectData.SLPassword"
+  [(ngModel)]="objectData.slusername"
+  [(ngModel)]="objectData.db_type"
+  [(ngModel)]="objectData.slUrl" -->

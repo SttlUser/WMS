@@ -8,6 +8,8 @@ import{CreateUserComponent} from './components/create-user/create-user.component
 import { DispalyDataComponent } from './components/dispaly-data/dispaly-data.component';
 import { RoleMasterComponent } from './components/roleMaster/roleMaster.component';
 import { RegisterCompanyComponent } from './components/register-company/register-company.component';
+import { CompanyDataDisplayComponent  } from './components/company-data-display/company-data-display.component';
+import {EditRegisterCompanyComponent} from './components/edit-register-company/edit-register-company.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path:'usermaster',component:UsermasterComponent},
   {path:'edit-usermaster',component:EditUsermasterComponent},
   {path:'create-user',component:CreateUserComponent},
-  {path:'register-company',component:RegisterCompanyComponent}
+  {path:'register-company',component:RegisterCompanyComponent},
+  {path:'display-company',component:CompanyDataDisplayComponent},
+  {path:'edit-register-company',component:EditRegisterCompanyComponent}
   
 ];
 
