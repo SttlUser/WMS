@@ -27,13 +27,36 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/usermaster" >User Master</a>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/Company-name" >Company Name</a>
+        </li> -->
       </ul>
 
-      <div *ngIf="loginText; else loggedOut">
+
+
+      <!-- <div *ngIf="loginText; else loggedOut"> original work
+        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
+          Logout
+        </button>
+      </div> -->
+
+      <!-- <div *ngIf="goToLogin()"> my work
+        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
+          Logout
+        </button>
+      </div> -->
+
+      <div *ngIf="isLoggedIn(); else loggedOut">  
         <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
           Logout
         </button>
       </div>
+      <!-- <div *ngIf="isLoggedIn()">  
+        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
+          Logout
+        </button>
+      </div> -->
+      <!-- gpt work -->
 
       <ng-template #loggedOut>
         <button
@@ -43,6 +66,11 @@
           Login
         </button>
       </ng-template>
+      <!-- <div *ngIf="goToLogin()">  
+        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
+          Logout
+        </button>
+      </div> -->
     </div>
   </div>
 </nav>

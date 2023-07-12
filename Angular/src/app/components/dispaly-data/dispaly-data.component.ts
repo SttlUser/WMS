@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, NgForm,Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { CustomerService } from '../../customer.service'
 import { formatCurrency } from '@angular/common';
+
 @Component({
   selector: 'app-dispaly-data',
   templateUrl: './dispaly-data.component.html',
@@ -30,6 +31,11 @@ export class DispalyDataComponent {
       roletype:new FormControl(''),
       lastModifier:new FormControl('1')
     });
+    // ngForm: FormGroup = new FormGroup({
+    //   name: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
+    //   roleid: new FormControl(null, Validators.required),
+    //   // Add other form controls if needed
+    // });
   
 
   url:string=`${environment.api.server}/RoleMater/GetRoleTypes`;
@@ -81,6 +87,7 @@ export class DispalyDataComponent {
       (res) => {
         console.log(res);
         this.GetRoleMasterData();
+        row.isActiveRole = true;
       },
       (err) => {
         console.log(err);
@@ -93,6 +100,35 @@ export class DispalyDataComponent {
   }
 
   UpdatedRoleData(data:any){
+    //const nameRegex = /^[A-Za-z\s]+$/;
+    console.log("Data", data)
+    const formData = { ...this.ngForm.value };
+    console.log(formData);
+  const name = formData.name?.trim();
+  const roleid = formData.roletype?.trim();
+  // if (!name || !roleid) {
+  //   console.log('Rolename and roletype must not be empty.');
+  //   alert('Rolename and roletype must not be empty.');
+  //   return;
+  // }
+  // if (!name || !roleid) {
+  //   alert('Rolename and roletype must not be empty.');
+  //   return;
+  // }   for blank validation
+    
+  // if (!nameRegex.test(name.trim())) {
+  //   console.log('Rolename must not include special characters or numerals.');
+  //   alert('Rolename must not include special characters or numerals.');
+  //   return;
+  // }
+
+    // if (name.trim().toLowerCase() === roleid.toString().trim().toLowerCase()) {
+      
+    //   console.log('Rolename and roletype must be different.');
+    //   alert('Rolename and roletype must be different.');
+    //   return;
+    // }
+    
     console.log("update data",data);
     this.resto.UpdateRoleMasdterData(data).subscribe(
       (res) => {
@@ -106,5 +142,43 @@ export class DispalyDataComponent {
     )
     this.GetRoleMasterData();
   }
+  // UpdatedRoleData(data: any) {
+  //   // if (this.ngForm.invalid) {
+  //   //   alert('Please fix the validation errors.');
+  //   //   return;
+  //   // }
+  //   const formData = { ...this.ngForm.value };
+  //   const name = formData.name.trim();
+  //   const roleid = formData.roleid.trim();
+  
+  //   // this.ngForm.controls['name'].setValidators([Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]);
+  //   // this.ngForm.controls['roleid'].setValidators(Validators.required);
+  //   // this.ngForm.updateValueAndValidity();
+  //   if (!name || !roleid) {
+  //     alert('Rolename and roletype must not be empty.');
+  //     return;
+  //   }
+    
+  
+    
+  
+  //   if (name.toLowerCase() === roleid.toLowerCase()) {
+  //     alert('Rolename and roletype must be different.');
+  //     return;
+  //   }
+  
+  //   console.log("Update data:", data);
+  //   this.resto.UpdateRoleMasdterData(data).subscribe(
+  //     (res) => {
+  //       console.log(res);
+  //       alert("Data has been updated.");
+  //       this.ngForm.reset();
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  //   this.GetRoleMasterData();
+  // }
 
 }

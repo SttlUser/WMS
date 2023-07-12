@@ -1,7 +1,9 @@
 import { Component ,Input} from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerService } from 'src/app/customer.service';
 
 @Component({
+  
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
@@ -9,7 +11,11 @@ export class NavigationComponent {
   // loginState = JSON.parse(localStorage.getItem('error') || "{}")?.code
   // loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? 'Logout' : 'Login';
   loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? true : false;
-  constructor(private router: Router) { }
+  constructor(private router: Router,private custservice:CustomerService) { }
+  isLoggedIn() {
+    return this.loginText;
+  }
+  
   goToLogin() {
     //this.loginText = true;
     // console.log("logging in");
