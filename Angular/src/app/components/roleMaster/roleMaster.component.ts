@@ -5,6 +5,8 @@ import { environment } from 'src/environment';
 import {ReactiveFormsModule, FormControl,FormGroup} from '@angular/forms'
 import {CustomerService} from '../../customer.service'
 import { ToastService } from '../toast/toast.service';
+import { ToastComponent } from '../toast/toast.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-role-master',
@@ -27,7 +29,7 @@ export class RoleMasterComponent {
   showNavbar: boolean=true;
   
 
-  constructor(private router: Router, http:HttpClient,private resto:CustomerService,private toastService: ToastService) {
+  constructor(private router: Router, http:HttpClient,private resto:CustomerService,private toastService: ToastService,private snackBar: MatSnackBar) {
     this.Getdata(http)
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -61,7 +63,13 @@ export class RoleMasterComponent {
     if (formData.name && formData.roleid !== undefined) {
       this.resto.postdata(formData).subscribe((data) => {
         console.log("get data", data);
-        this.toastService.recieve(this.message);
+        const message = 'Role Created Successfully';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
         this.router.navigate(['/DispayRoleMaster']);
       });
     }
