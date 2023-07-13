@@ -28,7 +28,7 @@ export class CreateUserComponent {
     password: new FormControl(''),
     email: new FormControl(''),
     phone: new FormControl(''),
-    ins_del_id: new FormControl('1'),  
+    ins_del_id: new FormControl('90'),  
   });
 
   Getdata(http:HttpClient){

@@ -61,16 +61,21 @@ export class CustomerService {
 
   //Company registration
   public postRegisterCompany(data: any,header: any): Observable<any>{
+    return this.http.post(this.Dispaly_url+'CompanyMaster/RegisterCompany2',data,{ headers: header });
+  }
+
+  public postUpdateCompany(data: any,header: any): Observable<any>{
     return this.http.post(this.Dispaly_url+'CompanyMaster/UpdateCompanyDetail',data,{ headers: header });
   }
   
-  public DeleteCompanyData(flag:any,lastmodifiedby:any,comp_id:any): Observable<any> {
-    const obj=[4,lastmodifiedby,comp_id];
+  public DeleteCompanyData(flag: any, lastmodifiedby:any , comp_id:any): Observable<any> {
+    const obj=[flag, lastmodifiedby, comp_id]
+    // console.log(obj);
     return this.http.post(this.Dispaly_url +'CompanyMaster/DeleteCompanyDb',obj);
   }
 
-  public ActivateCompanyData(flag:any,lastmodifiedby:any,comp_id:any): Observable<any> {
-    const obj=[flag,lastmodifiedby,comp_id];
+  public ActivateCompanyData(flag: any, lastmodifiedby:any , comp_id:any): Observable<any> {
+    const obj=[flag, lastmodifiedby, comp_id]
     return this.http.post(this.Dispaly_url +'CompanyMaster/DeleteCompanyDb',obj);
   }
 
