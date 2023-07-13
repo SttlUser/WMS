@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EYRGvlttBq3kZxa21rUYOltlU6eRvVFbrAPxqjn+jzL4R682ipTlClmi4p5SlaDv524sbyss2hBAV2SACbTkCA==",
+  "dgSpecHash": "4QTOPJr8tOVJJnKYSA8SFNZiB7E6k9x0BmIRbe7+IY4mX03A57ed7SRRsh4wivr1H+tw7FhRicidXyGk2kTtXg==",
   "success": true,
-  "projectFilePath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
+  "projectFilePath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

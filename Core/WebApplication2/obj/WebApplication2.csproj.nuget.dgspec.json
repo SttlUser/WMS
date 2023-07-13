@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj": {}
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\WebApplication2\\WebApplication2.csproj": {}
   },
   "projects": {
-    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
-        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\obj\\",
+        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
+        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,17 +63,21 @@
         }
       }
     },
-    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj": {
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj",
+        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
         "projectName": "PostgresDBHelper",
-        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj",
-        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
-        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\obj\\",
+        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
+        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
+        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,11 +91,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
-                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
+                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj"
               },
-              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj": {
-                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj"
+              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -131,17 +139,21 @@
         }
       }
     },
-    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj": {
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
-        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\obj\\",
+        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
+        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -155,8 +167,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
-                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
+                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj"
               }
             }
           }
@@ -190,17 +202,21 @@
         }
       }
     },
-    "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj": {
+    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\WebApplication2\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\WebApplication2\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\WebApplication2.csproj",
-        "packagesPath": "C:\\Users\\stadmin\\.nuget\\packages\\",
-        "outputPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\WebApplication2\\obj\\",
+        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\WebApplication2\\WebApplication2.csproj",
+        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
+        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\WebApplication2\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\stadmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -215,14 +231,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj": {
-                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Models\\Models.csproj"
+              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
+                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj"
               },
-              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj": {
-                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\PostgresDBHelper\\PostgresDBHelper.csproj"
+              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj": {
+                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj"
               },
-              "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj": {
-                "projectPath": "G:\\Devam\\Projects\\DotNet\\DotnetCore_webapi_practice1\\WebApplication1\\Repositories\\Repositories.csproj"
+              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj"
               }
             }
           }

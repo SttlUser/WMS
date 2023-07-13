@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>Roles</h4>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Role</th>
+                    <th>RoleType</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+             <tbody>
+                <ng-container *ngFor="let rol of RoleData">
+                    <tr>
+                        <td>{{rol?.id}}</td>
+                        <td>{{rol?.name}}</td>
+                        <td>{{rol?.roleName}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="Editpage(rol)">Edit</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody> 
+        </table>
+    </div>
+</div>

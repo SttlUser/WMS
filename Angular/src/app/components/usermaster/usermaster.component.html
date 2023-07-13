@@ -16,8 +16,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Firstname</th>
-
+                    <th>Firstname</th>  
                     <th>LastName</th>
                     <th>Username</th>
                     <th>Email</th>
@@ -33,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let usr of Userdata">
+                <ng-container *ngFor="let usr of Userdata | capitalize">
                     <tr>
                         <td>{{usr?.firstName}}</td>
                         <td>{{usr?.lastName}}</td>
@@ -51,11 +50,8 @@
 
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>
-                                
-                            <!-- <button type="button" (click)="deletebtn(usr)"
-                                class="btn btn-outline-danger">Delete</button> -->
-
+                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>                         
+                            
                                 <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" class="btn btn-outline-danger">Delete</button>
                                 <ng-template #activeButton>
                                 <button class="btn btn-outline-success" (click)="activebtn(usr)">Activate</button>
@@ -119,27 +115,22 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Password</label>
                         <input class="form-control form-control-sm" type="text" #Password
-                            [(ngModel)]="UserdataUpdate.Password" name="Password" placeholder="Password"
-                            aria-label=".form-control-sm example">
+                            [(ngModel)]="UserdataUpdate.Password" name="Password" placeholder="Password" aria-label=".form-control-sm example">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Phone</label>
-                        <input class="form-control form-control-sm" type="text" #Phone
-                            [(ngModel)]="UserdataUpdate.Phone" name="Phone" placeholder="Phone  "
-                            aria-label=".form-control-sm example">
+                        <input class="form-control form-control-sm" type="text" #Phone [(ngModel)]="UserdataUpdate.Phone" name="Phone" placeholder="Phone" aria-label=".form-control-sm example">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Role</label>
                         <!-- <input class="form-control form-control-sm" type="text" #ins_del_id
                             [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" placeholder="Role"
                             aria-label=".form-control-sm example"> -->
-                        <select class="form-select" aria-label="Default select example" #ins_del_id 
-                            name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
+                        <select class="form-select" aria-label="Default select example" #ins_del_id  name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
                             <option value="Default">select</option>
-                            <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.roleName}}</option>
+                            <option name="select"*ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
                         </select>
-                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id formControlName="ins_del_id"
-                            [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
+                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id  formControlName="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
