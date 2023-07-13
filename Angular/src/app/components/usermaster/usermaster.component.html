@@ -135,7 +135,7 @@
                             aria-label=".form-control-sm example"> -->
                         <select class="form-select" aria-label="Default select example" #ins_del_id 
                             name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
-                            <option value="Default">select</option>
+                            
                             <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.roleName}}</option>
                         </select>
                         <input hidden class="form-control form-control-sm" type="text" #ins_del_id formControlName="ins_del_id"

@@ -45,45 +45,30 @@ export class RoleMasterComponent {
 
     const formData = { ...this.ngForm.value };
     console.log(formData)
-    const name = formData.name ?? '';
-    const roleid = formData.roleid ?? '';
-    if (!name?.trim() || roleid === null || roleid === undefined) {
+    const name = formData.name?.trim();
+    const roleid = formData.roleid;
+    if (name!.trim() === null && roleid === 0 ) {
       
       console.log('Rolename and roletype must not be empty.');
       alert('Rolename and roletype must not be empty.');
       return;
     }
-    if (!name?.trim() || !roleid) {
-      console.log('Rolename and roletype must not be empty.');
-      alert('Rolename and roletype must not be empty.');
-      return;
-    }
-    
 
-    if (name.trim().toLowerCase() === roleid.toString().trim().toLowerCase()) {
-      
-      console.log('Rolename and roletype must be different.');
-      alert('Rolename and roletype must be different.');
-      return;
-    }
     const nameRegex = /^[a-zA-Z\s]+$/;
-    if (!nameRegex.test(name.trim())) {
-      
-      console.log('no special characters');
-      alert('Rolename must not include Special Characters');
+  if (typeof name !== 'string' || !nameRegex.test(name)) {
+    console.log('Rolename should not contain special characters.');
+    alert('Rolename should not contain special characters.');
+    return;
+  }
+
+    if (!name || roleid === null || roleid === undefined ) {
+      console.log('Rolename and roletype must not be empty.');
+      alert('Rolename and roletype must not be empty.');
       return;
     }
-
-    if (name && roleid !== undefined) {
-      this.resto.postdata(formData).subscribe((data) => {
-
-        console.log("get data", data);
-        alert("Data added successfully");
-        return;
-      });
+    else{
+      alert("data saved")
     }
   }
-  // function GetRolesDetail() {
-  //   throw new Error('Function not implemented.');
-  // }
+  
 }

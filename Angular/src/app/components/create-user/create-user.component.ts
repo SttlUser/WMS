@@ -67,8 +67,7 @@ export class CreateUserComponent {
       return;
     }
   
-    // Validating lastname
-    if (!formData.lastname) {
+     if (!formData.lastname) {
       alert("Lastname is required");
       return;
     }

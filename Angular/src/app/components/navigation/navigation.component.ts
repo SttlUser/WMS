@@ -11,7 +11,7 @@ export class NavigationComponent {
   // loginState = JSON.parse(localStorage.getItem('error') || "{}")?.code
   // loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? 'Logout' : 'Login';
   loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? true : false;
-  constructor(private router: Router,private custservice:CustomerService) { }
+  constructor(private router: Router) { }
   isLoggedIn() {
     return this.loginText;
   }
