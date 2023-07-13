@@ -33,6 +33,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/DisplayCompany" >Companies</a>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/Company-name" >Company Name</a>
+        </li> -->
       </ul>
 
       <div *ngIf="loginStatus; else loggedOut">
@@ -40,6 +43,12 @@
           Logout
         </button>
       </div>
+      <!-- <div *ngIf="isLoggedIn()">  
+        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
+          Logout
+        </button>
+      </div> -->
+      <!-- gpt work -->
 
       <ng-template #loggedOut>
         <button
@@ -49,6 +58,11 @@
           Login
         </button>
       </ng-template>
+      <!-- <div *ngIf="goToLogin()">  
+        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
+          Logout
+        </button>
+      </div> -->
     </div>
   </div>
 </nav>

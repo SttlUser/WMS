@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/components/toast/toast.service';
+import { CustomerService } from 'src/app/customer.service';
 
 @Component({
+  
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })

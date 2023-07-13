@@ -13,6 +13,7 @@ import {EditRegisterCompanyComponent} from './components/edit-register-company/e
 
 import {RoleAcessListComponent} from './components/RoleAccess/ListingOfData/role-acess-list/role-acess-list.component';
 import {EditRoleAccessComponent} from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component'
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // { path: '',( err?.code === 0) ? (redirectTo: `${err?.code === 0 ? '' : "/login"}`, pathMatch: 'full'): null },

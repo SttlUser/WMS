@@ -121,6 +121,56 @@ export class UsermasterComponent {
   }
 
   PostUpdateUserData(UpdateUser: any) {
+    const formData = { ...this.ngForm.value };
+    const ins_del_id = formData.ins_del_id ?? '';
+    if (!this.UserdataUpdate.Firstname || !this.UserdataUpdate.Lastname || !this.UserdataUpdate.Email || 
+      !this.UserdataUpdate.Password || !this.UserdataUpdate.Phone ) {
+        if(this.UserdataUpdate.ins_del_id = ""){
+      console.log("All fields are required");
+      alert("All fields are required, Please fill in it");
+      return;
+        }
+    }
+    
+    if (!UpdateUser.Firstname) {
+      console.log("Firstname is required");
+      alert("Firstname is required")
+      return;
+    }
+  
+    // Validating lastname
+    if (!UpdateUser.Lastname) {
+      console.log("Lastname is required");
+      return;
+    }
+  
+    // Validating email
+    if (!UpdateUser.Email) {
+      console.log("Email is required");
+      return;
+    } else if (!this.isValidEmail(UpdateUser.Email)) {
+      console.log("Invalid email format");
+      return;
+    }
+  
+    // Validating password
+    if (!UpdateUser.Password) {
+      console.log("Password is required");
+      return;
+    } else if (!this.isValidPassword(UpdateUser.Password)) {
+      console.log("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character");
+      return;
+    }
+  
+    // Validating phone
+    if (!UpdateUser.Phone) {
+      console.log("Phone is required");
+      return;
+    } else if (!this.isValidPhone(UpdateUser.Phone)) {
+      console.log("Invalid phone number format");
+      return;
+    };
+    
     console.log(UpdateUser);
     this.resto.UpdateUserData(UpdateUser).subscribe(
       (res) => {
@@ -138,6 +188,24 @@ export class UsermasterComponent {
         console.log(err);
       }
     )
+    
+  }
+  
+   isValidEmail(Email: string) {
+    
+    const emailPattern =/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(Email);
+  }
+  
+   isValidPassword(Password: string) {
+    // Password validation regex pattern
+    const passwordPattern =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordPattern.test(Password);
+  }
+  
+   isValidPhone(Phone: string) {
+    const phonePattern = /^[0-9]\d{9}$/; 
+    return phonePattern.test(Phone);
   }
 
   deletebtn(usr: any) {
@@ -161,16 +229,7 @@ export class UsermasterComponent {
       )
     }
 
-    // this.resto.DeletUserData(1, usr.id, 4).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //     this.GetUserDetail();
-    //   },
-    //   (err) => {
-    //     console.log(err);c
-    //   }
-    // )
-
+    
   }
 
   activebtn(usr: any) {

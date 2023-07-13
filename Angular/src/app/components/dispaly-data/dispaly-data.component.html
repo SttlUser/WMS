@@ -80,25 +80,26 @@
             </div>
             <div class="modal-body">
 
-                <form #RoleUpdateForm="ngForm" (ngSubmit)="UpdatedRoleData(RoleUpdateForm.value)">
+                <form #RoleUpdateForm="ngForm"  (ngSubmit)="UpdatedRoleData(RoleUpdateForm.value)">
 
                     <input hidden class="form-control form-control-sm" type="text" #id [(ngModel)]="RoledataUpdate.id"
                         name="id" aria-label=".form-control-sm example">
                     <div class="mb-3">
                         <label for="name" class="form-label">Role Name</label>
-                        <input class="form-control form-control-sm" type="text" #name [(ngModel)]="RoledataUpdate.name"
-                            name="name" placeholder="name" aria-label=".form-control-sm example">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="RoledataUpdate.name" name="name"
+                        placeholder="name" aria-label=".form-control-sm example" #name="ngModel" required>
+                        
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Role</label>
-                        <select class="form-select" aria-label="Default select example" #roleTypeid name="roleTypeid"
-                            [(ngModel)]="RoledataUpdate.roleTypeid">
+                        <label for="roleid" class="form-label">Role</label>
+                        <select class="form-select" aria-label="Default select example" #roleTypeid name="roleid"
+                            [(ngModel)]="RoledataUpdate.roleTypeid" >
                             <option value="Default">select</option>
                             <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
                         </select>
                         <input hidden class="form-control form-control-sm" type="text" #roleTypeid
-                            formControlName="roleTypeid" [(ngModel)]="RoledataUpdate.roleTypeid" name="roleTypeid"
-                            aria-label=".form-control-sm example">
+                            formControlName="roleid" [(ngModel)]="RoledataUpdate.roleTypeid" name="roleid"
+                            aria-label=".form-control-sm example" >
                     </div>
 
                     
@@ -108,6 +109,29 @@
                     <button type="submit" class="btn btn-primary">Update</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </form>
+                <!-- <form #RoleUpdateForm="ngForm" (ngSubmit)="UpdatedRoleData(RoleUpdateForm.value)">
+                    <input hidden class="form-control form-control-sm" type="text" [(ngModel)]="RoledataUpdate.id" name="id">
+                  
+                    <div class="mb-3">
+                      <label for="name" class="form-label">Role Name</label>
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]="RoledataUpdate.name" name="name"
+                        placeholder="name" aria-label=".form-control-sm example" #name="ngModel" required>
+                      Add the "required" attribute to enforce validation -->
+                    <!-- </div>
+                  
+                    <div class="mb-3">
+                      <label for="roleTypeid" class="form-label">Role</label>
+                      <select class="form-select" [(ngModel)]="RoledataUpdate.roleTypeid" name="roleTypeid" #roleTypeid="ngModel"
+                        required>
+                        <option value="">Select</option>
+                        <option *ngFor="let i of items" [value]="i.id">{{ i.name }}</option>
+                      </select>
+                    </div>
+                  
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </form> --> 
+                  
 
             </div>
         </div>
