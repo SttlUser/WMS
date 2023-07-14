@@ -8,18 +8,21 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RoleMasterComponent } from './components/roleMaster/roleMaster.component';
 import {CustomerService} from './customer.service';
+import { CommonModule } from '@angular/common';
 import { DispalyDataComponent } from './components/dispaly-data/dispaly-data.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditUsermasterComponent } from './components/edit-usermaster/edit-usermaster.component';
 import { UsermasterComponent } from './components/usermaster/usermaster.component';
-import { CommonModule } from '@angular/common';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { RegisterCompanyComponent } from './components/register-company/register-company.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CompanyDataDisplayComponent } from './components/company-data-display/company-data-display.component';
+import { EditRegisterCompanyComponent } from './components/edit-register-company/edit-register-company.component';
 import { RoleAcessListComponent } from './components/RoleAccess/ListingOfData/role-acess-list/role-acess-list.component';
 import { EditRoleAccessComponent } from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { ToastService } from './components/toast/toast.service';
 import { CapitalizePipe } from './capitalize.pipe';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-bar';
 
 
@@ -37,6 +40,9 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-b
     UsermasterComponent,
     EditUsermasterComponent,
     CreateUserComponent,
+    RegisterCompanyComponent,
+    CompanyDataDisplayComponent,
+    EditRegisterCompanyComponent,
     RoleAcessListComponent,
     EditRoleAccessComponent,
     ToastComponent,

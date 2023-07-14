@@ -1,9 +1,11 @@
-import { Component ,Input} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/components/toast/toast.service';
+import { CustomerService } from 'src/app/customer.service';
 
 @Component({
+  
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
@@ -15,6 +17,8 @@ export class NavigationComponent {
   // loginState = JSON.parse(localStorage.getItem('error') || "{}")?.code
   // loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? 'Logout' : 'Login';
   loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? true : false;
+  loginStatus = localStorage.getItem('loginStatus') === 'true' ? true : false;
+  
   constructor(private router: Router,private toastService: ToastService) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -26,7 +30,7 @@ export class NavigationComponent {
    }
   
   goToLogin() {
-    //this.loginText = true;
+    this.loginText = true;
     // console.log("logging in");
     this.router.navigate(['/login']);
     
