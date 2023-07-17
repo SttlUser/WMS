@@ -18,18 +18,18 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // { path: '',( err?.code === 0) ? (redirectTo: `${err?.code === 0 ? '' : "/login"}`, pathMatch: 'full'): null },
   { path: '', component: HomeComponent },
-  { path: 'AddRoleMaster', component: RoleMasterComponent },
-  {path:'DispayRoleMaster',component:DispalyDataComponent },
-  {path:'UserMaster',component:UsermasterComponent},
+  { path: 'AddRoleMaster', component: RoleMasterComponent,data: { header: 'Create Role', subheader:'Create New Role' } },
+  {path:'DispayRoleMaster',component:DispalyDataComponent ,data: { header: 'Role Master', subheader:'Role List' }},
+  {path:'UserMaster',component:UsermasterComponent, data: { header: 'User Master', subheader:'Users List' }},
   {path:'edit-usermaster',component:EditUsermasterComponent},
   // {path:'create-user',component:CreateUserComponent},
-  {path:'RegisterCompany',component:RegisterCompanyComponent},
-  {path:'DisplayCompany',component:CompanyDataDisplayComponent},
-  {path:'EditRegisteredCompany',component:EditRegisterCompanyComponent},
+  {path:'RegisterCompany',component:RegisterCompanyComponent,data: { header: 'Register Company', subheader:'Add New Company' }},
+  {path:'DisplayCompany',component:CompanyDataDisplayComponent,data: { header: 'Company Master', subheader:'Company List' }},
+  {path:'EditRegisteredCompany',component:EditRegisterCompanyComponent,data: { header: 'Edit Company Details', subheader:'Edit Company' }},
   
-  {path:'AddUser',component:CreateUserComponent},
-  {path :'RoleAccessList',component:RoleAcessListComponent},
-  {path : 'EditRoleAccess',component:EditRoleAccessComponent}
+  {path:'AddUser',component:CreateUserComponent,data:{header:'Create User',subheader:'Create New User'}},
+  {path :'RoleAccessList',component:RoleAcessListComponent,data: { header: 'Role Access Master', subheader:'Role Access List' } },
+  {path : 'EditRoleAccess',component:EditRoleAccessComponent,data: { header: 'Edit Role Access', subheader:'Edit Role' }}
 ];
 
 @NgModule({

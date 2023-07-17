@@ -1,20 +1,19 @@
-<div class="container">
+<div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
     <div class="table-wrapper">
         <div class="table-title">
+            <br>
             <div class="row">
                 <div class="col-sm-8">
                     <h4>Role Master Detail</h4>
                 </div>
             </div>
         </div>
-        <br><br>
-        <div class="btn-outline-secondary me-3 p-2" style="float: right">
-            <button type="button" class="btn btn-primary" (click)="GotoRoleMaster()">Add</button>
+        <div class="btn-secondary me-3 p-2" style="float: right">
+            <button type="button" class="btn btn-custom" (click)="GotoRoleMaster()">Add</button>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
-                    <!-- <th>Id</th> -->
                     <th>Name</th>
                     <th>RoleType</th>
                     <th>CreatedDate</th>
@@ -54,7 +53,7 @@
     </div>
 </div>
 
-<!-- <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -67,7 +66,7 @@
 
         </div>
     </div>
-</div> -->
+</div>
 
 
 

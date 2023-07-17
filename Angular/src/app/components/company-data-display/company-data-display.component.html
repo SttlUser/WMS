@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
   <div class="table-wrapper">
     <div class="table-title">
+      <br>
       <div class="row">
         <div class="col-sm-8">
           <h4>Comapany Master Data</h4>
         </div>
       </div>
     </div>
-    <br /><br />
-    <div class="btn-outline-secondary me-3 p-2" style="float: right">
+    <div class="btn-secondary " style="float: right">
       <button
         type="button" id="add"
-        class="btn btn-outline-secondary"(click)="GotoCompanypage()">Add New Company</button>
+        class="btn btn-custom" (click)="GotoCompanypage()">Add New Company</button>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="mytable">
       <thead>
         <tr>
           <th>Company Name</th>

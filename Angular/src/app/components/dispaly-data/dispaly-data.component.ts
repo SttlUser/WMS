@@ -7,7 +7,9 @@ import { CustomerService } from '../../customer.service';
 import { ToastService } from '../toast/toast.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastComponent } from '../toast/toast.component';
- 
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt';
   
 @Component({
   selector: 'app-dispaly-data',
@@ -44,15 +46,14 @@ message:any;
   toastComponent: any;
   showNavbar: boolean = true;
   constructor(private router: Router, private resto: CustomerService, public http: HttpClient,private toastService: ToastService,private snackBar: MatSnackBar ) {
-    this.GetRoleMasterData();
     this.Getdata(http);
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
       this.router.navigate(['/login']);
     }
-
-
+    
+    
     //for navbar hiding
     router.events.subscribe(
       (val)=>{
@@ -62,8 +63,9 @@ message:any;
           }
         }
       }
-    )
-
+      )
+      
+      this.GetRoleMasterData();
     
   }
   GotoRoleMaster() {
@@ -77,6 +79,7 @@ message:any;
       (response: any) => {
         console.log("receved table data", response);
         this.RoleData = response;
+        this.initializeDataTable();
       },
       (error) => {
         console.error('Error retrieving data:', error);
@@ -90,6 +93,12 @@ message:any;
       console.log(this.items);
       return this.items
     })
+  }
+  
+  initializeDataTable() {
+    $(document).ready(() => {
+      $('#myTable').DataTable();
+    });
   }
 
   UpdateRole(RoleData: any) {
@@ -110,7 +119,7 @@ message:any;
           console.log(res);
           this.GetRoleMasterData();
           const message = 'Role Deleted Successfully';
-    this.snackBar.openFromComponent(ToastComponent, {
+      this.snackBar.openFromComponent(ToastComponent, {
       data: { message },
       duration: 2000, // Toast duration in milliseconds
       horizontalPosition: 'end',
