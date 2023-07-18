@@ -41,7 +41,7 @@ export class NavigationComponent {
     this.toastService.recieve(this.logged_out);
     this.loginText = false;
     this.isLoggedIn = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
   updateForm(){
     this.router.navigate(['']); 

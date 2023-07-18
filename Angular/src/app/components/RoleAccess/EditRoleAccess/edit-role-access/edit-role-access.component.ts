@@ -100,6 +100,7 @@ export class EditRoleAccessComponent implements OnInit  {
           verticalPosition: 'top'
         });
         // this.toastService.recieve(this.edit_role_access_posted);
+        this.router.navigate(['/RoleAccessList'])
       },
       (err)=>{
         console.log(err);

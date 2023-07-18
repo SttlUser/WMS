@@ -77,6 +77,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
       .get(this.Dispaly_url + 'CompanyMaster/GetCompanyDetails')
       .subscribe(
         (res) => {
+          // console.log(res)
           this.Comapnydata = res;
           this.initializeDataTable();
         },

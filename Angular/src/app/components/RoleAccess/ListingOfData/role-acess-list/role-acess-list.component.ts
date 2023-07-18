@@ -22,7 +22,7 @@ export class RoleAcessListComponent {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
-      this.router.navigate(['/role-acess-list']);
+      this.router.navigate(['/login']);
       // console.log(this.data);
     }
     
