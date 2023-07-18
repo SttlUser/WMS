@@ -19,7 +19,7 @@ const routes: Routes = [
   // { path: '', component: LoginComponent ,data: { header: 'nav', subheader:'nav' },},
   
   // { path: '',( err?.code === 0) ? (redirectTo: `${err?.code === 0 ? '' : "/login"}`, pathMatch: 'full'): null },
-  { path: '', component: HomeComponent ,},
+  { path: '', component: HomeComponent ,data: { header: 'Dashboard', subheader:'Welcome to WMS' }},
   { path: 'AddRoleMaster', component: RoleMasterComponent,data: { header: 'Create Role', subheader:'Create New Role' } },
   {path:'DispayRoleMaster',component:DispalyDataComponent ,data: { header: 'Role Master', subheader:'Role List' }},
   {path:'UserMaster',component:UsermasterComponent, data: { header: 'User Master', subheader:'Users List' }},
