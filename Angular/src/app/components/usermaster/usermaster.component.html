@@ -50,7 +50,8 @@
 
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>                         
+                                data-bs-target="#exampleModal"  *ngIf="usr.isActive; " (click)="UpdateUser(usr)">Edit</button>        
+                                                
                             
                                 <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" class="btn btn-outline-danger">Delete</button>
                                 <ng-template #activeButton>

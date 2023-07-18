@@ -70,4 +70,6 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-b
   providers: [CustomerService, ToastService, { provide: MAT_SNACK_BAR_DATA, useValue: {} } ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+ 
+}

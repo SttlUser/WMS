@@ -6,27 +6,37 @@ import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  template: `
+  <router-outlet></router-outlet>
+  <h1>{{ headerName }}</h1>
+`,
 })
 export class AppComponent {
   title = 'WMS';
   showNavbar = true;
   toasts: Toast[] = [];
+   HeaderName: string = 'Header';
+  SubHeaderName:string='Sub Header'
+   
 
   constructor(private toastService: ToastService,private router:Router) { 
    
     router.events.subscribe(
       (val)=>{
         if(val instanceof NavigationEnd){
+
           if(val.url=='/login'){
             this.showNavbar=false;
           }
         }
       }
     )
-
+    
   }
   ngOnInit(): void {
+
+    
     // this.toastService.getToast().subscribe((toast: Toast) => {
     //   this.toasts.push(toast);
     //   setTimeout(() => this.removeToast(toast), 3000);

@@ -7,7 +7,8 @@ import { CustomerService } from 'src/app/customer.service';
 @Component({
   
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html'
+  templateUrl: './navigation.component.html',
+ 
 })
 export class NavigationComponent {
  
@@ -53,6 +54,7 @@ export class NavigationComponent {
   deletebtn(){
 
   }
+
 
 
 }
