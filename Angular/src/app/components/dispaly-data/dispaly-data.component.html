@@ -8,8 +8,8 @@
                 </div>
             </div>
         </div>
-        <div class="btn-secondary me-3 p-2" style="float: right">
-            <button type="button" class="btn btn-custom" (click)="GotoRoleMaster()">Add</button>
+        <div class="btn-outline-secondary me-3 p-2" style="float: right">
+            <button type="button" class="btn btn-primary" (click)="GotoRoleMaster()">Add</button>
         </div>
         <table class="table table-bordered" id="myTable">
             <thead>
@@ -35,11 +35,17 @@
                         <td>
                             {{rol?.isActive ? 'Active' : 'Inactive' }}
                         </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" (click)="UpdateRole(rol)">Edit</button>                         
-            
-                                <button *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" class="btn btn-outline-danger">Delete</button>
+                        <td >
+                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" (click)="UpdateRole(rol)">Edit</button>-->
+                                <a href="#"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="UpdateRole(rol)">
+                                    <i class="far fa-edit text-primary mr-5"></i>
+                                  </a>                                                                                                      
+                                  <a href="#" *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" class="shadow">
+                                    <i class="far fa-trash-alt text-danger mr-1"></i>                        
+                                  </a>                                                                
+                                  <!-- Rest of the code -->
+                                <!-- <button *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" class="btn btn-outline-danger">Delete</button> -->
                                 <ng-template #activeButton>
                                 <button class="btn btn-outline-success" (click)="ActiveRole(rol)">Activate</button>
                                 </ng-template>

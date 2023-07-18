@@ -8,7 +8,11 @@ import { filter, map } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  template: `
+    <router-outlet></router-outlet>
+    <h1>{{ headerName }}</h1>
+  `,
 })
 export class AppComponent {
   title = 'WMS';
@@ -49,14 +53,5 @@ export class AppComponent {
         this.SubHeaderName = data['subheader'];
       });
   }
-  // removeToast(toast: Toast): void {
-  //   this.toasts = this.toasts.filter(t => t !== toast);
-  // }
-  // showSuccessToast(): void {
-  //   this.toastService.showSuccess('Success message!');
-  // }
 
-  // showErrorToast(): void {
-  //   this.toastService.showError('Error message!');
-  // }
 }

@@ -17,7 +17,7 @@ import {EditRoleAccessComponent} from './components/RoleAccess/EditRoleAccess/ed
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // { path: '',( err?.code === 0) ? (redirectTo: `${err?.code === 0 ? '' : "/login"}`, pathMatch: 'full'): null },
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent ,data:{header: 'Dashboard', subheader:'Welcome To WMS'}},
   { path: 'AddRoleMaster', component: RoleMasterComponent,data: { header: 'Create Role', subheader:'Create New Role' } },
   {path:'DispayRoleMaster',component:DispalyDataComponent ,data: { header: 'Role Master', subheader:'Role List' }},
   {path:'UserMaster',component:UsermasterComponent, data: { header: 'User Master', subheader:'Users List' }},

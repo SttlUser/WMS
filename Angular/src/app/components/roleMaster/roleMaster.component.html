@@ -1,5 +1,32 @@
 
 
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="width: 18rem;">
+        <form [formGroup]="ngForm" (ngSubmit)="PostDataForm()">
+
+          <ul class="list-group list-group-flush p-3">
+            <li class="list-group-item">
+              <input type="text" name="name" class="form-control" placeholder="Role Name" formControlName="name" />
+            </li>
+            <li class="list-group-item">
+              <select class="form-select" aria-label="Default select example" formControlName="roleid">
+                <option value="Default">select</option>
+                <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
+              </select>
+            </li>
+            <li class="list-group-item">
+              <button class="btn btn-primary">Create</button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
 <div class="container d-flex align-items-center justify-content-center" style="height: 40vh;">
   <div class="row">

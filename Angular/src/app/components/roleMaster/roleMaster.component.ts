@@ -106,3 +106,7 @@ export class RoleMasterComponent {
   }
   
 }
+function GetRolesDetail() {
+  throw new Error('Function not implemented.');
+}
+
