@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
   FormControl,
+  AbstractControl,
 } from '@angular/forms';
 import { CustomerService } from 'src/app/customer.service';
 import { environment } from 'src/environment';
@@ -69,12 +70,12 @@ export class EditRegisterCompanyComponent {
   ngOnInit() {
     this.applyForm = this.formBuilder.group({
       name: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d+$/),Validators.pattern(/^\d{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
       slUrl: ['', Validators.required],
       sldbName: ['', Validators.required],
-      slusername: ['', Validators.required],
-      slPassword: ['', Validators.required],
+      slusername: ['', Validators.required,Validators.pattern(/^[0-9]+$/)],
+      SLPassword: ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/)]],
       tableData: this.formBuilder.array([]),
       putCheckbox: [true],
       ssccCheckbox: [true],
@@ -144,6 +145,76 @@ export class EditRegisterCompanyComponent {
   }
   
   onSubmit() {
+   
+    if (this.isFormFieldsEmpty(this.applyForm)) {
+        
+      alert('Please fill in all the required fields.');
+      return;
+    }
+    
+
+
+
+
+
+   const phoneControl = this.applyForm.get('phone');
+   if (phoneControl && phoneControl.invalid) {
+    if (phoneControl.errors?.['required']) {
+    alert('Please provide a phone number.');
+   } else if (phoneControl.errors?.['pattern']) {
+    const phoneNumber = phoneControl.value;
+    if (phoneNumber.length !== 10) {
+      alert('Please provide a phone number with exactly 10 digits.');
+    } else {
+      alert('Please provide a valid phone number.\n\nPhone number must contain only numeric digits.');
+    }
+  }
+  return;
+}
+const emailControl = this.applyForm.get('email');
+if (emailControl && emailControl.invalid) {
+  alert('Please provide a valid email address.');
+  return;
+}
+const slUsernameControl = this.applyForm.get('slusername');
+if (slUsernameControl && slUsernameControl.invalid) {
+  if (slUsernameControl.errors?.['required']) {
+    alert('Please provide a username.');
+  } else if (slUsernameControl.errors?.['pattern']) {
+    alert('Please provide a valid username.\n\nUsername must contain only numeric digits.');
+  }
+  return;
+}
+const slPasswordControl = this.applyForm.get('SLPassword');
+if (slPasswordControl && slPasswordControl.invalid) {
+  alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
+  return;
+}
+    // if (this.isFormFieldsEmpty(this.applyForm)) {
+    //   // Form is invalid, display an alert or handle the error
+    //   alert('Please fill in all the required fields.');
+    //   return;
+    // }
+    // const emailValue = this.applyForm.get('email')?.value;
+    // const passwordValue = this.applyForm.get('slPassword')?.value;
+    // const phoneValue = this.applyForm.get('phone')?.value;
+
+    // if (!this.validatePhone(phoneValue)) {
+    //   // Invalid phone number format, display an alert or handle the error
+    //   alert('Please enter a valid phone number.');
+    //   return;
+    // }
+    // if (!this.validateEmail(emailValue)) {
+    //   // Invalid email format, display an alert or handle the error
+    //   alert('Please enter a valid email address.');
+    //   return;
+    // }
+  
+    // if (!this.validatePassword(passwordValue)) {
+    //   // Invalid password format, display an alert or handle the error
+    //   alert('Please enter a valid password.');
+    //   return;
+    // }
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
     );
@@ -191,7 +262,7 @@ export class EditRegisterCompanyComponent {
     const headers = {
       'Content-Type': 'application/json', // Set the Content-Type header to application/json
     };
-    // console.log(serializedData);
+    console.log(serializedData);
     this.resto.postUpdateCompany(serializedData, headers).subscribe(
       (response: any) => {
         let counter=0;
@@ -224,7 +295,57 @@ export class EditRegisterCompanyComponent {
         console.error('Error retrieving data:', error);
       }
     );
+    
+  
   }
+  isFormFieldsEmpty(control: AbstractControl): boolean {
+    if (control instanceof FormGroup) {
+      for (const key in control.controls) {
+        if (control.controls.hasOwnProperty(key)) {
+          if (this.isFormFieldsEmpty(control.controls[key])) {
+            return true; 
+          }
+        }
+      }
+    } else if (control instanceof FormArray) {
+      for (const formControl of control.controls) {
+        if (this.isFormFieldsEmpty(formControl)) {
+          return true; 
+        }
+      }
+    } else {
+      if (/*control.invalid ||*/ control.value === null || control.value === '') {
+        return true; 
+      }
+    }
+  
+    return false; // All fields are filled
+  }
+//   validateEmail(email: string): boolean {
+   
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return emailRegex.test(email);
+//   }
+  
+//   validatePassword(password: string): boolean {
+    
+//     if (password.length < 8) {
+//       return false; 
+//     }
+//     const hasUpperCase = /[A-Z]/.test(password); 
+//   const hasLowerCase = /[a-z]/.test(password); 
+//   const hasNumber = /\d/.test(password); 
+//   const hasSpecialCharacter = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(password); 
+  
+ 
+//   return hasUpperCase && hasLowerCase && hasNumber && hasSpecialCharacter;
+// }
+  
+//   validatePhone(phone: string): boolean {
+    
+//     const phoneRegex = /^\d{10}$/; 
+//     return phoneRegex.test(phone);
+//   }
 }
 
 export class CompanyData {
