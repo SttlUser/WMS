@@ -1,24 +1,30 @@
 
 
-<div class="container">
-    <div class="table-wrapper">
+
+<div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
+    
+    <div class="table-wrapper" >
         <div class="table-title">
+            <br>
             <div class="row">
                 <div class="col-sm-8">
                     <h4>User Master Detail</h4>
                 </div>
             </div>
         </div>
-        <br><br>
+        <!-- <br><br> -->
         <div class="btn-outline-secondary me-3 p-2" style="float: right">
-            <button type="button" class="btn btn-outline-secondary" (click)="addNewUserMaster()">Add</button>
+            <!-- <button type="button" class="btn btn-outline-secondary" (click)="addNewUserMaster()">Add</button> -->
+            <button type="button" class="btn btn-primary" (click)="addNewUserMaster()">Add</button>
+
         </div>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
-                    <th>Firstname</th>  
+                    <th>FirstName</th>
+
                     <th>LastName</th>
-                    <th>Username</th>
+                    <th>UserName</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>CreatedDate</th>
@@ -32,8 +38,8 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let usr of Userdata | capitalize">
-                    <tr>
+                <ng-container *ngFor="let usr of Userdata">
+                    <tr >
                         <td>{{usr?.firstName}}</td>
                         <td>{{usr?.lastName}}</td>
                         <td>{{usr?.userName}}</td>
@@ -49,11 +55,13 @@
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"  *ngIf="usr.isActive; " (click)="UpdateUser(usr)">Edit</button>        
-                                                
-                            
-                                <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" class="btn btn-outline-danger">Delete</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>
+                                
+                            <!-- <button type="button" (click)="deletebtn(usr)"
+                                class="btn btn-outline-danger">Delete</button> -->
+
+                                <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" id="userdelet" class="btn btn-danger">Delete</button>
                                 <ng-template #activeButton>
                                 <button class="btn btn-outline-success" (click)="activebtn(usr)">Activate</button>
                                 </ng-template>
@@ -116,22 +124,27 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Password</label>
                         <input class="form-control form-control-sm" type="text" #Password
-                            [(ngModel)]="UserdataUpdate.Password" name="Password" placeholder="Password" aria-label=".form-control-sm example">
+                            [(ngModel)]="UserdataUpdate.Password" name="Password" placeholder="Password"
+                            aria-label=".form-control-sm example">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Phone</label>
-                        <input class="form-control form-control-sm" type="text" #Phone [(ngModel)]="UserdataUpdate.Phone" name="Phone" placeholder="Phone" aria-label=".form-control-sm example">
+                        <input class="form-control form-control-sm" type="text" #Phone
+                            [(ngModel)]="UserdataUpdate.Phone" name="Phone" placeholder="Phone  "
+                            aria-label=".form-control-sm example">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Role</label>
                         <!-- <input class="form-control form-control-sm" type="text" #ins_del_id
                             [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" placeholder="Role"
                             aria-label=".form-control-sm example"> -->
-                        <select class="form-select" aria-label="Default select example" #ins_del_id  name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
+                        <select class="form-select" aria-label="Default select example" #ins_del_id 
+                            name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
                             <option value="Default">select</option>
-                            <option name="select"*ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
+                            <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.roleName}}</option>
                         </select>
-                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id  formControlName="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
+                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id formControlName="ins_del_id"
+                            [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

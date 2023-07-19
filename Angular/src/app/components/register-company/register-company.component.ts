@@ -109,6 +109,7 @@ export class RegisterCompanyComponent implements OnInit {
           horizontalPosition: 'end',
           verticalPosition: 'top',
         });
+        this.NewList=[];
       },
       (error: any) => {
         console.error('Error retrieving data:', error);

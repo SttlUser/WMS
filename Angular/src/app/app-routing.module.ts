@@ -14,88 +14,28 @@ import { EditRegisterCompanyComponent } from './components/edit-register-company
 import { RoleAcessListComponent } from './components/RoleAccess/ListingOfData/role-acess-list/role-acess-list.component';
 import { EditRoleAccessComponent } from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component'
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: NavigationComponent,
+    component: LayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
-
+      { path: '', component: HomeComponent  ,data: { header: 'Dashboard', subheader:'Welcome to WMS'}  },
+      { path: 'AddRoleMaster', component: RoleMasterComponent ,data: { header: 'Create Role', subheader:'Create New Role'}},
+      { path: 'DispayRoleMaster', component: DispalyDataComponent , data: { header: 'Role Master', subheader:'Role List'}},
+      { path: 'UserMaster', component: UsermasterComponent , data: { header: 'User Master', subheader:'User List'}},
+      { path: 'edit-usermaster', component: EditUsermasterComponent  },
+      { path: 'RegisterCompany', component: RegisterCompanyComponent ,data: { header: 'Register Company', subheader:'Add New Company'}},
+      { path: 'DisplayCompany', component: CompanyDataDisplayComponent ,data: { header: 'Company Master', subheader:'Company List'}},
+      { path: 'AddUser', component: CreateUserComponent ,data:{header:'Create User',subheader:'Create New User'} },
+      { path: 'RoleAccessList', component: RoleAcessListComponent ,data: { header: 'Role Access Master', subheader:'Role Access List'}},
+      { path: 'EditRoleAccess', component: EditRoleAccessComponent ,data: { header: 'Edit Role Access', subheader:'Edit Role'}},
+      { path: 'EditRegisteredCompany', component: EditRegisterCompanyComponent ,data: { header: 'Edit Company Details', subheader:'Edit Company'}}
     ],
   },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'AddRoleMaster', component: RoleMasterComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'DispayRoleMaster', component: DispalyDataComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'UserMaster', component: UsermasterComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'edit-usermaster', component: EditUsermasterComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'RegisterCompany', component: RegisterCompanyComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'DisplayCompany', component: CompanyDataDisplayComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'AddUser', component: CreateUserComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'RoleAccessList', component: RoleAcessListComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'EditRoleAccess', component: EditRoleAccessComponent },
-    ],
-  },
-  {
-    path: '',
-    component: NavigationComponent,
-    children: [
-      { path: 'EditRegisteredCompany', component: EditRegisterCompanyComponent },
-    ],
-  },
-
+ 
   { path: '**', redirectTo: '' },
 ];
 
@@ -105,4 +45,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+ }

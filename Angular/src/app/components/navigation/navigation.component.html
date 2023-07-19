@@ -1,56 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light"  >
+<nav class="navbar navbar-expand-lg " >
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">WMS</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/DispayRoleMaster"
-            >Role Master</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/UserMaster" >User Master</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/RoleAccessList" >Role Based Access</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/DisplayCompany" >Companies</a>
-        </li>
-       
-      </ul>
-
-      <div *ngIf="loginStatus; else loggedOut">
-        <button class="btn btn-outline-secondary me-3 p-2" (click)="logout()">
-          Logout
-        </button>
-      </div>
-    
-      <ng-template #loggedOut>
-        <button
-          class="btn btn-outline-secondary me-3 p-2"
-          (click)="goToLogin()"
-        >
-          Login
-        </button>
-      </ng-template>
+    <a href="index.html">
+      <img alt="Logo" src="../assets/media/logos/silver--touch.png" class="logo-default max-h-100px" />
+    </a>
+    <div id="kt_header_menu" class="header-menu header-menu-left header-menu-mobile  header-menu-layout-default "></div>
+    <ul class="menu-nav ">
       
-    </div>
+      <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true" ><a style="text-decoration: none;"
+        routerLink="/role-master" class="menu-link menu-toggle" routerLink="/" ><span class="menu-text" >Home</span><span
+          class="menu-desc"></span><i class="menu-arrow"></i></a>
+
+    </li>
+      <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true" ><a style="text-decoration: none;"
+          routerLink="/role-master" class="menu-link menu-toggle" routerLink="/DispayRoleMaster" ><span class="menu-text" >Role Master</span><span
+            class="menu-desc"></span><i class="menu-arrow"></i></a>
+
+      </li>
+      <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true"><a
+          routerLink="" class="menu-link menu-toggle" routerLink="/UserMaster"><span class="menu-text">User Master</span><span
+            class="menu-desc"></span><i class="menu-arrow"></i></a>
+
+      </li>
+      <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true"><a
+          routerLink="" class="menu-link menu-toggle" routerLink="RoleAccessList"><span class="menu-text">Role Based Access</span><span
+            class="menu-desc"></span><i class="menu-arrow"></i></a>
+
+      </li>
+      <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true"><a
+        routerLink="" class="menu-link menu-toggle" routerLink="/DisplayCompany"><span class="menu-text">Companies</span><span
+          class="menu-desc"></span><i class="menu-arrow"></i></a>
+
+      <!-- <li class="menu-item  menu-item-submenu menu-item-aro" data-menu-toggle="click" aria-haspopup="true"><a
+          routerLink="" class="menu-link menu-toggle" (click)="logout()"><span class="menu-text">Logout</span><span
+          class="menu-desc"></span><i class="menu-arrow"></i></a> -->
+    </ul>
+
   </div>
+  <button class="Log_Btn btn btn-danger" style="margin-left: 387px;" (click)="logout()">Logout</button>
 </nav>

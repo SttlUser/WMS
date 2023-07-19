@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
   <div class="table-wrapper">
     <div class="table-title">
+      <br>
       <div class="row">
         <div class="col-sm-8">
           <h4>Comapany Master Data</h4>
         </div>
       </div>
     </div>
-    <br /><br />
     <div class="btn-outline-secondary me-3 p-2" style="float: right">
       <button
         type="button" id="add"
-        class="btn btn-outline-secondary"(click)="GotoCompanypage()">Add New Company</button>
+        class="btn btn-primary" (click)="GotoCompanypage()">Add New Company</button>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="mytable">
       <thead>
         <tr>
           <th>Company Name</th>
@@ -31,19 +31,20 @@
             <td>{{ i?.name }}</td>
             <td>{{ i?.email }}</td>
             <td>{{ i?.slUrl }}</td>
-            <td>{{ i?.db_type }}</td>
+            <td>{{ i?.databaseType }}</td>
             <td>{{ i?.slUsername }}</td>
             <td>{{ i?.isDelete ? "Inactive" : "Active" }}</td>
             <td>
               <!-- <button
                 type="button"class="btn btn-outline-primary"data-bs-toggle="modal"data-bs-target="#exampleModal"(click)="UpdateCompany()">Edit</button> -->
 
-              <button type="button" (click)="UpdateCompany(i)"class="btn btn-outline-secondary">Edit</button>
+              <button type="button" (click)="UpdateCompany(i)"class="btn btn-primary mr-5">Edit</button>
 
               <button
                 *ngIf="i.isActive; else activeButton"
                 (click)="deletebtn(i)"
-                class="btn btn-outline-danger"
+                class="btn btn-danger"
+                id="delet"
               >
                 Delete
               </button>

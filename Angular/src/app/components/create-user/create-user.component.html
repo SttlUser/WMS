@@ -1,43 +1,67 @@
-<article>
+
+<div class="container" style="background-color: rgb(253, 253, 253); border-radius: 15px;">
+ 
+  <br>
+  <article>
     <section class="listing-apply">
-      <h2 class="section-heading">Create User</h2>
-      <form [formGroup]="applyForm" (ngSubmit)="PostUserData()">
-        <input hidden type="text"   name="cb_pk_id"  formControlName="cb_pk_id" >
-        <label for="first-name">First Name</label>
-        <input id="firstname" type="text"   name="firstname" formControlName="firstname">
-        <br>
-        <br>
-        <label for="middlename">Middle Name</label>
-        <input id="middlename" type="text"  name="Middlename" formControlName="middlename">
-        <br>
-        <br>
-        <label for="lastname">Last Name</label>
-        <input id="lastname" type="text"   name="lastname" formControlName="lastname">
-        <br> 
-        <br>   
-        <label for="username">User name</label>
-        <input id="username" type="text"   name="username" formControlName="username">
-        <br> 
-        <br>   
-        <label for="username">Password</label>
-        <input id="password" type="password"   name="password" formControlName="password">
-        <br>
-        <br>
-        <label for="email">Email</label>
-        <input id="email" type="email"   name="email" formControlName="email">
-        <br>
-        <br>
-        <label for="phone">Phone</label>
-        <input id="phone" type="text"  name="phone" formControlName="phone">
-        <br>
-        <br>
-          <select for="select-role" id="ins_del_id" formControlName="ins_del_id">
-            
-        <option  name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
-          </select>
-          <br>
-          <br>
-        <button type="submit" class="primary">Create</button>
+      
+      <form [formGroup]="applyForm" (ngSubmit)="PostUserData()" >
+  
+        <div class="form-row">
+          <div class="form-group" style="width: 45%;">
+            <label for="first-name">First Name</label>
+            <input id="firstname" type="text" name="firstname" formControlName="firstname" class="form-control">
+          </div>
+          <div class="form-group" style="width: 45%; margin-left: 10px;">
+            <label for="middlename">Middle Name</label>
+            <input id="middlename" type="text" name="Middlename" formControlName="middlename" class="form-control">
+          </div>
+        </div>
+        
+  
+        <div class="form-row">
+          <div class="form-group" style="width: 45%;">
+            <label for="lastname">Last Name</label>
+            <input id="lastname" type="text" name="lastname" formControlName="lastname" class="form-control">
+          </div>
+          <div class="form-group" style="width: 45%;margin-left: 10px;">
+            <label for="username">User name</label>
+            <input id="username" type="text" name="username" formControlName="username" class="form-control">
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group" style="width: 45%;">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" formControlName="password" class="form-control">
+          </div>
+          <div class="form-group" style="width: 45%; margin-left: 10px;">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" formControlName="email" class="form-control">
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group" style="width: 45%;">
+            <label for="phone">Phone</label>
+            <input id="phone" type="text" name="phone" formControlName="phone" class="form-control">
+          </div>
+          <div class="form-group" style="width: 45%; margin-left: 10px;">
+            <label for="ins_del_id">Select Role</label>
+            <select id="ins_del_id" formControlName="ins_del_id" class="form-control">
+              <option value="">Select</option>
+              <option *ngFor="let i of items" [value]="i.id">{{i.name}}</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="form-row" style="position: relative; display: flex; justify-content: center;">
+          <div class="form-group text-center" style="margin-bottom: 20px;">
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </div>
+  
       </form>
     </section>
   </article>
+</div>
