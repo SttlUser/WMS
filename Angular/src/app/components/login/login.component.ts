@@ -54,8 +54,8 @@ export class LoginComponent implements  OnInit {
     // Hide the navbar component on the login page
     this.showNavbar = JSON.parse(localStorage.getItem('showNavbar') || "{}") ? true : false;
   }
-
   showNavbar = JSON.parse(localStorage.getItem('showNavbar') || "{}") ? true : false;
+
   Authenticate(Form: NgForm) {
     if (Form.invalid) {
       // Mark the form as touched to display validation errors
@@ -70,7 +70,7 @@ export class LoginComponent implements  OnInit {
       alert('Please enter both username and password');
       return;
     }
-    console.log('ngForm.value', Form.value)
+    // console.log('ngForm.value', Form.value)
     this.http.post(`${environment.api.server}/Login/UserLogin`, Form.value).subscribe((res: any) => {
       localStorage.setItem('error', JSON.stringify({ code: res?.errorInfo?.code, message: res?.errorInfo?.message }));
       if (res?.errorInfo?.code !== 0) {
@@ -91,6 +91,6 @@ export class LoginComponent implements  OnInit {
         this.toastService.recieve(this.logged_in);
       }
     })
-    console.log("Authenticated, Now navigating to home page", this.router)
+    // console.log("Authenticated, Now navigating to home page", this.router)
   }
 }

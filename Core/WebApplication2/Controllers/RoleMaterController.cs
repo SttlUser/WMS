@@ -88,17 +88,16 @@ namespace WebApplication2.Controllers
 
         // POST api/<ValuesController>
         [HttpPost("CreateRole")]
-        public async Task<RoleMasterData> Post([FromBody] JsonObject role)
+        public async Task<RoleMaster> Post([FromBody] JsonObject role)
         {
-            RoleMasterData roleMaster = new RoleMasterData();
+             RoleMaster roleMaster = new RoleMaster();
             try
             {
                 //JsonObject obj = JsonNode.Parse(role).AsObject();
                 int roletype = Convert.ToInt32(role["roleid"].ToString()); // (int)role["roleid"];
                 string roleName = (string)role["name"];
-                //string CURRENT_DATE = (string)role["CreatedDate"];
                 //roleMaster = await _dBHelperRepo.CreateRole(2,roleName,roletype);
-                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype,  42);
+                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype,1);
 
                 roleMaster.Error = ReturnError(0, string.Empty);
             }
@@ -117,15 +116,13 @@ namespace WebApplication2.Controllers
 
         // DELETE api/<ValuesController>/5
         [HttpPost("DeleteRoleMaster")]
-        public async Task<RoleMasterData> DeleteRole([FromBody] JsonArray usr)
+        public async Task<RoleMaster> DeleteRole(int roletype)
         {
+            RoleMaster roleMaster = new RoleMaster();
 
-            RoleMasterData roleMaster = new RoleMasterData();
-            int id = (int)usr[1];
-            int LastModifiedById = (int)usr[0]; 
             try
-            {
-                roleMaster = await _dBHelperRepo.DeleteRole(4,LastModifiedById, id);   //1 is the dummy data for lastModified field                
+            {               
+                RoleMaster roleType = await _dBHelperRepo.DeleteRole(4,roletype, "" , 1);   //1 is the dummy data for lastModified field                
             }
             catch (Exception ex)
             {                
@@ -134,7 +131,6 @@ namespace WebApplication2.Controllers
             return roleMaster;
 
         }
-
 
         [HttpGet("GetRoleMasterData")]
         public async Task<List<RoleMasterData>> GetAllRoleMaster(int flag)
@@ -152,27 +148,6 @@ namespace WebApplication2.Controllers
             }
             return lstroleMaster;
         }
-
-        [HttpPut("UpdateRoleMaster")]
-        public async Task<RoleMasterData> UpdateRoleMaster([FromBody] JsonObject user)
-        {
-            RoleMasterData rolemasterdata = new RoleMasterData();
-            try
-            {
-                string roleName = (string)user["Name"];
-                int roletype = Convert.ToInt32(user["RoleTypeid"].ToString());
-                int cb_pk_id = Convert.ToInt32(user["Id"].ToString());
-                //int lastModifiedBy = Convert.ToInt32(user["LastModifiedById"].ToString());
-                rolemasterdata = await _dBHelperRepo.UpdateRoleData(3, roleName, roletype, cb_pk_id, 42);
-                rolemasterdata.Error = ReturnError(0, string.Empty);
-            }
-            catch (Exception ex)
-            {
-                rolemasterdata.Error = ReturnError(400, ex.ToString());
-            }
-            return rolemasterdata;
-        }
-
 
         private Error ReturnError(int code, string strError)
         {

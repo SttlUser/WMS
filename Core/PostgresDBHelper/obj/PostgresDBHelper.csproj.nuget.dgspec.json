@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj": {}
+    "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj": {}
   },
   "projects": {
-    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
+    "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
-        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\obj\\",
+        "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\bapsd\\.nuget\\packages\\",
+        "outputPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bapsd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -63,20 +63,20 @@
         }
       }
     },
-    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj": {
+    "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
+        "projectUniqueName": "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
         "projectName": "PostgresDBHelper",
-        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
-        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
-        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\obj\\",
+        "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
+        "packagesPath": "C:\\Users\\bapsd\\.nuget\\packages\\",
+        "outputPath": "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bapsd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -91,11 +91,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
-                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj"
+              "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj": {
+                "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj"
               },
-              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj": {
-                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj"
+              "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -139,20 +139,20 @@
         }
       }
     },
-    "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj": {
+    "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\baps\\.nuget\\packages\\",
-        "outputPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\obj\\",
+        "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\bapsd\\.nuget\\packages\\",
+        "outputPath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\baps\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bapsd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -167,8 +167,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj": {
-                "projectPath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj"
+              "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj": {
+                "projectPath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj"
               }
             }
           }

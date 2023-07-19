@@ -1,17 +1,88 @@
-<div class="container d-flex align-items-center justify-content-center">
-  <div class="card">
-    <div class="card-body">
-      <form #Form="ngForm" (ngSubmit)="Authenticate(Form)">
-        <div class="mb-3">
-          <input ngModel type="text" class="form-control" id="username" name="username" placeholder="User Name" />
-        </div>
-        <div class="mb-3">
-          <input ngModel type="text" class="form-control" id="password" name="password" placeholder="Password" />
-        </div>
+<!-- 
+<div class="container-fluid h-100">
+  <div class="row h-100">
 
-        <button type="submit">Submit</button>
-      </form>
-      <!-- <a routerLink="/">Submit</a> -->
+    <div class="col-md-4 d-none d-md-flex bg-light login-form-container">
+      <div class="login-image-container">
+        <img class="login-image" [src]="'assets/media/svg/illustrations/login-visual-7.svg'" alt="Login Image">
+      </div>
+    </div>
+
+    <div class="d-md-none bg-light w-100 h-100">
+      <div class="login-image-container">
+        <div class="login-background-image" [style.backgroundImage]="'url(assets/media/svg/illustrations/login-visual-7.svg)'"></div>
+      </div>
+    </div>
+
+    <div class="col-md-8 bg-light login-container">
+      <div class="login-form">
+        <h3 class="mb-4">Login</h3>
+        <form  #Form="ngForm"
+        (ngSubmit)="Authenticate(Form)">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input ngModel type="text" class="form-control" id="username" name="username" placeholder="User Name" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input ngModel type="text" class="form-control" id="password" name="password" placeholder="Password" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>z 
+</div> -->
+
+
+
+
+<!-- login.component.html -->
+<div class="container-fluid h-100" style="height: 100%; margin: 0; padding: 0; overflow: hidden;">
+  <div class="row h-100 align-items-center">
+  <!-- <div class="row h-100 align-items-center"> -->
+    <!-- Left: Image (Desktop) -->
+    <div class="col-md-4 d-none d-md-flex bg-light login-form-container" style="height: 100vh;">
+      <!-- <div class="col-md-4 d-none d-md-flex bg-light login-form-container" style="height: 100%;"> -->
+      <div class="login-image-container d-flex justify-content-center align-items-center">
+        <!-- <div class="login-image-container d-flex justify-content-center align-items-center" style="height: 100%;"> -->
+        <!-- Replace 'image-url' with the actual URL of your image -->
+        <img class="login-image" [src]="'/assets/media/login_Splash_95.png'" alt="Login Image">
+      </div>
+    </div>
+
+    <!-- Center: Image (Mobile) -->
+    <div class="d-md-none bg-light w-100"
+      style="height: 40vh; display: flex; justify-content: center; align-items: center;">
+      <div class="login-image-container">
+        <!-- Replace 'image-url' with the actual URL of your background image -->
+        <img class="login-background-image  " [src]="'/assets/media/login_Splash_95.png'" alt="Login Image">
+        <!-- <div class="login-background-image"
+          [style.backgroundImage]="'url(Angular/src/assets/media/login_Splash_95.png)'"></div> -->
+      </div>
+    </div>
+
+    <!-- Right: Login Form -->
+    <div class="col-md-8 bg-white login-container" style="height: 100vh;">
+    <!-- <div class="col-md-8 bg-white login-container" style="height: 100%;"> -->
+      <div class="login-form d-flex flex-column justify-content-center" style="height: 100%;">
+        <h3 class="mb-4">Welcome to WMS</h3>
+        <h2 class="mb-4">Login</h2>
+        <form #Form="ngForm" (ngSubmit)="Authenticate(Form)">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input ngModel type="text" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+              id="username" name="username" placeholder="User Name" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input ngModel type="text" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+              id="password" name="password" placeholder="Password" />
+          </div>
+          <button type="submit"
+            class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

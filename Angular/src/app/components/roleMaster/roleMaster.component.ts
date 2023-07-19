@@ -61,6 +61,8 @@ export class RoleMasterComponent {
     })
   }
 
+
+
   PostDataForm() {
 
     const formData = { ...this.ngForm.value };
@@ -104,3 +106,7 @@ export class RoleMasterComponent {
   }
   
 }
+function GetRolesDetail() {
+  throw new Error('Function not implemented.');
+}
+

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4QTOPJr8tOVJJnKYSA8SFNZiB7E6k9x0BmIRbe7+IY4mX03A57ed7SRRsh4wivr1H+tw7FhRicidXyGk2kTtXg==",
+  "dgSpecHash": "CYiJMTC+vKp4fyvZV8MbIsJ40Oue/XEeDR/QVd+xlzh7Yv4yMEPmokt5YmkX4AU7cmx6LQal2uENgHv451i+nw==",
   "success": true,
-  "projectFilePath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Repositories\\Repositories.csproj",
+  "projectFilePath": "C:\\JANAK\\WMS\\WMS\\Core\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

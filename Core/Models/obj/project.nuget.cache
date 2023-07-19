@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s7FPPl0RwiNI6l/HYkfanpi2XFkWpmw7u3pxYXaY2uL44Nf3/wYYbXCRC+aaaZY+8pfSTpij35GR3ByLDyOwBA==",
+  "dgSpecHash": "YM/RC/3MhqU2cVVIkJNkd48owCtiWxr2dqW2/JVr5iyZWtY/pcsgQcJt+3YJbzNhXnl+qCL83JV6elr+nHNJng==",
   "success": true,
-  "projectFilePath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\Models\\Models.csproj",
+  "projectFilePath": "C:\\JANAK\\WMS\\WMS\\Core\\Models\\Models.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

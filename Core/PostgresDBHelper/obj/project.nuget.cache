@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "aVT3QrQmcysizkS6gKv92YxmIcJYXE/LrMjY4h0/SuSgKR/VjKvRCgtYpTU1LNkmLxuSNQVsxyyMkTG6qVe25A==",
+  "dgSpecHash": "vl7SJQMltlvOJ+rnk4VAHyDlCWLCTwalLgqFmAhFMuG9QWAWIMVCzcFRq0osbPX/MZjscz+mIS5LzXP4NojOQw==",
   "success": true,
-  "projectFilePath": "C:\\sap_projects\\angular\\WMS_Frontend\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
+  "projectFilePath": "C:\\JANAK\\WMS\\WMS\\Core\\PostgresDBHelper\\PostgresDBHelper.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\baps\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
-    "C:\\Users\\baps\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\baps\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
-    "C:\\Users\\baps\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\bapsd\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\bapsd\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\bapsd\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
+    "C:\\Users\\bapsd\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

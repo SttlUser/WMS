@@ -1,0 +1,42 @@
+
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>Comapny Register</h4>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="btn-outline-secondary me-3 p-2" style="float: right">
+            <button type="button" class="btn btn-outline-secondary" (click)="GotoCompanypage()">Add New Company</button>
+        </div>
+        <table class="table table-bordered" id="myTable" >
+            <thead>
+                <tr>
+                    <th>Company Name</th>
+                    <th>Email</th>
+                    <th>Service Layer URL</th>
+                    <th>DB Type</th>
+                    <th>User Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let rol of ComapnyData">
+                    <tr>
+                        <!-- <td>{{rol?.id}}</td> -->
+                        <td>{{rol?.name}}</td>
+                        <td>{{rol?.email}}</td>
+                        <td>{{rol?.slUrl}}</td>
+                        <td>{{rol?.databaseType}}</td>
+                        <td>{{rol?.slUsername}}</td>
+                        <td>Edit</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

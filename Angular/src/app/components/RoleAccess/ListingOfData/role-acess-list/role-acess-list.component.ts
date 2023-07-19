@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CustomerService } from '../../../../customer.service'
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt';
 
 @Component({
   selector: 'app-role-acess-list',
@@ -16,33 +19,34 @@ export class RoleAcessListComponent {
   
   constructor(private router: Router,private resto: CustomerService,public http:HttpClient){
     
-    this.GetRoleMasterData();
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
-      this.router.navigate(['/role-acess-list']);
+      this.router.navigate(['/login']);
       // console.log(this.data);
     }
-
-        //for navbar hiding
-        router.events.subscribe(
-          (val)=>{
-            if(val instanceof NavigationEnd){
-              if(val.url=='/login'){
-                this.showNavbar=true;
-              }
-            }
+    
+    //for navbar hiding
+    router.events.subscribe(
+      (val)=>{
+        if(val instanceof NavigationEnd){
+          if(val.url=='/login'){
+            this.showNavbar=true;
           }
-        )
+        }
+      }
+      )
+      this.GetRoleAccessData();
   }
   
 
-  GetRoleMasterData(){
+  GetRoleAccessData(){
     console.log("receving table data");
     this.resto.getRoleMaster().subscribe(
       (response: any) => {
         console.log("receved table data", response);
         this.RoleData = response;
+        this.initializeDataTable();
       },
       (error) => {
         console.error('Error retrieving data:', error);
@@ -50,6 +54,11 @@ export class RoleAcessListComponent {
     );
   }
 
+  initializeDataTable() {
+    $(document).ready(() => {
+      $('#myTable').DataTable();
+    });
+  }
 
   Editpage(rol:any){
      
