@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {CustomerService} from '../../customer.service'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { ToastService } from '../toast/toast.service';
+import { ToastComponent } from '../toast/toast.component';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-user',
@@ -16,7 +18,8 @@ export class CreateUserComponent {
   message = "USER CREATED SUCCESSFULLY";
   items:any=[];
   url:string=`${environment.api.server}/RoleMater/GetRoleMasterData?id=`+1;
-  constructor(private resto:CustomerService, private router: Router ,public http:HttpClient,private toastService: ToastService){
+  snackBar: any;
+  constructor(private resto:CustomerService, private router: Router ,public http:HttpClient,private toastService: ToastService,@Inject(MAT_SNACK_BAR_DATA) public data: any){
     this.Getdata(http);
   }
   applyForm = new FormGroup({
@@ -90,7 +93,7 @@ if (!passwordRegex.test(password)) {
 }
 
 // Validate the email format
-const emailRegex = /^[A-Za-z0-9._%+-]+@example\.com$/;
+const emailRegex = /^[A-Za-z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.(com|edu|org|net|gov|co)$/;
 if (!emailRegex.test(email)) {
   console.log('Invalid email format.');
   alert('Invalid email format.');
@@ -111,6 +114,13 @@ if (!phoneRegex.test(phone)) {
     },
     (err)=>{
       console.log(err);
+      const message = 'Something went wrong.';
+      this.snackBar.openFromComponent(ToastComponent, {
+        data: { message },
+        duration: 2000, // Toast duration in milliseconds
+        horizontalPosition: 'end',
+        verticalPosition: 'top'
+      });
     }
     )
     

@@ -113,6 +113,13 @@ export class RegisterCompanyComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
+        const message = 'Something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     );
   }

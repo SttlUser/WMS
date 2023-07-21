@@ -83,6 +83,13 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         },
         (err) => {
           console.log(err);
+          const message = 'Something went wrong.';
+          this.snackBar.openFromComponent(ToastComponent, {
+            data: { message },
+            duration: 2000, // Toast duration in milliseconds
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
         }
       );
   }
@@ -126,6 +133,13 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
           },
           (err) => {
             console.log(err);
+            const message = 'Something went wrong.';
+            this.snackBar.openFromComponent(ToastComponent, {
+              data: { message },
+              duration: 2000, // Toast duration in milliseconds
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
           }
         );
     }
@@ -147,7 +161,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
           });
           },
           (err) => {
-            const message = err;
+            const message = 'Something wnent wrong.';
               this.snackBar.openFromComponent(ToastComponent, {
               data: { message },
               duration: 2000, // Toast duration in milliseconds

@@ -96,8 +96,9 @@ export class CustomerService {
   }
 
   ////// role access get api
-  public GetRoleAccessData(): Observable<any>{
-    return this.http.get(this.Dispaly_url+'RoleBasedAccess/GetRoleBasedAccessData');
+  public GetRoleAccessData(id:number): Observable<any>{
+    console.log("id",id);
+    return this.http.get(this.Dispaly_url+`RoleBasedAccess/GetRoleBasedAccessData?flag=1&roleid=${id}`);
   }
 
   /////RoleEditacess post Api

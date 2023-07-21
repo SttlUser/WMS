@@ -6,6 +6,13 @@
     <section class="listing-apply">
       
       <form [formGroup]="applyForm" (ngSubmit)="PostUserData()" >
+        <div class="form-row">
+          <div class="form-group" style="width: 45%;">
+            <a routerLink="/UserMaster" class="back_btn">
+              <img src="../assets/media/arrow-left.png" alt="BCK_BTN" width="20px" height="20px">
+            </a>
+          </div>
+        </div>
   
         <div class="form-row">
           <div class="form-group" style="width: 45%;">
@@ -54,12 +61,14 @@
             </select>
           </div>
         </div>
-  
-        <div class="form-row" style="position: relative; display: flex; justify-content: center;">
-          <div class="form-group text-center" style="margin-bottom: 20px;">
-            <button type="submit" class="btn btn-primary">Create</button>
+        
+        <div class="form-row">
+          <div class="form-group" style="width: 45%;">
+            
+              <button type="submit" class="btn btn-primary">Create</button>
           </div>
         </div>
+        
   
       </form>
     </section>

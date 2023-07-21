@@ -22,10 +22,9 @@
             </button>
 
             <button class="btn btn-icon btn-hover-transparent-white p-0 ml-3" id="kt_header_mobile_topbar_toggle">
-                <span
-                    class="svg-icon svg-icon-xl">    <svg
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                        height="24px" viewBox="0 0 24 24" version="1.1">
+                <span class="svg-icon svg-icon-xl"> <svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24"
+                        version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <polygon points="0 0 24 0 24 24 0 24" />
                             <path
@@ -49,7 +48,8 @@
                 <!--begin::Header-->
                 <div id="kt_header" class="header  header-fixed ">
                     <!--begin::Container-->
-                    <div class=" container  d-flex align-items-stretch justify-content-between">
+                    <div class=" container  d-flex align-items-stretch justify-content-between"
+                        style="margin-left: 30vh;">
                         <!--begin::Left-->
                         <div class="d-flex align-items-stretch mr-3">
                             <!--begin::Header Logo-->
@@ -64,7 +64,7 @@
                                     <!--begin::Header Nav-->
                                     <app-navigation> </app-navigation>
                                     <!-- <router-outlet/> -->
-                                    <ul class="menu-nav ">
+                                    <ul class="menu-nav" style="margin-top: 35px;">
 
                                     </ul>
                                     <!--end::Header Nav-->
@@ -113,12 +113,14 @@
                                         <!--end::Item-->
                                         <!--begin::Item-->
                                         <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-                                        <a aria-disabled="true"  class="text-white text-hover-white opacity-75 hover-opacity-100">
+                                        <a aria-disabled="true"
+                                            class="text-white text-hover-white opacity-75 hover-opacity-100">
                                             {{ header }} </a>
                                         <!--end::Item-->
                                         <!--begin::Item-->
                                         <span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-                                        <a aria-disabled="true"  class="text-white text-hover-white opacity-75 hover-opacity-100">
+                                        <a aria-disabled="true"
+                                            class="text-white text-hover-white opacity-75 hover-opacity-100">
                                             {{subheader}} </a>
                                         <!--end::Item-->
                                     </div>
@@ -130,7 +132,7 @@
                             <!--end::Info-->
 
                             <!--begin::Toolbar-->
-                          
+
                             <!--end::Toolbar-->
                         </div>
 
@@ -139,7 +141,7 @@
 
                     <!--begin::Entry-->
                     <div class="">
-                    <!-- <div class="d-flex flex-column-fluid"> -->
+                        <!-- <div class="d-flex flex-column-fluid"> -->
                         <!--begin::Container-->
                         <div class=" container ">
                             <router-outlet></router-outlet>
@@ -154,15 +156,16 @@
                 </div>
                 <!--end::Content-->
 
-                 <!--begin::Footer-->
-                 <div class="footer bg-white py-4 d-flex flex-lg-column " id="kt_footer">
+                <!--begin::Footer-->
+                <!-- <div class="footer bg-white py-4 d-flex flex-lg-column"  id="kt_footer"> -->
+                <div class="footer bg-white py-4 position-sticky bottom-0 w-100" id="kt_footer">
                     <!--begin::Container-->
                     <div class=" container  d-flex flex-column flex-md-row align-items-center justify-content-between">
                         <!--begin::Copyright-->
                         <div class="text-dark order-2 order-md-1">
-                            <span class="text-muted font-weight-bold mr-2">2020&copy;</span>
+                            <span class="text-muted font-weight-bold mr-2">2023 &copy;</span>
                             <a href="http://keenthemes.com/metronic" target="_blank"
-                                class="text-dark-75 text-hover-primary">Keenthemes</a>
+                                class="text-dark-75 text-hover-primary">SilverTouch</a>
                         </div>
                         <!--end::Copyright-->
 
@@ -170,9 +173,9 @@
                         <div class="nav nav-dark order-1 order-md-2">
                             <a href="http://keenthemes.com/metronic" target="_blank"
                                 class="nav-link pr-3 pl-0">About</a>
-                            <a href="http://keenthemes.com/metronic" target="_blank" class="nav-link px-3">Team</a>
+                            <!-- <a href="http://keenthemes.com/metronic" target="_blank" class="nav-link px-3">Team</a>
                             <a href="http://keenthemes.com/metronic" target="_blank"
-                                class="nav-link pl-3 pr-0">Contact</a>
+                                class="nav-link pl-3 pr-0">Contact</a> -->
                         </div>
                         <!--end::Nav-->
                     </div>
@@ -210,7 +213,7 @@
             <!--begin::Header-->
             <div class="d-flex align-items-center mt-5">
                 <div class="symbol symbol-100 mr-5">
-                    <div class="symbol-label" ></div>
+                    <div class="symbol-label"></div>
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
@@ -251,7 +254,7 @@
             <div class="separator separator-dashed mt-8 mb-5"></div>
             <!--end::Separator-->
 
-         
+
 
             <!--begin::Separator-->
             <div class="separator separator-dashed my-7"></div>
@@ -319,7 +322,7 @@
 
                     <span class="font-weight-bolder text-success py-1 font-size-lg">+50%</span>
                 </div>
-                
+
                 <!--end::Item-->
 
                 <!--begin::Item-->

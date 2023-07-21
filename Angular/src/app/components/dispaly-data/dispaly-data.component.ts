@@ -83,6 +83,13 @@ message:any;
       },
       (error) => {
         console.error('Error retrieving data:', error);
+        const message = 'oops! something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     );
   }
@@ -131,6 +138,13 @@ message:any;
         },
         (err) => {
           // this.toastService.showError('API call was unsuccessful!');
+          const message = 'Something went wrong';
+          this.snackBar.openFromComponent(ToastComponent, {
+            data: { message },
+            duration: 2000, // Toast duration in milliseconds
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
          
           console.log(err);
         }
@@ -159,6 +173,13 @@ message:any;
       (err) => {
         console.log(err);
         // this.toastService.showError('API call was unsuccessful!');
+        const message = 'Something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     )
     }
@@ -168,22 +189,32 @@ message:any;
     console.log("update data", UpdateRole);
     this.resto.UpdateRoleMasdterData(UpdateRole).subscribe(
       (res) => {
-        console.log(res);
+        console.log(res, 'Role Updated Successfully');
         // this.toastService.recieve(this.updade);
         // alert("data has been updated./")
+        const message = 'Role Updated Successfully';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        });
+        this.GetRoleMasterData();
+      
       },
       (err) => {
         console.log(err);
+        const message = 'Something Went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     )
-    this.GetRoleMasterData();
-    const message = 'Role Updated Successfully';
-    this.snackBar.openFromComponent(ToastComponent, {
-      data: { message },
-      duration: 2000, // Toast duration in milliseconds
-      horizontalPosition: 'end',
-      verticalPosition: 'top'
-    });
+    
+ 
   }
 
   // sendString(myString:any){

@@ -58,7 +58,7 @@ export class UsermasterComponent {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']);   
       // console.log(this.data);
     }
   }
@@ -72,6 +72,7 @@ export class UsermasterComponent {
         console.log("receved table data", response);
         this.Userdata = response;
         this.initializeDataTable();
+ 
       },
       (error) => {
         console.error('Error retrieving data:', error);
@@ -88,7 +89,7 @@ export class UsermasterComponent {
     }
   };
 
-  UpdateUser(row: any) {
+  UpdateUser(row: any) {   
     this.UserdataUpdate.cb_pk_id = row.id;
     this.UserdataUpdate.Firstname = row.firstName;
     this.UserdataUpdate.Lastname = row.lastName;
@@ -165,7 +166,7 @@ export class UsermasterComponent {
       return this.items
     });
   }
- 
+
 
 }
 
