@@ -1,0 +1,13 @@
+.hide-navbar {
+    display: none;
+  }
+  .Log_Btn{
+    margin-left: 20%;
+    padding: 8px 12px;
+    background-color: #ff0000;
+    color: #f90000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ 

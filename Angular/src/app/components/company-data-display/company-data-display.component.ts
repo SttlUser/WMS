@@ -7,6 +7,9 @@ import { environment } from 'src/environment';
 import { Injectable } from '@angular/core';
 import { ToastComponent } from '../toast/toast.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt';
 
 @Injectable({
 	providedIn: 'root'
@@ -52,19 +55,18 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
 
 
   constructor(private router: Router,private resto: CustomerService,public http: HttpClient,private snackBar: MatSnackBar) {
-    this.GetComapnyMasterData(http);
-
+    
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log('Error', err);
       this.router.navigate(['/login']);
       // console.log(this.data);
     }
+    this.GetComapnyMasterData(http);
   }
 
   ngAfterViewInit(): void {}
-  initializeDataTable() {
-  }
+  
 
   GotoCompanypage() {
     this.router.navigate(['/RegisterCompany']);
@@ -75,12 +77,27 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
       .get(this.Dispaly_url + 'CompanyMaster/GetCompanyDetails')
       .subscribe(
         (res) => {
+          // console.log(res)
           this.Comapnydata = res;
+          this.initializeDataTable();
         },
         (err) => {
           console.log(err);
+          const message = 'Something went wrong.';
+          this.snackBar.openFromComponent(ToastComponent, {
+            data: { message },
+            duration: 2000, // Toast duration in milliseconds
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
         }
       );
+  }
+
+  initializeDataTable() {
+    $(document).ready(() => {
+      $('#mytable').DataTable();
+    });
   }
 
   UpdateCompany(row:any) {
@@ -116,6 +133,13 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
           },
           (err) => {
             console.log(err);
+            const message = 'Something went wrong.';
+            this.snackBar.openFromComponent(ToastComponent, {
+              data: { message },
+              duration: 2000, // Toast duration in milliseconds
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
           }
         );
     }
@@ -137,7 +161,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
           });
           },
           (err) => {
-            const message = err;
+            const message = 'Something wnent wrong.';
               this.snackBar.openFromComponent(ToastComponent, {
               data: { message },
               duration: 2000, // Toast duration in milliseconds

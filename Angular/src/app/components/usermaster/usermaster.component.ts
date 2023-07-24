@@ -1,32 +1,22 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { NavigationEnd, NavigationExtras, Router } from '@angular/router'
+import { FormGroup, FormControl, NgForm, Validators } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router'
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { CustomerService } from '../../customer.service'
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { ToastService } from '../toast/toast.service';
-import { Pipe, PipeTransform } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToastComponent } from '../toast/toast.component';
-
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt';
 
 
 @Component({
   selector: 'app-usermaster',
   templateUrl: './usermaster.component.html',
-  styleUrls: ['./usermaster.component.css']
+  styleUrls: ['./usermaster.component.css'],
+ 
 })
 
-
-
 export class UsermasterComponent {
-  isLoggedIn: boolean = true;
-  myString:any;
-  update = "UPDATE API SUCCESS";
-  activate = "Activate API SUCCESS";
-  
   
   @Input() data: any[] = [];
   @Output() editRowEvent = new EventEmitter<any>();
@@ -61,28 +51,16 @@ export class UsermasterComponent {
   items: any = [];
 
   url: string = `${environment.api.server}/RoleMater/GetRoleMasterData`;
-  showNavbar: boolean=true;
 
-  constructor(private router: Router, private resto: CustomerService, public http: HttpClient,private toastService: ToastService,private snackBar: MatSnackBar) {
+  constructor(private router: Router, private resto: CustomerService, public http: HttpClient) {
     this.GetUserDetail();
     this.Getdata(http);
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']);   
       // console.log(this.data);
     }
-
-        //for navbar hiding
-        router.events.subscribe(
-          (val)=>{
-            if(val instanceof NavigationEnd){
-              if(val.url=='/usermaster'){
-                this.showNavbar=true;
-              }
-            }
-          }
-        )
   }
 
 
@@ -93,6 +71,8 @@ export class UsermasterComponent {
       (response: any) => {
         console.log("receved table data", response);
         this.Userdata = response;
+        this.initializeDataTable();
+ 
       },
       (error) => {
         console.error('Error retrieving data:', error);
@@ -109,7 +89,7 @@ export class UsermasterComponent {
     }
   };
 
-  UpdateUser(row: any) {
+  UpdateUser(row: any) {   
     this.UserdataUpdate.cb_pk_id = row.id;
     this.UserdataUpdate.Firstname = row.firstName;
     this.UserdataUpdate.Lastname = row.lastName;
@@ -119,93 +99,24 @@ export class UsermasterComponent {
     this.UserdataUpdate.Password = row.password;
     this.UserdataUpdate.roleName = row.roleName;
   }
+  initializeDataTable() {
+    $(document).ready(() => {
+      $('#myTable').DataTable();
+     
+    });
+  }
 
   PostUpdateUserData(UpdateUser: any) {
-    const formData = { ...this.ngForm.value };
-    const ins_del_id = formData.ins_del_id ?? '';
-    if (!this.UserdataUpdate.Firstname || !this.UserdataUpdate.Lastname || !this.UserdataUpdate.Email || 
-      !this.UserdataUpdate.Password || !this.UserdataUpdate.Phone ) {
-        if(this.UserdataUpdate.ins_del_id = ""){
-      console.log("All fields are required");
-      alert("All fields are required, Please fill in it");
-      return;
-        }
-    }
-    
-    if (!UpdateUser.Firstname) {
-      console.log("Firstname is required");
-      alert("Firstname is required")
-      return;
-    }
-  
-    // Validating lastname
-    if (!UpdateUser.Lastname) {
-      console.log("Lastname is required");
-      return;
-    }
-  
-    // Validating email
-    if (!UpdateUser.Email) {
-      console.log("Email is required");
-      return;
-    } else if (!this.isValidEmail(UpdateUser.Email)) {
-      console.log("Invalid email format");
-      return;
-    }
-  
-    // Validating password
-    if (!UpdateUser.Password) {
-      console.log("Password is required");
-      return;
-    } else if (!this.isValidPassword(UpdateUser.Password)) {
-      console.log("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character");
-      return;
-    }
-  
-    // Validating phone
-    if (!UpdateUser.Phone) {
-      console.log("Phone is required");
-      return;
-    } else if (!this.isValidPhone(UpdateUser.Phone)) {
-      console.log("Invalid phone number format");
-      return;
-    };
-    
     console.log(UpdateUser);
     this.resto.UpdateUserData(UpdateUser).subscribe(
       (res) => {
         console.log(res);
-        const message = 'User Updated Successfully';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-        // this.toastService.recieve(this.update);
+        alert("data has been updated./")
       },
       (err) => {
         console.log(err);
       }
     )
-    
-  }
-  
-   isValidEmail(Email: string) {
-    
-    const emailPattern =/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(Email);
-  }
-  
-   isValidPassword(Password: string) {
-    // Password validation regex pattern
-    const passwordPattern =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return passwordPattern.test(Password);
-  }
-  
-   isValidPhone(Phone: string) {
-    const phonePattern = /^[0-9]\d{9}$/; 
-    return phonePattern.test(Phone);
   }
 
   deletebtn(usr: any) {
@@ -214,14 +125,6 @@ export class UsermasterComponent {
         (res) => {
           console.log(res);
           this.GetUserDetail();
-          const message = 'User Deleted Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-          // this.UsersendString(this.myString);
         },
         (err) => {
           console.log(err);
@@ -229,30 +132,30 @@ export class UsermasterComponent {
       )
     }
 
-    
+    // this.resto.DeletUserData(1, usr.id, 4).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //     this.GetUserDetail();
+    //   },
+    //   (err) => {
+    //     console.log(err);c
+    //   }
+    // )
+
   }
 
   activebtn(usr: any) {
-    if (window.confirm("Do you really want to Activate?")){
     this.resto.DeletUserData(1, usr.id, 5).subscribe(
       (res) => {
         console.log(res);
         this.GetUserDetail();
-        const message = 'User Activated Successfully';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-        // this.toastService.recieve(this.activate);
       },
       (err) => {
         console.log(err);
       }
     )
   }
-  }
+
   addNewUserMaster() {
     this.router.navigate(['/AddUser'])
   }
@@ -264,11 +167,6 @@ export class UsermasterComponent {
     });
   }
 
-  UsersendString(myString:any){
-    myString = "DELETE API SUCCESS";
-   this.toastService.recieve(myString);
-  }
- 
 
 }
 

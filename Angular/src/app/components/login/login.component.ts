@@ -1,5 +1,5 @@
 
-import { Component,Input,OnInit } from '@angular/core';
+import { Component,Inject,Input,OnInit,ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -7,6 +7,7 @@ import { environment } from 'src/environment';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { ToastService } from 'src/app/components/toast/toast.service';
 import { ToastComponent } from '../toast/toast.component';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements  OnInit {
   ngForm!: FormGroup;
 
-  
+  @ViewChild('usernameInput', { static: false }) usernameInput!: ElementRef;
+
   OnInit(): void {
     this.ngForm = this.formbuilder.group({
       username: ['', Validators.required],
@@ -25,13 +27,18 @@ export class LoginComponent implements  OnInit {
     });
     this.ngForm.setValidators(this.validateLoginForm);
   }
+  ngAfterViewInit() {
+    this.usernameInput.nativeElement.focus();
+    }
+
   validateLoginForm(control: AbstractControl): { [key: string]: boolean } | null {
     const username = control.get('username');
     const password = control.get('password');
 
     if (username && password && username.value.trim() === '' && password.value.trim() === '') {
       this.showAlertMessage('Please enter username and password');
-      console.log("Function called");
+      console.log("Please enter username and password");
+      
       return { 'emptyFields': true };
 
     }
@@ -45,17 +52,17 @@ export class LoginComponent implements  OnInit {
 
   login_error = "USERNAME AND PASSWORD IS INCORRECT";
   logged_in = "LOGED IN SUCCESSFULLY";
-  snackBar: any;
+  
 
-  constructor(private router: Router, private http: HttpClient, private toastService: ToastService,private formbuilder:FormBuilder) {
+  constructor(private router: Router, private http: HttpClient, private toastService: ToastService,private formbuilder:FormBuilder,private snackBar: MatSnackBar) {
     console.log(this.showNavbar)
   }
   ngOnInit(): void {
     // Hide the navbar component on the login page
     this.showNavbar = JSON.parse(localStorage.getItem('showNavbar') || "{}") ? true : false;
   }
-
   showNavbar = JSON.parse(localStorage.getItem('showNavbar') || "{}") ? true : false;
+
   Authenticate(Form: NgForm) {
     if (Form.invalid) {
       // Mark the form as touched to display validation errors
@@ -68,29 +75,49 @@ export class LoginComponent implements  OnInit {
 
     if (!username || !password) {
       alert('Please enter both username and password');
+      //console.log(username)
       return;
     }
-    console.log('ngForm.value', Form.value)
+    // console.log('ngForm.value', Form.value)
     this.http.post(`${environment.api.server}/Login/UserLogin`, Form.value).subscribe((res: any) => {
       localStorage.setItem('error', JSON.stringify({ code: res?.errorInfo?.code, message: res?.errorInfo?.message }));
       if (res?.errorInfo?.code !== 0) {
         // alert(res?.errorInfo?.message);
         // this.toastService.recieve(this.login_error);
-      } else {
-
-        console.log("loggin in")
-
-        this.router.navigate(['/DispayRoleMaster']);
-        const message = 'Login Successfully';
+        console.log("Errorx");
+        alert("Username or Password is wrong")
+        console.log(password)
+        const message = 'Please verify your Credentials.';
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },
           duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom'
+        });
+      } else if(res?.errorInfo?.code == 0) {
+
+        console.log("loggin in")
+        const message = 'Login Successfully';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 50000, // Toast duration in milliseconds
+          horizontalPosition: 'right',
           verticalPosition: 'top'
         });
-        this.toastService.recieve(this.logged_in);
+        this.router.navigate(['/DispayRoleMaster']);
+       
+        // this.toastService.recieve(this.logged_in);
+      }
+      else{
+        const message = 'Something Went Wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        });
       }
     })
-    console.log("Authenticated, Now navigating to home page", this.router)
+    // console.log("Authenticated, Now navigating to home page", this.router)
   }
 }

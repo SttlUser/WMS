@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     api: {
-        server: 'https://k261vrkj-44368.asse.devtunnels.ms',
+        server: 'http://192.168.0.112:8888',
         
         mapKey: '',
     }    

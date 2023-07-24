@@ -8,7 +8,9 @@ import { MAT_SNACK_BAR_DATA, MatSnackBar } from '@angular/material/snack-bar';
   `,
   styles: [`
     .toast-message {
-      color: white;
+      color: blue;
+      z-index:999; 
+       position:'absolute';
       font-size: 14px;
     }
   `]
@@ -21,7 +23,7 @@ export class ToastComponent {
           this.snackBar.openFromComponent(ToastComponent, {
             data: { message },
             duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
+            horizontalPosition: 'right',
             verticalPosition: 'top',
           });
   }

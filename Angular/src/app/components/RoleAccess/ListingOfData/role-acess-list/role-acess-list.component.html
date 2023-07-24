@@ -1,26 +1,26 @@
-<div class="container">
-    <div class="table-wrapper">
+<div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
+    <div class="table-wrapper"  style="padding: 2vh;">
         <div class="table-title">
+            <br>
             <div class="row">
                 <div class="col-sm-8">
                     <h4>Roles</h4>
                 </div>
             </div>
         </div>
-        <br><br>
-        <table class="table table-bordered">
+    
+        <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Role</th>
-                    <th>RoleType</th>
+                    <th>Role Type</th>
                     <th>Action</th>
                 </tr>
             </thead>
              <tbody>
                 <ng-container *ngFor="let rol of RoleData">
                     <tr>
-                        <td>{{rol?.id}}</td>
+                        
                         <td>{{rol?.name}}</td>
                         <td>{{rol?.roleName}}</td>
                         <td>

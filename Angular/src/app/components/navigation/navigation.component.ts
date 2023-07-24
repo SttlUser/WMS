@@ -7,7 +7,8 @@ import { CustomerService } from 'src/app/customer.service';
 @Component({
   
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html'
+  templateUrl: './navigation.component.html',
+ 
 })
 export class NavigationComponent {
  
@@ -36,12 +37,14 @@ export class NavigationComponent {
     
   }
   logout() {
+    if (window.confirm("Do you really want to Logout?")) {
     localStorage.removeItem('error');
     console.log("logging out");
-    this.toastService.recieve(this.logged_out);
+    //this.toastService.recieve(this.logged_out);
     this.loginText = false;
     this.isLoggedIn = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
+    }
   }
   updateForm(){
     this.router.navigate(['']); 
@@ -53,6 +56,7 @@ export class NavigationComponent {
   deletebtn(){
 
   }
+
 
 
 }

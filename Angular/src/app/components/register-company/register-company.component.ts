@@ -53,7 +53,7 @@ export class RegisterCompanyComponent implements OnInit {
       whsInput: ['1'],
     });
   }
-  
+  //innerClass: CompanyData | undefined;
   companyDataObj: CompanyData = new CompanyData();
   Sldbnamelistobj: Sldbname = new Sldbname();
 
@@ -104,7 +104,26 @@ export class RegisterCompanyComponent implements OnInit {
       alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
       return;
     }
-    
+    // const emailValue = this.applyForm.get('email')?.value;
+    // const passwordValue = this.applyForm.get('SLPassword')?.value;
+    // const phoneValue = this.applyForm.get('phone')?.value;
+
+    // if (!this.validatePhone(phoneValue)) {
+    //   // Invalid phone number format, display an alert or handle the error
+    //   alert('Please enter a valid phone number.');
+    //   return;
+    // }
+    // if (!this.validateEmail(emailValue)) {
+    //   // Invalid email format, display an alert or handle the error
+    //   alert('Please enter a valid email address.');
+    //   return;
+    // }
+
+    // if (!this.validatePassword(passwordValue)) {
+    //   // Invalid password format, display an alert or handle the error
+    //   alert('Please enter a valid password.');
+    //   return;
+    // }
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
     );
@@ -156,13 +175,21 @@ export class RegisterCompanyComponent implements OnInit {
         const message = 'Company Added Successfully';
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },
-          duration: 2000, 
+          duration: 2000, // Toast duration in milliseconds
           horizontalPosition: 'end',
           verticalPosition: 'top',
         });
+        this.NewList=[];
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
+        const message = 'Something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     );
   }
@@ -182,7 +209,7 @@ export class RegisterCompanyComponent implements OnInit {
         }
       }
     } else {
-      if ( control.value === null || control.value === '') {
+      if (/*control.invalid ||*/ control.value === null || control.value === '') {
         return true;
       }
     }
@@ -278,7 +305,7 @@ export class RegisterCompanyComponent implements OnInit {
 export class CompanyData {
   [x: string]: any;
   constructor() { }
-  
+  //   sldbnameList: Sldbname[] = [];
 
   id!: number;
   Name!: string;

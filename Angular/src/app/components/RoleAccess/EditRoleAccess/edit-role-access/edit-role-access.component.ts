@@ -24,9 +24,14 @@ export class EditRoleAccessComponent implements OnInit  {
   rbacCheckboxArr: any[] = [];
   Access=[{"id":0,"value":"Full Access"},{"id":1,"value":"No Access"}];
   showNavbar: boolean = true;
-  
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];
+      //console.log(this.id); // Use the ID as needed
+    });}
+
   constructor(private router: Router,private resto: CustomerService,public http:HttpClient,private route: ActivatedRoute,private toastService: ToastService,private snackBar: MatSnackBar,private location: Location){
-    this.GetAccessData(http);
+    this.GetAccessData(http );
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
@@ -48,20 +53,25 @@ export class EditRoleAccessComponent implements OnInit  {
   
 
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
-      console.log(this.id); // Use the ID as needed
-    });}
 
   GetAccessData(http:HttpClient){
-    this.resto.GetRoleAccessData().subscribe(
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];})
+    console.log("functionid",this.id);
+    this.resto.GetRoleAccessData(this.id).subscribe(
       (response: any) => {
         console.log("receved table data", response);
         this.Accessdata = response;
       },
       (error) => {
         console.error('Error retrieving data:', error);
+        const message = 'Something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     );
   }
@@ -100,9 +110,17 @@ export class EditRoleAccessComponent implements OnInit  {
           verticalPosition: 'top'
         });
         // this.toastService.recieve(this.edit_role_access_posted);
+        this.router.navigate(['/RoleAccessList'])
       },
       (err)=>{
         console.log(err);
+        const message = 'Something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
       }
     )
   }

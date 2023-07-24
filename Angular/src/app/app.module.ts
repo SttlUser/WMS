@@ -24,6 +24,8 @@ import { ToastComponent } from './components/toast/toast.component';
 import { ToastService } from './components/toast/toast.service';
 import { CapitalizePipe } from './capitalize.pipe';
 import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-bar';
+import { LayoutComponent } from './layout/layout.component';
+import { DataService } from './data.service';
 
 
 
@@ -47,7 +49,7 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-b
     EditRoleAccessComponent,
     ToastComponent,
     CapitalizePipe,
-    
+    LayoutComponent
       
     
   ],
@@ -62,12 +64,10 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-b
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule
-  
-    
-   
-   
   ],
-  providers: [CustomerService, ToastService, { provide: MAT_SNACK_BAR_DATA, useValue: {} } ],
+  providers: [CustomerService, ToastService, { provide: MAT_SNACK_BAR_DATA, useValue: {} },DataService ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+ 
+}

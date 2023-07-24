@@ -34,12 +34,12 @@ export class RoleMasterComponent {
 
   constructor(private router: Router, http:HttpClient,private resto:CustomerService,private toastService: ToastService,private snackBar: MatSnackBar) {
     this.Getdata(http)
-    const err = JSON.parse(localStorage.getItem('error') || '{}');
-    if (err.code !== 0) {
-      console.log("Error", err);
-      this.toastService.recieve(this.error_login);
-      this.router.navigate(['/login']);
-    }
+    // const err = JSON.parse(localStorage.getItem('error') || '{}');
+    // if (err.code !== 0) {
+    //   console.log("Error", err);
+    //   this.toastService.recieve(this.error_login);
+    //   this.router.navigate(['/login']);
+    // }
 
         //for navbar hiding
         router.events.subscribe(
@@ -60,6 +60,8 @@ export class RoleMasterComponent {
       return this.items
     })
   }
+
+
 
   PostDataForm() {
 
@@ -104,3 +106,7 @@ export class RoleMasterComponent {
   }
   
 }
+function GetRolesDetail() {
+  throw new Error('Function not implemented.');
+}
+
