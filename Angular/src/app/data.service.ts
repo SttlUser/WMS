@@ -9,4 +9,5 @@ export class DataService {
   updateHeaderData(data: { header: string; subheader: string }) {
     this.headerData.next(data);
   }
+  
 }
