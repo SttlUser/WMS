@@ -91,7 +91,7 @@ export class LoginComponent implements  OnInit {
         const message = 'Login Successfully';
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },
-          duration: 50000, // Toast duration in milliseconds
+          duration: 2000, // Toast duration in milliseconds
           horizontalPosition: 'right',
           verticalPosition: 'top'
         });
