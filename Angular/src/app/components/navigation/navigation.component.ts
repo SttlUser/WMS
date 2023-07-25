@@ -37,13 +37,12 @@ export class NavigationComponent {
     
   }
   logout() {
-    if (window.confirm("Do you really want to Logout?")) {
-    localStorage.removeItem('error');
-    console.log("logging out");
-    this.toastService.recieve(this.logged_out);
-    this.loginText = false;
-    this.isLoggedIn = false;
-    this.router.navigate(['/login']);
+    if (window.confirm('Do you really want to Logout?')) {
+      localStorage.removeItem('error');
+      //this.toastService.recieve(this.logged_out);
+      this.loginText = false;
+      this.isLoggedIn = false;
+      this.router.navigate(['/login']);
     }
   }
   updateForm(){

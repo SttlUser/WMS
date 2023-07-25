@@ -77,7 +77,7 @@ message:any;
     console.log("receving table data");
     this.resto.getRoleMaster().subscribe(
       (response: any) => {
-        console.log("receved table data", response);
+        console.log("receved table data", response);  
         this.RoleData = response;
         this.initializeDataTable();
       },
@@ -118,37 +118,36 @@ message:any;
   DeleteRole(rol: any) {
     console.log(rol);
     if (window.confirm("Do you really want to delete?")) {
-      this.resto.DeleteRoleMasterData( rol.id, 42, 4).subscribe(
-        (res) => {
-          // this.toast.success({detail:"Success Message",summary:res.Message,duration:5000})
-          // this.toastService.toast(message);
-         
-          console.log(res);
-          this.GetRoleMasterData();
-          const message = 'Role Deleted Successfully';
-      this.snackBar.openFromComponent(ToastComponent, {
-      data: { message },
-      duration: 2000, // Toast duration in milliseconds
-      horizontalPosition: 'end',
-      verticalPosition: 'top'
-    });
-
-          // this.sendString(this.message);
-          
-        },
-        (err) => {
-          // this.toastService.showError('API call was unsuccessful!');
-          const message = 'Something went wrong';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-         
-          console.log(err);
-        }
-      )
+      console.log(rol);
+    this.resto.DeleteRoleMasterData(rol.id, 42, 4).subscribe(
+      (res) => {
+        console.log(res);
+        this.GetRoleMasterData();
+        const message = 'Role Activated Successfully';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        // this.toastService.recieve(this.activate);
+        // this.toastService.showSuccessToast('API call was successful!');
+      },
+      (err) => {
+        console.log(err);
+        // this.toastService.showError('API call was unsuccessful!');
+        const message = 'Something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+      }
+    )
+    }
+    else{
+        return;
     }
   }
 
@@ -183,6 +182,9 @@ message:any;
       }
     )
     }
+    else{
+      return;
+    }
   }
 
   UpdatedRoleData(UpdateRole: any) {
@@ -190,6 +192,7 @@ message:any;
     this.resto.UpdateRoleMasdterData(UpdateRole).subscribe(
       (res) => {
         console.log(res, 'Role Updated Successfully');
+        alert("Role updated")
         // this.toastService.recieve(this.updade);
         // alert("data has been updated./")
         const message = 'Role Updated Successfully';

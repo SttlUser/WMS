@@ -78,7 +78,8 @@ export class LoginComponent implements  OnInit {
         // alert(res?.errorInfo?.message);
         // this.toastService.recieve(this.login_error);
         console.log("Errorx");
-        const message = 'Please verify your Credentials.';
+        alert("Username or Password is wrong")
+        const message = 'Username or Password is wrong';
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },
           duration: 2000, // Toast duration in milliseconds
@@ -92,7 +93,7 @@ export class LoginComponent implements  OnInit {
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },
           duration: 50000, // Toast duration in milliseconds
-          horizontalPosition: 'right',
+          horizontalPosition: 'left',
           verticalPosition: 'top'
         });
         this.router.navigate(['/DispayRoleMaster']);
