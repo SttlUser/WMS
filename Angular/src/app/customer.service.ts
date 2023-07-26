@@ -41,7 +41,7 @@ export class CustomerService {
   }
   ///diplay data
   public getRoleMaster(): Observable<any> {
-    return this.http.get(this.Dispaly_url + 'RoleMater/GetRoleMasterData');
+    return this.http.get(this.Dispaly_url + 'RoleMater/GetRoleMasterData?flag='+1);
   }
   //delete role master data
   public DeleteRoleMasterData(id:any, deletbyid:any, flag:any): Observable<any> {

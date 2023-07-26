@@ -19,6 +19,8 @@ export class CreateUserComponent {
   items: any = [];
   url: string = `${environment.api.server}/RoleMater/GetRoleMasterData?id=` + 1;
   snackBar: any;
+  loggedInId: any;
+
   constructor(
     private resto: CustomerService,
     private router: Router,
@@ -27,9 +29,10 @@ export class CreateUserComponent {
     @Inject(MAT_SNACK_BAR_DATA) public data: any
   ) {
     this.Getdata(http);
+    this.loggedInId = sessionStorage.getItem('loggedInId');
   }
   applyForm = new FormGroup({
-    cb_pk_id: new FormControl('1'),
+    cb_pk_id: new FormControl(''),
     firstname: new FormControl(''),
     middlename: new FormControl(''),
     lastname: new FormControl(''),
@@ -47,7 +50,7 @@ export class CreateUserComponent {
     });
   }
   PostUserData() {
-    const formData = { ...this.applyForm.value };
+    const formData = { ...this.applyForm.value};
     const {
       firstname,
       middlename,
@@ -81,13 +84,13 @@ export class CreateUserComponent {
       alert('Lastname is required');
       return;
     }
-    if (
-      !isCapitalized(formData.firstname) ||
-      !isCapitalized(formData.lastname)
-    ) {
-      alert('First name and last name must be in capitalized format');
-      return;
-    }
+    // if (
+    //   !isCapitalized(formData.firstname) ||
+    //   !isCapitalized(formData.lastname)
+    // ) {
+    //   alert('First name and last name must be in capitalized format');
+    //   return;
+    // }
     function isCapitalized(value: string) {
       // Check if the first character of the value is capitalized
       return /^[A-Z]/.test(value);
@@ -122,6 +125,8 @@ export class CreateUserComponent {
       );
       return;
     }
+
+    formData.cb_pk_id= this.loggedInId
     console.log('Details entered', formData);
     this.resto.PostUserData(formData).subscribe(
       (res) => {

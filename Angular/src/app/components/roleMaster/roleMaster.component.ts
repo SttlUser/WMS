@@ -29,7 +29,7 @@ export class RoleMasterComponent {
   url: string = `${environment.api.server}/RoleMater/GetRoleTypes`;
   url2: string = `${environment.api.server}/RoleMater/CreateRole`;
   showNavbar: boolean = true;
-
+  loggedInId: any
   constructor(
     private router: Router,
     http: HttpClient,
@@ -37,14 +37,9 @@ export class RoleMasterComponent {
     private toastService: ToastService,
     private snackBar: MatSnackBar
   ) {
-    this.Getdata(http);
-    // const err = JSON.parse(localStorage.getItem('error') || '{}');
-    // if (err.code !== 0) {
-    //   console.log("Error", err);
-    //   this.toastService.recieve(this.error_login);
-    //   this.router.navigate(['/login']);
-    // }
 
+    this.Getdata(http);
+    this.loggedInId = sessionStorage.getItem('loggedInId');
     //for navbar hiding
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
@@ -63,7 +58,7 @@ export class RoleMasterComponent {
   }
 
   PostDataForm() {
-    const formData = { ...this.ngForm.value };
+    const formData = { ...this.ngForm.value , createdby: this.loggedInId};
     // console.log(formData)
 
     const name = formData.name?.trim();
@@ -85,6 +80,8 @@ export class RoleMasterComponent {
       alert('Please select valid type');
       return;
     } else {
+      console.log(formData)
+      
       this.resto.postdata(formData).subscribe((data) => {
         alert('data saved');
         console.log('get data', data);
