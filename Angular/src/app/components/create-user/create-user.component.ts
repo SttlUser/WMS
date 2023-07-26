@@ -109,7 +109,7 @@ export class CreateUserComponent {
 
     // Validate the email format
     const emailRegex =
-      /^[A-Za-z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.(com|edu|org|net|gov|co)$/;
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       console.log('Invalid email format.');
       alert('Invalid email format.');
