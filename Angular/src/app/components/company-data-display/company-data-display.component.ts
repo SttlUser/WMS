@@ -96,7 +96,12 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
 
   initializeDataTable() {
     $(document).ready(() => {
-      $('#mytable').DataTable();
+      $('#mytable').DataTable({
+        scrollX:true,
+        autoWidth:true,
+        retrieve: true,
+        paging: false
+      });
     });
   }
 

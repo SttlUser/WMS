@@ -37,7 +37,8 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
-
+                    loginResponse.id = userMaster.Id;
+                    loginResponse.username = userMaster.UserName;
                     loginResponse.ErrorInfo = ReturnError(0, string.Empty);
                 }
             }

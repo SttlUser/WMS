@@ -13,6 +13,16 @@ namespace Models
     }
     public class LoginResponse
     {
+        public int id { get; set; }
+        public string username { get; set; }
         public Error ErrorInfo { get; set; }
     }
+    public class SLLoginRequest
+    {
+        public string CompanyDB{get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+    
+
 }

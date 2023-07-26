@@ -1,9 +1,6 @@
-
-
-
 <div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
-    
-    <div class="table-wrapper"  style="padding: 2vh;" >
+
+    <div class="table-wrapper" style="padding: 2vh;">
         <div class="table-title">
             <br>
             <div class="row">
@@ -21,10 +18,9 @@
         <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
-                    <th>FirstName</th>
-
-                    <th>LastName</th>
-                    <th>UserName</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>User Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>CreatedDate</th>
@@ -39,7 +35,7 @@
             </thead>
             <tbody>
                 <ng-container *ngFor="let usr of Userdata">
-                    <tr >
+                    <tr>
                         <td>{{usr?.firstName}}</td>
                         <td>{{usr?.lastName}}</td>
                         <td>{{usr?.userName}}</td>
@@ -55,16 +51,16 @@
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" (click)="UpdateUser(usr)">Edit</button>
-                                
-                            <!-- <button type="button" (click)="deletebtn(usr)"
-                                class="btn btn-outline-danger">Delete</button> -->
-
-                                <button *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" id="userdelet" class="btn btn-danger">Delete</button>
-                                <ng-template #activeButton>
+                            <a *ngIf="usr.isActive" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                (click)="UpdateUser(usr)">
+                                <i class="far fa-edit text-primary mr-5"></i>
+                            </a>
+                            <a *ngIf="usr.isActive; else activeButton" (click)="deletebtn(usr)" id="userdelet">
+                                <i class="far fa-trash-alt text-danger mr-1" style="background-color: transparent;"></i>
+                            </a>
+                            <ng-template #activeButton>
                                 <button class="btn btn-outline-success" (click)="activebtn(usr)">Activate</button>
-                                </ng-template>
+                            </ng-template>
                         </td>
                     </tr>
                 </ng-container>
@@ -138,13 +134,14 @@
                         <!-- <input class="form-control form-control-sm" type="text" #ins_del_id
                             [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" placeholder="Role"
                             aria-label=".form-control-sm example"> -->
-                        <select class="form-select" aria-label="Default select example" #ins_del_id 
-                            name="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id">
+                        <select class="form-select" aria-label="Default select example" #ins_del_id name="ins_del_id"
+                            [(ngModel)]="UserdataUpdate.ins_del_id">
                             <option value="Default">select</option>
                             <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.roleName}}</option>
                         </select>
-                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id formControlName="ins_del_id"
-                            [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id" aria-label=".form-control-sm example">
+                        <input hidden class="form-control form-control-sm" type="text" #ins_del_id
+                            formControlName="ins_del_id" [(ngModel)]="UserdataUpdate.ins_del_id" name="ins_del_id"
+                            aria-label=".form-control-sm example">
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

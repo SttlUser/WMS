@@ -20,7 +20,7 @@ export class RoleMasterComponent {
   isLoggedIn: boolean = true;
   ngForm=new FormGroup({
     name:new FormControl(''),
-    roleid:new FormControl(1)
+    roleid:new FormControl('Default')
   })
 
 
@@ -66,27 +66,25 @@ export class RoleMasterComponent {
   PostDataForm() {
 
     const formData = { ...this.ngForm.value };
-    console.log(formData)
+    // console.log(formData)
 
     const name = formData.name?.trim();
     const roleid = formData.roleid;
-    if (name!.trim() === null && roleid === 0 ) {
-      
+
+    if (!name ) {
       console.log('Rolename and roletype must not be empty.');
-      alert('Rolename and roletype must not be empty.');
+      alert('Please enter Role Name');
       return;
     }
-
     const nameRegex = /^[a-zA-Z\s]+$/;
     if (typeof name !== 'string' || !nameRegex.test(name)) {
-    console.log('Rolename should not contain special characters.');
-    alert('Rolename should not contain special characters.');
+    alert('Rolename should not contain special characters or number.');
     return;
     }
 
-    if (!name || roleid === null || roleid === undefined ) {
+    if (roleid == 'Default' ) {
       console.log('Rolename and roletype must not be empty.');
-      alert('Rolename and roletype must not be empty.');
+      alert('Please select valid type');
       return;
     }
     else{

@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements  OnInit {
   ngForm!: FormGroup;
 
-  
+  loginid:any;
   OnInit(): void {
     this.ngForm = this.formbuilder.group({
       username: ['', Validators.required],
@@ -73,12 +73,14 @@ export class LoginComponent implements  OnInit {
     }
     // console.log('ngForm.value', Form.value)
     this.http.post(`${environment.api.server}/Login/UserLogin`, Form.value).subscribe((res: any) => {
-      localStorage.setItem('error', JSON.stringify({ code: res?.errorInfo?.code, message: res?.errorInfo?.message }));
+      console.log("loggin in",res);
+      localStorage.setItem('error', JSON.stringify({ code: res?.errorInfo?.code, message: res?.errorInfo?.message, userId:res?.id, userName:res?.username }));
       if (res?.errorInfo?.code !== 0) {
         // alert(res?.errorInfo?.message);
         // this.toastService.recieve(this.login_error);
         console.log("Errorx");
-        const message = 'Please verify your Credentials.';
+        alert("Username or Password is wrong")
+        const message = 'Username or Password is wrong';
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },
           duration: 2000, // Toast duration in milliseconds
@@ -86,8 +88,8 @@ export class LoginComponent implements  OnInit {
           verticalPosition: 'bottom'
         });
       } else if(res?.errorInfo?.code == 0) {
-
-        console.log("loggin in")
+        this.loginid = res.id;
+        console.log("loggin in",this.loginid);
         const message = 'Login Successfully';
         this.snackBar.openFromComponent(ToastComponent, {
           data: { message },

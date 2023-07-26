@@ -76,18 +76,19 @@ export class EditRoleAccessComponent implements OnInit  {
     );
   }
 
-  rbacCheckBox(rol:any){
-    this.role_id=rol.roleid;
-    if(rol.checked){
+  rbacCheckBox(rol: any) {
+    this.role_id = rol.roleid;
+    if (rol.checked) {
       this.rbacCheckboxArr.push(rol.documentid);
       console.log('Checked');
-      rol = this.Accessdata.roleid;
-    } else{
-      const index = this.rbacCheckboxArr.indexOf(rol);
-        this.rbacCheckboxArr.splice(index,1);
-      console.log('UnChecked');
-      rol = 0;
-    }
+      this.checkboxValues[rol.documentid] = true;
+  } else {
+    const index = this.rbacCheckboxArr.indexOf(rol.documentid);
+    this.rbacCheckboxArr.splice(index, 1);
+    console.log('UnChecked');
+    // Update the state of the checkbox in the checkboxStates array
+    this.checkboxValues[rol.documentid] = false;
+  }
     console.log(this.rbacCheckboxArr);
   }
 

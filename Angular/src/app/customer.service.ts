@@ -40,8 +40,8 @@ export class CustomerService {
     return this.http.post(this.Dispaly_url + 'UserMaster/CreateUser', data);
   }
   ///diplay data
-  public getRoleMaster(): Observable<any> {
-    return this.http.get(this.Dispaly_url + 'RoleMater/GetRoleMasterData');
+  public getRoleMaster(flag:any): Observable<any> {
+    return this.http.get(this.Dispaly_url + 'RoleMater/GetRoleMasterData?flag='+flag);
   }
   //delete role master data
   public DeleteRoleMasterData(id:any, deletbyid:any, flag:any): Observable<any> {

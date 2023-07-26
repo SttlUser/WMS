@@ -37,15 +37,6 @@ namespace PostgresDBHelper
 
             return result;
         }
-        //public async Task<List<T>> GetAll<T>(string constring, string command,int flag)
-        //{
-        //    List<T> result = new List<T>();
-
-        //    result = (await (new NpgsqlConnection(constring)).QueryAsync<T>(command,flag)).ToList();
-
-        //    return result;
-        //}
-
         public Task<T> GetAsync<T>(string pgDbConStr, string v)
         {
             throw new NotImplementedException();
@@ -62,22 +53,6 @@ namespace PostgresDBHelper
 
 
 
-
-        //public async Task<List<T>> GetAll<T>(string constring, string command, object parms)
-        //{
-        //    List<T> result = new List<T>();
-
-        //    result = (await (new NpgsqlConnection(constring)).QueryAsync<T>(command, parms)).ToList();
-
-        //    return result;
-        //}
-        //public async Task<int> EditData(string constring, string command, object parms)
-        //{
-        //    int result;
-
-        //    result = await (new NpgsqlConnection(constring)).ExecuteAsync(command, parms);
-
-        //    return result;
-        //}
+       
     }
 }
