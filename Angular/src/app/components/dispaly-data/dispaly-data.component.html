@@ -4,20 +4,20 @@
             <br>
             <div class="row">
                 <div class="col-sm-8">
-                    <h4>Role Master Detail</h4>
+                    <h4>Role Listing</h4>
                 </div>
             </div>
         </div>
-        <div class="btn-secondary" style="float: right">
-            <button type="button" class="btn btn-primary" (click)="GotoRoleMaster()">Add</button>
+        <div class="" style="float: right">
+            <button type="button" class="btn btn-primary mb-3" (click)="GotoRoleMaster()">Add</button>
         </div>
         <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>RoleType</th>
-                    <th>CreatedDate</th>
-                    <th>CreatedByName</th>
+                    <th>Role Type</th>
+                    <th>Created Date</th>
+                    <th>Created By Name</th>
                     <th>Last Modifier</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -38,12 +38,13 @@
                         <td >
                             <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" (click)="UpdateRole(rol)">Edit</button>-->
-                                <a href="#"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="UpdateRole(rol)">
+                                <a  *ngIf="rol.isActive" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="UpdateRole(rol)">
                                     <i class="far fa-edit text-primary mr-5"></i>
                                   </a>                                                                                                      
-                                  <a href="#" *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" class="shadow">
-                                    <i class="far fa-trash-alt text-danger mr-1"></i>                        
-                                  </a>                                                                
+                                   <a *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" >
+                                    <i class="far fa-trash-alt text-danger mr-1" style="background-color: transparent;"></i>                 
+                                  </a>   
+                                                                                                 
                                   <!-- Rest of the code -->
                                 <!-- <button *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" class="btn btn-outline-danger">Delete</button> -->
                                 <ng-template #activeButton>
@@ -90,14 +91,14 @@
                     <input hidden class="form-control form-control-sm" type="text" #id [(ngModel)]="RoledataUpdate.id"
                         name="id" aria-label=".form-control-sm example">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Role Name</label>
+                        <label for="name" class="form-label">Role Name*</label>
                         <input class="form-control form-control-sm" type="text" [(ngModel)]="RoledataUpdate.name" name="name"
-                        placeholder="name" aria-label=".form-control-sm example" #name="ngModel" required>
+                        placeholder="Role Name" aria-label=".form-control-sm example" #name="ngModel" required>
                         
                     </div>
                     <div class="mb-3">
-                        <label for="roleid" class="form-label">Role</label>
-                        <select class="form-select" aria-label="Default select example" #roleTypeid name="roleid"
+                        <label for="roleid" class="form-label">Role Type*</label>
+                        <select class="form-select" aria-label="Default select example" #roleTypeid name="RoleTypeid"
                             [(ngModel)]="RoledataUpdate.roleTypeid" >
                             <option value="Default">select</option>
                             <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
@@ -111,7 +112,7 @@
                     <input hidden class="form-control form-control-sm" type="text" #lastModifier
                         [(ngModel)]="RoledataUpdate.lastModifier" name="lastModifier"
                         aria-label=".form-control-sm example">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary mr-3">Update</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </form>
             </div>
