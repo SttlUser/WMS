@@ -42,7 +42,7 @@ export class RoleAcessListComponent {
 
   GetRoleAccessData(){
     console.log("receving table data");
-    this.resto.getRoleMaster().subscribe(
+    this.resto.getRoleMaster(6).subscribe(
       (response: any) => {
         console.log("receved table data", response);
         this.RoleData = response;
@@ -56,7 +56,12 @@ export class RoleAcessListComponent {
 
   initializeDataTable() {
     $(document).ready(() => {
-      $('#myTable').DataTable();
+      $('#myTable').DataTable({
+        scrollX:true,
+        autoWidth:true,
+        retrieve: true,
+        paging: false
+      });
     });
   }
 

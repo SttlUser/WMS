@@ -102,7 +102,13 @@ export class UsermasterComponent {
   }
   initializeDataTable() {
     $(document).ready(() => {
-      $('#myTable').DataTable();
+      $('#myTable').DataTable({
+        scrollX:true,
+        autoWidth:true,
+        retrieve: true,
+        paging: false
+      });
+     
     });
   }
 

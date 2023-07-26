@@ -59,7 +59,7 @@ export class RoleMasterComponent {
 
   PostDataForm() {
     const formData = { ...this.ngForm.value , createdby: this.loggedInId};
-    // console.log(formData)
+    console.log(formData)
 
     const name = formData.name?.trim();
     const roleid = formData.roleid;

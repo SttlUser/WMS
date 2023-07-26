@@ -41,9 +41,10 @@
                                 <a  *ngIf="rol.isActive" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="UpdateRole(rol)">
                                     <i class="far fa-edit text-primary mr-5"></i>
                                   </a>                                                                                                      
-                                  <a *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" class="shadow">
-                                    <i class="far fa-trash-alt text-danger mr-1"></i>                        
-                                  </a>                                                                
+                                   <a *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" >
+                                    <i class="far fa-trash-alt text-danger mr-1" style="background-color: transparent;"></i>                 
+                                  </a>   
+                                                                                                 
                                   <!-- Rest of the code -->
                                 <!-- <button *ngIf="rol.isActive else activeButton" (click)="DeleteRole(rol)" id="Roledelet" class="btn btn-outline-danger">Delete</button> -->
                                 <ng-template #activeButton>

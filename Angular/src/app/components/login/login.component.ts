@@ -22,6 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   ngForm!: FormGroup;
 
+  loginid:any;
   OnInit(): void {
     this.ngForm = this.formbuilder.group({
       username: ['', Validators.required],

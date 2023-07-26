@@ -75,8 +75,8 @@ export class DispalyDataComponent {
   }
 
   GetRoleMasterData() {
-    console.log('receving table data');
-    this.resto.getRoleMaster().subscribe(
+    console.log("receving table data");
+    this.resto.getRoleMaster(1).subscribe(
       (response: any) => {
         console.log('receved table data', response);
         this.RoleData = response;
@@ -105,7 +105,12 @@ export class DispalyDataComponent {
 
   initializeDataTable() {
     $(document).ready(() => {
-      $('#myTable').DataTable();
+      $('#myTable').DataTable({
+        scrollX:true,
+        autoWidth:true,
+        retrieve: true,
+        paging: false
+      });
     });
   }
 

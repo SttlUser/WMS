@@ -43,14 +43,28 @@ export class CreateUserComponent {
     ins_del_id: new FormControl('Default'),
   });
 
-  Getdata(http: HttpClient) {
-    http.get(this.url).subscribe((res: any) => {
-      this.items = res;
-      return this.items;
-    });
-  }
-  PostUserData() {
-    const formData = { ...this.applyForm.value};
+  Getdata(http:HttpClient){
+    this.resto.getRoleMaster(6).subscribe(
+      (response: any) => {
+        console.log("receved table data", response);  
+        this.items = response;
+        return this.items
+        
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+        const message = 'oops! something went wrong.';
+        this.snackBar.openFromComponent(ToastComponent, {
+          data: { message },
+          duration: 2000, // Toast duration in milliseconds
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+      }
+    );
+}
+  PostUserData(){
+    const formData = { ...this.applyForm.value };
     const {
       firstname,
       middlename,
