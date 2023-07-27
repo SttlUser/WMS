@@ -42,7 +42,7 @@ export class RegisterCompanyComponent implements OnInit {
       phone: ['', Validators.required],
       email: ['', [Validators.required]],
       SLUrl: ['', Validators.required],
-      db_type: ['', Validators.required],
+      db_type: ['hana', Validators.required],
       slusername: ['', Validators.required],
       SLPassword: ['', Validators.required],
       tableData: this.formBuilder.array([this.createTableRow()]),

@@ -81,7 +81,8 @@ namespace WebApplication2.Controllers
             {
                 int roletype = Convert.ToInt32(role["roleid"].ToString()); // (int)role["roleid"];
                 string roleName = (string)role["name"];
-                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype,  42);
+                int createdBy = Convert.ToInt32(role["createdBy"].ToString());
+                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype, createdBy);
 
                 roleMaster.Error = ReturnError(0, string.Empty);
             }
@@ -143,7 +144,9 @@ namespace WebApplication2.Controllers
                 string roleName = (string)user["Name"];
                 int roletype = Convert.ToInt32(user["RoleTypeid"].ToString());
                 int cb_pk_id = Convert.ToInt32(user["Id"].ToString());
-                rolemasterdata = await _dBHelperRepo.UpdateRoleData(3, roleName, roletype, cb_pk_id, 42);
+                int lastModifier = Convert.ToInt32(user["lastModifier"].ToString());
+
+                rolemasterdata = await _dBHelperRepo.UpdateRoleData(3, roleName, roletype, cb_pk_id, lastModifier);
                 rolemasterdata.Error = ReturnError(0, string.Empty);
             }
             catch (Exception ex)

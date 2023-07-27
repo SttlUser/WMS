@@ -2,34 +2,26 @@
   <div class="table-title">
     <br>
     <div class="row">
-        <div class="col-sm-8">
-            <h4>Register Company</h4>
-        </div>
-        <div class="row">
+      <div class="col-sm-8">
+        <h4>Register Company</h4>
+      </div>
+      <div class="row">
 
-          <a routerLink="/DisplayCompany" class="back_btn">
-              <img src="../assets/media/arrow-left.png" alt="BCK_BTN" width="20px" height="20px"  style="margin-left: 600px;">
-            </a>
+        <a routerLink="/DisplayCompany" class="back_btn">
+          <img src="../assets/media/arrow-left.png" alt="BCK_BTN" width="20px" height="20px"
+            style="margin-left: 600px;">
+        </a>
       </div>
     </div>
-</div>
-<br>
+  </div>
+  <br>
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a
-        class="nav-link"
-        [class.active]="activeTab === 'registrationTab'"
-        (click)="activeTab = 'registrationTab'"
-        >Registration Tab</a
-      >
+      <a class="nav-link" [class.active]="activeTab === 'registrationTab'"
+        (click)="activeTab = 'registrationTab'">Registration Tab</a>
     </li>
     <li class="nav-item">
-      <a
-        class="nav-link"
-        [class.active]="activeTab ==='checkboxTab'"
-        (click)="activeTab = 'checkboxTab'"
-        >WMS</a
-      >
+      <a class="nav-link" [class.active]="activeTab ==='checkboxTab'" (click)="activeTab = 'checkboxTab'">WMS</a>
     </li>
   </ul>
   <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
@@ -38,80 +30,48 @@
       <div class="row">
         <div class="col-6">
           <table class="table" id="myTable">
-            <tr >
-              <td><input
-                class="form-check-input"
-                type="checkbox"
-                id="putCheckbox"
-                value="true"
-                formControlName="putCheckbox"
-                style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;"
-              /></td>
-              <td><label class="form-check-label" for="putCheckbox"
-                >Put away process
-              </label></td>
-            </tr>
-            
             <tr>
-              <td><input
-                class="form-check-input"
-                type="checkbox"
-                id="ssccCheckbox"
-                value="true"
-                formControlName="ssccCheckbox"
-                style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;"
-              /></td>
-              <td> <label class="form-check-label" for="ssccCheckbox"
-                >SSCC No. Management</label
-              ></td>
+              <td><input class="form-check-input" type="checkbox" id="putCheckbox" value="true"
+                  formControlName="putCheckbox"
+                  style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" /></td>
+              <td><label class="form-check-label" for="putCheckbox">Put away process
+                </label></td>
+            </tr>
+
+            <tr>
+              <td><input class="form-check-input" type="checkbox" id="ssccCheckbox" value="true"
+                  formControlName="ssccCheckbox"
+                  style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" /></td>
+              <td> <label class="form-check-label" for="ssccCheckbox">SSCC No. Management</label></td>
             </tr>
 
             <tr>
               <td>
-                <input
-              class="form-check-input"
-              type="checkbox"
-              id="cartonCheckbox"
-              value="true"
-              formControlName="cartonCheckbox"
-              style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;"
-            />
+                <input class="form-check-input" type="checkbox" id="cartonCheckbox" value="true"
+                  formControlName="cartonCheckbox"
+                  style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" />
               </td>
               <td>
-                <label class="form-check-label" for="cartonCheckbox"
-              >Cartoon No. management</label
-            >
+                <label class="form-check-label" for="cartonCheckbox">Cartoon No. management</label>
               </td>
             </tr>
             <tr>
               <td>
-                <input
-              class="form-check-input"
-              type="checkbox"
-              id="autoCheckbox"
-              value="true"
-              formControlName="autoCheckbox"
-              style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;"
-            />
+                <input class="form-check-input" type="checkbox" id="autoCheckbox" value="true"
+                  formControlName="autoCheckbox"
+                  style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" />
               </td>
               <td>
-                <label class="form-check-label" for="autoCheckbox"
-                >Autp Batch Configurator</label
-              >
+                <label class="form-check-label" for="autoCheckbox">Autp Batch Configurator</label>
               </td>
             </tr>
           </table>
-         
+
         </div>
         <div class="col">
           <div class="form-group">
             <label for="whsInput">Defualt WHS</label>
-            <input
-              type="text"
-              class="form-control"
-              id="whsInput"
-              formControlName="whsInput"
-            />
+            <input type="text" class="form-control" id="whsInput" formControlName="whsInput" />
           </div>
         </div>
       </div>
@@ -124,89 +84,37 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="companyName">Company Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="companyName"
-              formControlName="companyName"
-              name="companyName"
-              
-              required
-            />
+            <input type="text" class="form-control" id="companyName" formControlName="companyName" name="companyName"
+              required />
           </div>
           <div class="form-group">
             <label for="phone">Phone No:</label>
-            <input
-              type="tel"
-              class="form-control"
-              id="phone"
-              formControlName="phone"
-              name="phone"
-              
-              required
-            />
+            <input type="tel" class="form-control" id="phone" formControlName="phone" name="phone" required />
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              formControlName="email"
-              name="email"
-              
-              required
-            />
+            <input type="email" class="form-control" id="email" formControlName="email" name="email" required />
           </div>
           <div class="form-group">
             <label>Live Service Layer URL:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="SLUrl"
-              formControlName="SLUrl"
-              name="SLUrl"
-              
-              required
-            />
+            <input type="text" class="form-control" id="SLUrl" formControlName="SLUrl" name="SLUrl" required />
           </div>
           <div class="form-group">
             <label for="db_type">Database type:</label>
-            <select
-              class="form-control"
-              id="db_type"
-              formControlName="db_type"
-              name="db_type"
-            
-              required
-            >
-              <option value="hana"  selected >HANA</option>
+            <select class="form-select" id="db_type" formControlName="db_type" name="db_type" required>
+              <option value="hana" selected>HANA</option>
               <option value="sql">SQL</option>
             </select>
           </div>
           <div class="form-group">
             <label for="slusername">Company Registration No (User Name):</label>
-            <input
-              type="text"
-              class="form-control"
-              id="slusername"
-              formControlName="slusername"
-              name="slusername"
-             
-              required
-            />
+            <input type="text" class="form-control" id="slusername" formControlName="slusername" name="slusername"
+              required />
           </div>
           <div class="form-group">
             <label for="SLPassword">Password:</label>
-            <input
-              type="password"
-              class="form-control"
-              id="SLPassword"
-              formControlName="SLPassword"
-              name="SLPassword"
-              
-              required
-            />
+            <input type="password" class="form-control" id="SLPassword" formControlName="SLPassword" name="SLPassword"
+              required />
           </div>
           <button type="submit" class="btn btn-primary mb-5">Register</button>
           <button type="button" class="btn btn-danger mb-5">Clear</button>
@@ -225,24 +133,13 @@
                 </tr>
               </thead>
               <tbody formArrayName="tableData">
-                <tr
-                  *ngFor="let row of tableData.controls; let i = index"
-                  [formGroupName]="i"
-                >
+                <tr *ngFor="let row of tableData.controls; let i = index" [formGroupName]="i">
                   <td>{{ i + 1 }}</td>
                   <td>
-                    <input
-                      type="text"
-                      formControlName="dbName"
-                      class="dbName"
-                    />
+                    <input type="text" formControlName="dbName" class="dbName" />
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      formControlName="sapCompanyName"
-                      class="sapCompanyName"
-                    />
+                    <input type="text" formControlName="sapCompanyName" class="sapCompanyName" />
                   </td>
                   <td>
                     false
@@ -259,21 +156,11 @@
                   </td>
                   <td>
                     <!-- <button class="btn btn-primary" (click)="addRow()"> -->
-                    <button
-                      id="register"
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="addRow()"
-                    >
+                    <button id="register" type="button" class="btn btn-primary" (click)="addRow()">
                       Add
                     </button>
                     <!-- <button class="btn btn-danger" (click)="deleteRow(i)"> -->
-                    <button
-                      id="delet"
-                      type="button"
-                      class="btn btn-danger"
-                      (click)="deleteRow(i)"
-                    >
+                    <button id="delet" type="button" class="btn btn-danger" (click)="deleteRow(i)">
                       Delete
                     </button>
                   </td>

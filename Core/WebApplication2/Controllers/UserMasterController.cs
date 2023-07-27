@@ -85,6 +85,7 @@ namespace WebApplication2.Controllers
                 string phone = (string)role["phone"];
 
                 int ins_del_id = Convert.ToInt32(role["ins_del_id"].ToString());
+                //int createdBy = Convert.ToInt32(role["createdBy"].ToString());
 
                 userMaster = await _dBHelperRepo.CreateUser(2, firstname, lastname, username, password, email, phone, userid, ins_del_id);
 
@@ -110,7 +111,9 @@ namespace WebApplication2.Controllers
                 string Email = (string)user["Email"];
                 string Phone = (string)user["Phone"];
                 int ins_del_id = Convert.ToInt32(user["ins_del_id"].ToString());
-                userMaster = await _dBHelperRepo.UpdateUser(3, cb_pk_id, Firstname, Lastname, Password, Email, Phone, ins_del_id);
+                int lastModifier = Convert.ToInt32(user["lastModifier"].ToString());
+
+                userMaster = await _dBHelperRepo.UpdateUser(3, cb_pk_id, Firstname, Lastname, Password, Email, Phone, ins_del_id, lastModifier);
                 userMaster.Error = ReturnError(0, string.Empty);
             }
             catch (Exception ex)

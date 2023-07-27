@@ -97,10 +97,10 @@ namespace PostgresDBHelper
             });
         }
 
-        public async Task<UserMaster> UpdateUser(int flag, int cb_pk_id, string Firstname, string Lastname, string Password, string Email, string Phone, int ins_del_id)
+        public async Task<UserMaster> UpdateUser(int flag, int cb_pk_id, string Firstname, string Lastname, string Password, string Email, string Phone, int ins_del_id,int lastModifier)
         {
 
-            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag, @ins_del_id , @cb_pk_id,@firstname,@lastname,@password,@email,@phone)", new { flag, ins_del_id, cb_pk_id, Firstname, Lastname, Password, Email, Phone });
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag, @ins_del_id , @cb_pk_id,@firstname,@lastname,@password,@email,@phone,@lastModifier)", new { flag, ins_del_id, cb_pk_id, Firstname, Lastname, Password, Email, Phone ,lastModifier, });
 
         }
 
