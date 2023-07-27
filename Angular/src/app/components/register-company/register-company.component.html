@@ -1,3 +1,11 @@
+<head>
+  <!-- Other meta tags, title, etc. -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+
 <div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
   <div class="table-title">
     <br>
@@ -124,6 +132,8 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="companyName">Company Name:</label>
+            <span class="required-field">*</span>
+
             <input
               type="text"
               class="form-control"
@@ -133,9 +143,12 @@
               
               required
             />
+            
           </div>
           <div class="form-group">
-            <label for="phone">Phone No:</label>
+            <label for="phone">Phone No.</label>
+            <span class="required-field">*</span>
+
             <input
               type="tel"
               class="form-control"
@@ -148,6 +161,8 @@
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
+            <span class="required-field">*</span>
+
             <input
               type="email"
               class="form-control"
@@ -160,6 +175,8 @@
           </div>
           <div class="form-group">
             <label>Live Service Layer URL:</label>
+            <span class="required-field">*</span>
+
             <input
               type="text"
               class="form-control"
@@ -170,7 +187,7 @@
               required
             />
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="db_type">Database type:</label>
             <select
               class="form-control"
@@ -183,9 +200,31 @@
               <option value="hana"  selected >HANA</option>
               <option value="sql">SQL</option>
             </select>
+          </div> -->
+          <div class="form-group">
+            <label for="db_type">Database type:</label>
+            <span class="required-field">*</span>
+
+            <div class="custom-select-wrapper">
+              <select
+                class="form-control custom-select"
+                id="db_type"
+                formControlName="db_type"
+                name="db_type"
+                required
+              >
+                <option value="hana" selected>HANA</option>
+                <option value="sql">SQL</option>
+              </select>
+              
+
+            </div>
           </div>
+          
           <div class="form-group">
             <label for="slusername">Company Registration No (User Name):</label>
+            <span class="required-field">*</span>
+
             <input
               type="text"
               class="form-control"
@@ -198,6 +237,8 @@
           </div>
           <div class="form-group">
             <label for="SLPassword">Password:</label>
+            <span class="required-field">*</span>
+
             <input
               type="password"
               class="form-control"
@@ -208,18 +249,20 @@
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary mb-5">Register</button>
-          <button type="button" class="btn btn-danger mb-5">Clear</button>
+          <button type="submit" class="btn btn-primary mb-5">Register</button>  <!-- Added a class "register-button" -->
+          <button type="button" class="btn btn-danger " (click)="ClearForm() ">Clear</button> <!-- Added a class "clear-button" -->
         </div>
-
+            
         <div class="col">
           <div class="form-group">
             <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>S. No</th>
-                  <th>DB Names</th>
-                  <th>SAP Company Names</th>
+                  <th>DB Names <span class="required-field">*</span>
+                  </th>
+                  <th>SAP Company Names<span class="required-field">*</span>
+                  </th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -231,6 +274,8 @@
                 >
                   <td>{{ i + 1 }}</td>
                   <td>
+                    
+
                     <input
                       type="text"
                       formControlName="dbName"
@@ -238,6 +283,8 @@
                     />
                   </td>
                   <td>
+                    
+
                     <input
                       type="text"
                       formControlName="sapCompanyName"
@@ -257,8 +304,8 @@
                         alt="Error"
                       /> -->
                   </td>
-                  <td>
-                    <!-- <button class="btn btn-primary" (click)="addRow()"> -->
+                  <!-- <td>
+                    
                     <button
                       id="register"
                       type="button"
@@ -267,11 +314,29 @@
                     >
                       Add
                     </button>
-                    <!-- <button class="btn btn-danger" (click)="deleteRow(i)"> -->
+                    
                     <button
                       id="delet"
                       type="button"
                       class="btn btn-danger"
+                      (click)="deleteRow(i)"
+                    >
+                      Delete
+                    </button>
+                  </td> -->
+                  <td>
+                    <button
+                      id="register"
+                      type="button"
+                      class="btn btn-primary add-button"
+                      (click)="addRow(i)"
+                    >
+                      Add
+                    </button>
+                    <button
+                      id="delet"
+                      type="button"
+                      class="btn btn-danger delete-button" 
                       (click)="deleteRow(i)"
                     >
                       Delete

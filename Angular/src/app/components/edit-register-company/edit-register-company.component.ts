@@ -86,6 +86,7 @@ export class EditRegisterCompanyComponent {
     });
     
   }
+  
   getTableDataControls(): FormArray {
     return this.applyForm.get('tableData') as FormArray;
   }
@@ -143,14 +144,15 @@ export class EditRegisterCompanyComponent {
     const tableData = this.applyForm.get('tableData') as FormArray;
     tableData.removeAt(index);
   }
+  clearForm() {
+    this.applyForm.reset(); // Reset the form to its initial state
+  }
+  
+  
   
   onSubmit() {
    
-    if (this.isFormFieldsEmpty(this.applyForm)) {
-        
-      alert('Please fill in all the required fields.');
-      return;
-    }
+   
     
 
 
@@ -188,6 +190,11 @@ if (slUsernameControl && slUsernameControl.invalid) {
 const slPasswordControl = this.applyForm.get('SLPassword');
 if (slPasswordControl && slPasswordControl.invalid) {
   alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
+  return;
+}
+if (this.isFormFieldsEmpty(this.applyForm)) {
+        
+  alert('Please fill in all the required fields.');
   return;
 }
     // if (this.isFormFieldsEmpty(this.applyForm)) {
@@ -295,8 +302,13 @@ if (slPasswordControl && slPasswordControl.invalid) {
         console.error('Error retrieving data:', error);
       }
     );
+
+    
     
   
+  }
+  ClearForm() {
+    this.applyForm.reset(); // Reset the form to its initial state
   }
   isFormFieldsEmpty(control: AbstractControl): boolean {
     if (control instanceof FormGroup) {

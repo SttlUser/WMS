@@ -203,16 +203,22 @@
           </div>
           <div class="form-group">
             <label for="db_type">Database type:</label>
-            <select
-              class="form-control"
-              id="sldbName"
-              formControlName="sldbName"
-              name="sldbName"
-              required
-            >
-              <option value="HANA" selected>HANA</option>
-              <option value="SQL">sql</option>
-            </select>
+            <span class="required-field">*</span>
+
+            <div class="custom-select-wrapper">
+              <select
+                class="form-control custom-select"
+                id="db_type"
+                formControlName="db_type"
+                name="db_type"
+                required
+              >
+                <option value="hana" selected>HANA</option>
+                <option value="sql">SQL</option>
+              </select>
+              
+
+            </div>
           </div>
           <div class="form-group">
             <label for="slusername">Company Registration No (User Name):</label>
@@ -238,7 +244,7 @@
             />
           </div>
           <button type="submit" class="btn btn-primary" id="register">Register</button>
-          <button type="button" class="btn btn-danger">Clear</button>
+          <button type="button" class="btn btn-danger "(click)="ClearForm" > Clear</button>
         </div>
 
         <div class="col">

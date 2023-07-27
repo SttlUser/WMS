@@ -43,8 +43,8 @@ export class RegisterCompanyComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       SLUrl: ['', Validators.required],
       db_type: ['', Validators.required],
-      slusername: ['', Validators.required, Validators.pattern(/^[0-9]+$/)],
-      SLPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/)]],
+      slusername: ['', Validators.required],
+      SLPassword: ['', [Validators.required]],
       tableData: this.formBuilder.array([this.createTableRow()]),
       putCheckbox: [true],
       ssccCheckbox: [true],
@@ -57,20 +57,57 @@ export class RegisterCompanyComponent implements OnInit {
   companyDataObj: CompanyData = new CompanyData();
   Sldbnamelistobj: Sldbname = new Sldbname();
 
-  onSubmit() {
+  clearForm1() {
+    this.applyForm.reset();
+    this.clearFormArray(this.applyForm.get('tableData') as FormArray); // Reset the formArray
+    this.applyForm.patchValue({ // Reset the checkboxes
+      putCheckbox: true,
+      ssccCheckbox: true,
+      cartonCheckbox: true,
+      autoCheckbox: true,
+    });
+  }
 
-
-    if (this.isFormFieldsEmpty(this.applyForm)) {
-
-      alert('Please fill in all the required fields.');
-      return;
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0);
     }
+  }
+  clearForm() {
+    this.applyForm.reset({
+      companyName: '',
+      phone: '',
+      email: '',
+      SLUrl: '',
+      db_type: '',
+      slusername: '',
+      SLPassword: '',
+      tableData: [this.createTableRow()],
+      putCheckbox: true,
+      ssccCheckbox: true,
+      cartonCheckbox: true,
+      autoCheckbox: true,
+      whsInput: '1',
+    });
+  }
+  createTableRowForTableData(): FormGroup {
+    return this.formBuilder.group({
+      // Define the fields for each table row if applicable
+    });
+  } 
+    
+  
 
+  onSubmit() {
+    console.log("hello");
 
-
-
-
-
+    const companyNameControl = this.applyForm.get('companyName');
+    if (companyNameControl && companyNameControl.invalid /*&& companyNameControl.touched*/) {
+    if (companyNameControl.errors?.['required']) {
+      alert('Company Name is required.');
+    }
+    return;
+  }
     const phoneControl = this.applyForm.get('phone');
     if (phoneControl && phoneControl.invalid) {
       if (phoneControl.errors?.['required']) {
@@ -87,43 +124,49 @@ export class RegisterCompanyComponent implements OnInit {
     }
     const emailControl = this.applyForm.get('email');
     if (emailControl && emailControl.invalid) {
+      
       alert('Please provide a valid email address.');
+    
+      
       return;
     }
-    const slUsernameControl = this.applyForm.get('slusername');
-    if (slUsernameControl && slUsernameControl.invalid) {
-      if (slUsernameControl.errors?.['required']) {
-        alert('Please provide a username.');
-      } else if (slUsernameControl.errors?.['pattern']) {
-        alert('Please provide a valid username.\n\nUsername must contain only numeric digits.');
-      }
-      return;
+   const SLUrlNameControl = this.applyForm.get('SLUrl');
+    if (SLUrlNameControl && SLUrlNameControl.invalid /*&& SLUrlNameControl.touched*/) {
+    if (SLUrlNameControl.errors?.['required']) {
+      alert('Url is required.');
     }
-    const slPasswordControl = this.applyForm.get('SLPassword');
-    if (slPasswordControl && slPasswordControl.invalid) {
-      alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
-      return;
+    return;
+  }
+   const UsernameNameControl = this.applyForm.get('slusername');
+    if (UsernameNameControl && UsernameNameControl.invalid /*&& UsernameNameControl.touched*/) {
+    if (UsernameNameControl.errors?.['required']) {
+      alert('Username is required.');
     }
-    // const emailValue = this.applyForm.get('email')?.value;
-    // const passwordValue = this.applyForm.get('SLPassword')?.value;
-    // const phoneValue = this.applyForm.get('phone')?.value;
+    return;
+  }
+  const passwordNameControl = this.applyForm.get('SLPassword');
+    if (passwordNameControl && passwordNameControl.invalid /*&& passwordNameControl.touched*/) {
+    if (passwordNameControl.errors?.['required']) {
+      alert('Password is required.');
+    }
+    return;
+  }
+  const DBControl = this.applyForm.get('dbName');
+    if (DBControl && DBControl.invalid /*&& passwordNameControl.touched*/) {
+    alert("db name askjdkas")
+    return;
+  }
+  if (this.isFormFieldsEmpty(this.applyForm)) {
 
-    // if (!this.validatePhone(phoneValue)) {
-    //   // Invalid phone number format, display an alert or handle the error
-    //   alert('Please enter a valid phone number.');
-    //   return;
-    // }
-    // if (!this.validateEmail(emailValue)) {
-    //   // Invalid email format, display an alert or handle the error
-    //   alert('Please enter a valid email address.');
-    //   return;
-    // }
-
-    // if (!this.validatePassword(passwordValue)) {
-    //   // Invalid password format, display an alert or handle the error
-    //   alert('Please enter a valid password.');
-    //   return;
-    // }
+    alert('Please fill in all the required fields.');
+    return;
+  }
+  
+  
+  
+    
+    
+    
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
     );
@@ -193,6 +236,11 @@ export class RegisterCompanyComponent implements OnInit {
       }
     );
   }
+
+  ClearForm() {
+    this.applyForm.reset(); // Reset the form to its initial state
+  }
+
   isFormFieldsEmpty(control: AbstractControl): boolean {
     if (control instanceof FormGroup) {
       for (const key in control.controls) {
@@ -209,28 +257,28 @@ export class RegisterCompanyComponent implements OnInit {
         }
       }
     } else {
-      if (/*control.invalid ||*/ control.value === null || control.value === '') {
+      if (control.invalid || control.value === null || control.value === '') {
         return true;
       }
     }
 
     return false; 
   }
-  validateEmail(email: string): boolean {
+  // validateEmail(email: string): boolean {
     
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return emailRegex.test(email);
+  // }
 
-  validatePassword(password: string): boolean {
+  // validatePassword(password: string): boolean {
 
-    return password.length >= 8; 
-  }
-  validatePhone(phone: string): boolean {
+  //   return password.length >= 8; 
+  // }
+  // validatePhone(phone: string): boolean {
 
-    const phoneRegex = /^\d{10}$/;
-    return phoneRegex.test(phone);
-  }
+  //   const phoneRegex = /^\d{10}$/;
+  //   return phoneRegex.test(phone);
+  // }
 
 
   get tableData() {
