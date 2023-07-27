@@ -99,7 +99,7 @@ export class RegisterCompanyComponent implements OnInit {
   
 
   onSubmit() {
-    console.log("hello");
+    
 
     const companyNameControl = this.applyForm.get('companyName');
     if (companyNameControl && companyNameControl.invalid /*&& companyNameControl.touched*/) {
