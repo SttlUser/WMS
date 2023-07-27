@@ -145,9 +145,10 @@ export class UsermasterComponent {
 
   deletebtn(usr: any) {
     if (window.confirm('Do you really want to delete?')) {
-      this.resto.DeletUserData(1, usr.id, 4).subscribe(
+      this.resto.DeletUserData(this.loggedInId, usr.id, 4).subscribe(
         (res) => {
           console.log(res);
+          alert("User Deactivated Successfully")
           this.GetUserDetail();
         },
         (err) => {
@@ -158,9 +159,10 @@ export class UsermasterComponent {
   }
 
   activebtn(usr: any) {
-    this.resto.DeletUserData(1, usr.id, 5).subscribe(
+    this.resto.DeletUserData(this.loggedInId, usr.id, 5).subscribe(
       (res) => {
         console.log(res);
+        alert("User Activated Successfully")
         this.GetUserDetail();
       },
       (err) => {

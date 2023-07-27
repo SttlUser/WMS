@@ -125,7 +125,7 @@ export class DispalyDataComponent {
     console.log(rol);
     if (window.confirm('Do you really want to delete?')) {
       console.log(rol);
-      this.resto.DeleteRoleMasterData(rol.id, 42, 4).subscribe(
+      this.resto.DeleteRoleMasterData(rol.id, this.loggedInId, 4).subscribe(
         (res) => {
           console.log(res);
           this.GetRoleMasterData();
@@ -159,7 +159,7 @@ export class DispalyDataComponent {
   ActiveRole(rol: any) {
     if (window.confirm('Do you really want to Activate?')) {
       console.log(rol);
-      this.resto.DeleteRoleMasterData(rol.id, 42, 5).subscribe(
+      this.resto.DeleteRoleMasterData(rol.id, this.loggedInId, 5).subscribe(
         (res) => {
           console.log(res);
           this.GetRoleMasterData();
