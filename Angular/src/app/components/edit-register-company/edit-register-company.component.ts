@@ -9,7 +9,7 @@ import {
 import { CustomerService } from 'src/app/customer.service';
 import { environment } from 'src/environment';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ToastComponent } from '../toast/toast.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -30,18 +30,20 @@ export class EditRegisterCompanyComponent {
   DataTable!: FormArray;
 
   id: any;
-
+  isFlagTrue: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private resto: CustomerService,
     public http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar
   ) {
     // this.applyForm = this.formBuilder.group({
     //   dbName: this.formBuilder.array([]),
     // });
     // this.dbNamearray = this.applyForm.get('dbName') as FormArray;
+    this.isFlagTrue= true;
     this.objectData = {};
     this.objectData = this.resto.getObject();
     this.route.queryParams.subscribe((params) => {
@@ -50,15 +52,17 @@ export class EditRegisterCompanyComponent {
     this.GetDataById();
   }
 
-
   GetDataById() {
     this.resto.GetComapnyDataById(this.id).subscribe(
       (res) => {
+        console.log(res)
         this.applyForm.patchValue(res);
         const tableData = this.applyForm.get('tableData') as FormArray;
-        res.dbName.forEach((item : { dbName: string, sapCompanyName: string, flag: string }) => {
-          tableData.push(this.createTableRow(item));
-        });
+        res.dbName.forEach(
+          (item: { dbName: string; sapCompanyName: string; flag: boolean }) => {
+            tableData.push(this.createTableRow(item));
+          }
+        );
       },
       (err) => {
         console.log(err);
@@ -72,7 +76,7 @@ export class EditRegisterCompanyComponent {
       phone: ['', Validators.required],
       email: ['', [Validators.required]],
       slUrl: ['', Validators.required],
-      sldbName: ['', Validators.required],
+      databaseType: ['Default', Validators.required],
       slusername: ['', Validators.required],
       slPassword: ['', Validators.required],
       tableData: this.formBuilder.array([]),
@@ -80,10 +84,9 @@ export class EditRegisterCompanyComponent {
       ssccCheckbox: [true],
       cartonCheckbox: [true],
       autoCheckbox: [true],
-      whsInput: [''],
+      whsInput: ['1'],
       DataTable: this.formBuilder.array([]),
     });
-    
   }
   getTableDataControls(): FormArray {
     return this.applyForm.get('tableData') as FormArray;
@@ -123,26 +126,30 @@ export class EditRegisterCompanyComponent {
   companyDataObj: CompanyData = new CompanyData();
   Sldbnamelistobj: Sldbname = new Sldbname();
 
-  
-  createTableRow(item : { dbName: string, sapCompanyName: string, flag: string }): FormGroup {
+  createTableRow(item: {dbName: string; sapCompanyName: string; flag: boolean; }): FormGroup {
+    this.isFlagTrue = item.flag;
+
     return this.formBuilder.group({
       dbName: [item.dbName],
       sapCompanyName: [item.sapCompanyName],
-      flag: [item.flag],
+      flag: [item.flag]
     });
   }
-  
+
   addRow() {
     const tableData = this.applyForm.get('tableData') as FormArray;
-    tableData.push(this.createTableRow({ dbName: '', sapCompanyName: '' , flag:''}));
+    tableData.push(
+      this.createTableRow({ dbName: '', sapCompanyName: '', flag: false })
+    );
   }
-  
-  
+
   deleteRow(index: number) {
     const tableData = this.applyForm.get('tableData') as FormArray;
-    tableData.removeAt(index);
+    if (index != 0) {
+      this.tableData.removeAt(index);
+    }
   }
-  
+
   onSubmit() {
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
@@ -156,6 +163,12 @@ export class EditRegisterCompanyComponent {
       sldbname.sapCompanyName = this.sapcompanyname[i] || '';
       this.NewList.push(sldbname);
     }
+
+    if(this.applyForm.value.databaseType == 'Default'){
+      alert("Select database");
+      return;
+    }
+
     this.companyDataObj!.id = this.id;
     this.companyDataObj!.Name = this.applyForm.value.name;
     this.companyDataObj!.slUrl = this.applyForm.value.slUrl;
@@ -163,16 +176,16 @@ export class EditRegisterCompanyComponent {
     this.companyDataObj!.slPassword = this.applyForm.value.slPassword;
     this.companyDataObj!.phone = this.applyForm.value.phone;
     this.companyDataObj!.email = this.applyForm.value.email;
-    this.companyDataObj!.DatabaseType = this.applyForm.value.sldbName;
+    this.companyDataObj!.DatabaseType = this.applyForm.value.databaseType;
     this.companyDataObj!.DbName = this.NewList;
     this.companyDataObj!.hasPutAwayProc = this.applyForm.value.putCheckbox;
     this.companyDataObj!.hasSsccNoManagement =
-    this.applyForm.value.ssccCheckbox;
+      this.applyForm.value.ssccCheckbox;
     this.companyDataObj!.hasCartonNoManagement =
-    this.applyForm.value.cartonCheckbox;
+      this.applyForm.value.cartonCheckbox;
     this.companyDataObj!.defaultWarehouseCode = 1;
     this.companyDataObj!.hasAutoBatchConfigurator =
-    this.applyForm.value.autoCheckbox;
+      this.applyForm.value.autoCheckbox;
     this.companyDataObj!.createdDate = '1-2-3';
     this.companyDataObj!.deletedDate = '1-2-3';
     this.companyDataObj!.lastModifiedDate = '1-2-3';
@@ -185,8 +198,7 @@ export class EditRegisterCompanyComponent {
     this.companyDataObj!.flag = false;
     this.companyDataObj!.SLDBName = '';
     this.companyDataObj!.SAPCompanyName = '';
-    
-      
+
     const serializedData: string = JSON.stringify(this.companyDataObj);
     const headers = {
       'Content-Type': 'application/json', // Set the Content-Type header to application/json
@@ -194,29 +206,27 @@ export class EditRegisterCompanyComponent {
     // console.log(serializedData);
     this.resto.postUpdateCompany(serializedData, headers).subscribe(
       (response: any) => {
-        let counter=0;
-        response.dbName.forEach((item : any)=>{
-          if(!item.flag){
-            counter=1;
+        let counter = 0;
+        response.dbName.forEach((item: any) => {
+          if (!item.flag) {
+            counter = 1;
           }
-
-        })
-        if(counter==0){
+        });
+        if (counter == 0) {
           const message = 'Company Edited Successfully';
-            this.snackBar.openFromComponent(ToastComponent, {
+          this.snackBar.openFromComponent(ToastComponent, {
             data: { message },
             duration: 2000, // Toast duration in milliseconds
             horizontalPosition: 'end',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
           });
-        }
-        else{
+        } else {
           const message = 'error while updating';
-            this.snackBar.openFromComponent(ToastComponent, {
+          this.snackBar.openFromComponent(ToastComponent, {
             data: { message },
             duration: 2000, // Toast duration in milliseconds
             horizontalPosition: 'end',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
           });
         }
       },
@@ -224,6 +234,10 @@ export class EditRegisterCompanyComponent {
         console.error('Error retrieving data:', error);
       }
     );
+  }
+
+  cancel(){
+    this.router.navigate(['/DisplayCompany'])
   }
 }
 
@@ -255,7 +269,7 @@ export class CompanyData {
   createdDate!: string;
   createdBy!: number;
   lastModifiedDate!: string;
-  flag!:boolean;
+  flag!: boolean;
   SLDBName!: string;
   SAPCompanyName!: string;
   error!: {

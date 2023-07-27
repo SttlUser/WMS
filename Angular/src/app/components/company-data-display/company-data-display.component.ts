@@ -23,7 +23,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
   Dispaly_url = `${environment.api.server}/`;
 
   Comapnydata: any;
-
+  loggedInId:any
   CompanydataUpdate = {
     comp_id: Number,
     name: '',
@@ -62,6 +62,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
       this.router.navigate(['/login']);
       // console.log(this.data);
     }
+    this.loggedInId = sessionStorage.getItem('loggedInId');
     this.GetComapnyMasterData(http);
   }
 
@@ -77,7 +78,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
       .get(this.Dispaly_url + 'CompanyMaster/GetCompanyDetails')
       .subscribe(
         (res) => {
-          // console.log(res)
+          console.log(res)
           this.Comapnydata = res;
           this.initializeDataTable();
         },
@@ -124,11 +125,13 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
 
   deletebtn(row: any) {
     if (window.confirm('Do you really want to delete?')) {
+    const loggedInId = this.loggedInId
       this.resto
-        .DeleteCompanyData(4, 42,row.companyID).subscribe(
+        .DeleteCompanyData(4, loggedInId, row.companyID).subscribe(
           (res) => {
             this.GetComapnyMasterData(this.http);
-            const message = 'Company Deleted Successfully';
+            const message = 'Company De-activated Successfully';
+            alert("Company De-activated Successfully")
             this.snackBar.openFromComponent(ToastComponent, {
               data: { message },
               duration: 2000, // Toast duration in milliseconds
@@ -153,8 +156,9 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
  
   activebtn(row: any) {
   if (window.confirm('Do you really want to Activate?')) {
+    const loggedInId = this.loggedInId
 		this.resto
-        .ActivateCompanyData(5, 42,row.companyID).subscribe(
+        .ActivateCompanyData(5, loggedInId, row.companyID).subscribe(
           (res) => {
             this.GetComapnyMasterData(this.http);
             const message = 'Company Activated Successfully';

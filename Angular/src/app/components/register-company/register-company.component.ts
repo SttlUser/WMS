@@ -20,6 +20,7 @@ export class RegisterCompanyComponent implements OnInit {
   NewList: Sldbname[] = [];
   sapcompanyname: string[] = [];
   objectData: any;
+  loggedInID: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +32,7 @@ export class RegisterCompanyComponent implements OnInit {
     this.applyForm = this.formBuilder.group({
       tableData: this.formBuilder.array([]),
     });
+    this.loggedInID = sessionStorage.getItem('loggedInID');
     this.objectData = {};
     this.objectData = this.resto.getObject();
   }
@@ -42,7 +44,7 @@ export class RegisterCompanyComponent implements OnInit {
       phone: ['', Validators.required],
       email: ['', [Validators.required]],
       SLUrl: ['', Validators.required],
-      db_type: ['', Validators.required],
+      db_type: ['Default', Validators.required],
       slusername: ['', Validators.required],
       SLPassword: ['', Validators.required],
       tableData: this.formBuilder.array([this.createTableRow()]),
@@ -82,10 +84,13 @@ export class RegisterCompanyComponent implements OnInit {
     this.companyDataObj!.DatabaseType = this.applyForm.value.db_type;
     this.companyDataObj!.DbName = this.NewList;
     this.companyDataObj!.hasPutAwayProc = this.applyForm.value.putCheckbox;
-    this.companyDataObj!.hasSsccNoManagement =     this.applyForm.value.ssccCheckbox;
-    this.companyDataObj!.hasCartonNoManagement =      this.applyForm.value.cartonCheckbox;
+    this.companyDataObj!.hasSsccNoManagement =
+      this.applyForm.value.ssccCheckbox;
+    this.companyDataObj!.hasCartonNoManagement =
+      this.applyForm.value.cartonCheckbox;
     this.companyDataObj!.defaultWarehouseCode = this.applyForm.value.whsInput;
-    this.companyDataObj!.hasAutoBatchConfigurator =      this.applyForm.value.autoCheckbox;
+    this.companyDataObj!.hasAutoBatchConfigurator =
+      this.applyForm.value.autoCheckbox;
     this.companyDataObj!.createdDate = '1-2-3';
     this.companyDataObj!.deletedDate = '1-2-3';
     this.companyDataObj!.lastModifiedDate = '1-2-3';
@@ -101,15 +106,29 @@ export class RegisterCompanyComponent implements OnInit {
     console.log(serializedData);
     this.resto.postRegisterCompany(serializedData, headers).subscribe(
       (response: any) => {
+
+
         console.log('receved table data', response);
-        const message = 'Company Added Successfully';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
-        this.NewList=[];
+        response.dbName.forEach((element:any) => {
+          console.log(element.flag)
+          
+          if(element.flag==false){
+            alert("Data invalid");
+            return;
+          }
+
+        })
+
+        alert("Data registered successfully")
+
+        // const message = 'Company Added Successfully';
+        // this.snackBar.openFromComponent(ToastComponent, {
+        //   data: { message },
+        //   duration: 2000, // Toast duration in milliseconds
+        //   horizontalPosition: 'end',
+        //   verticalPosition: 'top',
+        // });
+        // this.NewList = [];
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
@@ -118,7 +137,7 @@ export class RegisterCompanyComponent implements OnInit {
           data: { message },
           duration: 2000, // Toast duration in milliseconds
           horizontalPosition: 'end',
-          verticalPosition: 'top'
+          verticalPosition: 'top',
         });
       }
     );
@@ -144,6 +163,11 @@ export class RegisterCompanyComponent implements OnInit {
     if (index != 0) {
       this.tableData.removeAt(index);
     }
+  }
+
+  clearForm() {
+    this.applyForm.reset();
+    this.applyForm.get('db_type')?.setValue('Default');
   }
 }
 
