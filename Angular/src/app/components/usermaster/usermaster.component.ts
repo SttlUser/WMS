@@ -189,7 +189,7 @@ export class UsermasterComponent {
   }
 
   Getdata(http: HttpClient) {
-    http.get(this.url).subscribe((res: any) => {
+    this.resto.getRoleMaster(6).subscribe((res: any) => {
       console.log(res)
       this.items = res;
       return this.items;
