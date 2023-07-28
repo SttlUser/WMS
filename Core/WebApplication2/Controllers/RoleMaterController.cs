@@ -129,7 +129,7 @@ namespace WebApplication2.Controllers
        
             try
             {
-                lstroleMaster = await _dBHelperRepo.GetAllRoleMaster(1);
+                lstroleMaster = await _dBHelperRepo.GetAllRoleMaster(flag);
             }
             catch  (Exception ex){
             }
