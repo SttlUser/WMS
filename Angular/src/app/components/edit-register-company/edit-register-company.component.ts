@@ -75,7 +75,7 @@ export class EditRegisterCompanyComponent {
       slUrl: ['', Validators.required],
       sldbName: ['', Validators.required],
       slusername: ['', Validators.required,Validators.pattern(/^[0-9]+$/)],
-      SLPassword: ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/)]],
+      SLPassword: ['', [Validators.required, /*Validators.minLength(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*).*$/)*/]],
       tableData: this.formBuilder.array([]),
       putCheckbox: [true],
       ssccCheckbox: [true],
@@ -144,14 +144,21 @@ export class EditRegisterCompanyComponent {
     const tableData = this.applyForm.get('tableData') as FormArray;
     tableData.removeAt(index);
   }
-  clearForm() {
-    this.applyForm.reset(); // Reset the form to its initial state
+  onClearForm() {
+    this.applyForm.reset({
+      putCheckbox: true,
+      ssccCheckbox: true,
+      cartonCheckbox: true,
+      autoCheckbox: true,
+      whsInput: ''
+    });
   }
   
   
   
+  
   onSubmit() {
-   
+   console.log(this.applyForm.get('SLPassword'));
    
     
 
@@ -187,11 +194,18 @@ if (slUsernameControl && slUsernameControl.invalid) {
   }
   return;
 }
-const slPasswordControl = this.applyForm.get('SLPassword');
-if (slPasswordControl && slPasswordControl.invalid) {
-  alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
-  return;
-}
+// const slPasswordControl = this.applyForm.get('SLPassword');
+// if (slPasswordControl && slPasswordControl.invalid) {
+//   alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
+//   return;
+// }
+const passwordNameControl = this.applyForm.get('SLPassword');
+    if (passwordNameControl && passwordNameControl.invalid /*&& passwordNameControl.touched*/) {
+    if (passwordNameControl.errors?.['required']) {
+      alert('Password is required.');
+    }
+    return;
+  }
 if (this.isFormFieldsEmpty(this.applyForm)) {
         
   alert('Please fill in all the required fields.');
@@ -283,7 +297,7 @@ if (this.isFormFieldsEmpty(this.applyForm)) {
           const message = 'Company Edited Successfully';
             this.snackBar.openFromComponent(ToastComponent, {
             data: { message },
-            duration: 2000, // Toast duration in milliseconds
+            duration: 2000, 
             horizontalPosition: 'end',
             verticalPosition: 'top'
           });
