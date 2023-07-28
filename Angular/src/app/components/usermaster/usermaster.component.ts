@@ -26,7 +26,6 @@ export class UsermasterComponent {
     ins_del_id: '',
     Password: '',
     roleName: '',
-    lastModifier: Number
   };
 
   ngForm = new FormGroup({
@@ -88,7 +87,7 @@ export class UsermasterComponent {
   };
 
   UpdateUser(row: any) {
-    console.log(row)
+    //console.log(row)
     this.UserdataUpdate.cb_pk_id = row.id;
     this.UserdataUpdate.Firstname = row.firstName;
     this.UserdataUpdate.Lastname = row.lastName;
@@ -97,8 +96,7 @@ export class UsermasterComponent {
     this.UserdataUpdate.ins_del_id = row.roleId;
     this.UserdataUpdate.Password = row.password;
     this.UserdataUpdate.roleName = row.roleName;
-    this.UserdataUpdate.lastModifier = this.loggedInId
-    console.log(this.UserdataUpdate)
+   // console.log(this.UserdataUpdate)
   }
   initializeDataTable() {
     $(document).ready(() => {
@@ -112,28 +110,43 @@ export class UsermasterComponent {
     });
   }
 
-  PostUpdateUserData(UpdateUser: any) {
-    if (
-      !UpdateUser.Email ||
-      !UpdateUser.FirstName ||
-      !UpdateUser.Lastname ||
-      !UpdateUser.Password ||
-      !UpdateUser.Phone ||
-      !UpdateUser.cb_pk_id ||
-      !UpdateUser.roleName 
-    ) {
-      alert("Some fields are empty.");
-    } 
+  PostUpdateUserData(data: any) {
+    console.log("hello");
+    console.log(data);
+    const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+    
+    if (!passwordRegex.test(data.Password)) {
+      console.log(
+        'Password must contain at least 8 characters including at least one uppercase letter, one lowercase letter, one digit, and one special character.'
+        );
+        alert(
+          'Password must contain at least 8 characters including at least one uppercase letter, one lowercase letter, one digit, and one special character.'
+          );
+          return;
+        }
 
-    if(UpdateUser.ins_del_id =='Default'){
-      alert("Select roletype");
-    }    
-    else{
-      console.log(UpdateUser);
-      this.resto.UpdateUserData(UpdateUser).subscribe(
+        
+        if (
+          !data.Email ||
+          !data.Firstname ||
+          !data.Lastname ||
+          !data.Password ||
+          !data.Phone ||
+          !data.ins_del_id 
+        ) {
+          alert("Some fields are empty.");
+        } 
+        if(data.ins_del_id =='Default'){
+          alert("Select roletype");
+        }    
+        else{
+          data.lastModifier = this.loggedInId;
+          //console.log(UpdateUser);
+          this.resto.UpdateUserData(data).subscribe(
         (res) => {
-          console.log(res);
-          alert('data has been updated');
+          //console.log(res);
+          alert('Data updated successfully');
           this.GetUserDetail()
         },
         (err) => {

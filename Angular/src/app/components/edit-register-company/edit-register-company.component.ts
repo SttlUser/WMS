@@ -236,9 +236,7 @@ export class EditRegisterCompanyComponent {
     );
   }
 
-  cancel(){
-    this.router.navigate(['/DisplayCompany'])
-  }
+
 }
 
 export class CompanyData {
