@@ -11,24 +11,24 @@
   
       <div class="col-sm-12">
         
-        <div class="card" style="width: 25rem;">
+        <div class="card" style="width: 28rem;">
          
           
           
-          <form [formGroup]="ngForm" (ngSubmit)="PostDataForm()">
+          <form [formGroup]="ngForm" class="p-2" (ngSubmit)="PostDataForm()">
             
             <ul class="list-group list-group-flush p-3">
+              <a routerLink="/DispayRoleMaster">
+                <i  class="flaticon2-arrow-2 text-dark mt-3"  ></i> 
+              </a>
               <li class="list-group-item">
-                <a href="DispayRoleMaster" class="back_btn">
-                  <img src="../assets/media/arrow-left.png" alt="BCK_BTN" width="20px" height="20px">
-                </a>
               </li>
               <li class="list-group-item">
-                <label for="first-name">Role Name*</label>
+                <label for="first-name">Role Name<span style="color: red;">*</span></label>
                 <input type="text" name="name" class="form-control" placeholder="Role Name" formControlName="name" />
               </li>
               <li class="list-group-item">
-                <label for="first-name">Role Type*</label>
+                <label for="first-name">Role Type<span style="color: red;">*</span></label>
                 <select class="form-select" aria-label="Default select example" formControlName="roleid">
                   <option value="Default">select</option>
                   <option name="select" *ngFor="let i of items" value="{{i.id}}">{{i.name}}</option>
@@ -41,7 +41,7 @@
           </form>
           
         </div>
-      </div>
+      </div> 
     </div>
   </div>
   </div>

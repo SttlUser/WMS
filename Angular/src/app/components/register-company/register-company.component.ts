@@ -7,6 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ConstantPool } from '@angular/compiler';
 import { ToastComponent } from '../toast/toast.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+//import { MatDialog } from '@angular/material/dialog';
+//import { MessageBoxComponent } from './components/message-box.component'; 
+import { MessageBoxComponent } from '../message-box/message-box.component';
 
 @Component({
   selector: 'app-register-company',
@@ -20,17 +23,20 @@ export class RegisterCompanyComponent implements OnInit {
   NewList: Sldbname[] = [];
   sapcompanyname: string[] = [];
   objectData: any;
+  loggedInID: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private resto: CustomerService,
     public http: HttpClient,
     private router: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+   
   ) {
     this.applyForm = this.formBuilder.group({
       tableData: this.formBuilder.array([]),
     });
+    this.loggedInID = sessionStorage.getItem('loggedInID');
     this.objectData = {};
     this.objectData = this.resto.getObject();
   }
@@ -42,7 +48,7 @@ export class RegisterCompanyComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(/^\d+$/), Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       SLUrl: ['', Validators.required],
-      db_type: ['', Validators.required],
+      db_type: ['Default', Validators.required],
       slusername: ['', Validators.required],
       SLPassword: ['', [Validators.required]],
       tableData: this.formBuilder.array([this.createTableRow()]),
@@ -56,7 +62,7 @@ export class RegisterCompanyComponent implements OnInit {
   //innerClass: CompanyData | undefined;
   companyDataObj: CompanyData = new CompanyData();
   Sldbnamelistobj: Sldbname = new Sldbname();
-
+ 
   clearForm1() {
     this.applyForm.reset();
     this.clearFormArray(this.applyForm.get('tableData') as FormArray); // Reset the formArray
@@ -73,23 +79,7 @@ export class RegisterCompanyComponent implements OnInit {
       formArray.removeAt(0);
     }
   }
-  clearForm() {
-    this.applyForm.reset({
-      companyName: '',
-      phone: '',
-      email: '',
-      SLUrl: '',
-      db_type: '',
-      slusername: '',
-      SLPassword: '',
-      tableData: [this.createTableRow()],
-      putCheckbox: true,
-      ssccCheckbox: true,
-      cartonCheckbox: true,
-      autoCheckbox: true,
-      whsInput: '1',
-    });
-  }
+  
   createTableRowForTableData(): FormGroup {
     return this.formBuilder.group({
       // Define the fields for each table row if applicable
@@ -192,10 +182,13 @@ export class RegisterCompanyComponent implements OnInit {
     this.companyDataObj!.DatabaseType = this.applyForm.value.db_type;
     this.companyDataObj!.DbName = this.NewList;
     this.companyDataObj!.hasPutAwayProc = this.applyForm.value.putCheckbox;
-    this.companyDataObj!.hasSsccNoManagement = this.applyForm.value.ssccCheckbox;
-    this.companyDataObj!.hasCartonNoManagement = this.applyForm.value.cartonCheckbox;
+    this.companyDataObj!.hasSsccNoManagement =
+      this.applyForm.value.ssccCheckbox;
+    this.companyDataObj!.hasCartonNoManagement =
+      this.applyForm.value.cartonCheckbox;
     this.companyDataObj!.defaultWarehouseCode = this.applyForm.value.whsInput;
-    this.companyDataObj!.hasAutoBatchConfigurator = this.applyForm.value.autoCheckbox;
+    this.companyDataObj!.hasAutoBatchConfigurator =
+      this.applyForm.value.autoCheckbox;
     this.companyDataObj!.createdDate = '1-2-3';
     this.companyDataObj!.deletedDate = '1-2-3';
     this.companyDataObj!.lastModifiedDate = '1-2-3';
@@ -214,15 +207,29 @@ export class RegisterCompanyComponent implements OnInit {
 
     this.resto.postRegisterCompany(serializedData, headers).subscribe(
       (response: any) => {
+
+
         console.log('receved table data', response);
-        const message = 'Company Added Successfully';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
-        this.NewList=[];
+        response.dbName.forEach((element:any) => {
+          console.log(element.flag)
+          
+          if(element.flag==false){
+            alert("Data invalid");
+            return;
+          }
+
+        })
+
+        alert("Data registered successfully")
+
+        // const message = 'Company Added Successfully';
+        // this.snackBar.openFromComponent(ToastComponent, {
+        //   data: { message },
+        //   duration: 2000, // Toast duration in milliseconds
+        //   horizontalPosition: 'end',
+        //   verticalPosition: 'top',
+        // });
+        // this.NewList = [];
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
@@ -231,7 +238,7 @@ export class RegisterCompanyComponent implements OnInit {
           data: { message },
           duration: 2000, // Toast duration in milliseconds
           horizontalPosition: 'end',
-          verticalPosition: 'top'
+          verticalPosition: 'top',
         });
       }
     );
@@ -347,6 +354,11 @@ export class RegisterCompanyComponent implements OnInit {
     if (index != 0) {
       this.tableData.removeAt(index);
     }
+  }
+
+  clearForm() {
+    this.applyForm.reset();
+    this.applyForm.get('db_type')?.setValue('Default');
   }
 }
 
