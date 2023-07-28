@@ -42,7 +42,7 @@ namespace WebApplication2.Controllers
 
 
         {
-            int ins_del_id = (int)usr[0];
+            int ins_del_id = Convert.ToInt32(usr[0].ToString());
             int cb_pk_id = (int)usr[1];
             int flag = (int)usr[2];
             UserMaster userMaster = new UserMaster();
@@ -113,7 +113,7 @@ namespace WebApplication2.Controllers
                 int ins_del_id = Convert.ToInt32(user["ins_del_id"].ToString());
                 int lastModifier = Convert.ToInt32(user["lastModifier"].ToString());
 
-                userMaster = await _dBHelperRepo.UpdateUser(3, cb_pk_id, Firstname, Lastname, Password, Email, Phone, ins_del_id, lastModifier);
+                userMaster = await _dBHelperRepo.UpdateUser(3, cb_pk_id, Firstname, Lastname, Password, Email, Phone, ins_del_id, null,lastModifier);
                 userMaster.Error = ReturnError(0, string.Empty);
             }
             catch (Exception ex)

@@ -105,7 +105,8 @@ namespace WebApplication2.Controllers
 
             RoleMasterData roleMaster = new RoleMasterData();
             int id = (int)usr[1];
-            int LastModifiedById = (int)usr[0];
+            //int LastModifiedById = (int)usr[0];
+            int LastModifiedById = Convert.ToInt32(usr[0].ToString());
             int flag = (int)usr[2];
             try
             {

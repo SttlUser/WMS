@@ -45,7 +45,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost("UpdateRoleAccessData")]
         public async Task<UpdateRoleAccess> Update([FromBody] JsonObject user)
-        {
+            {
             UpdateRoleAccess roleAccess = new UpdateRoleAccess();
             List<int> documentIds = new List<int>();
 

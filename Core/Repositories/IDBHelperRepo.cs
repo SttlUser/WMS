@@ -34,7 +34,7 @@ namespace Repositories
         Task<List<UserMaster>> GetAllUserMaster(int flag);
         Task<UserMaster> DeleteUser(int flag, int ins_del_id, int cb_pk_id);
         Task<UserMaster> CreateUser(int flag, string firstname, string lastname, string username, string email, string password, string phone,  int cb_pk_id, int ins_del_id);
-        Task<UserMaster> UpdateUser(int flag, int cb_pk_id, string Firstname, string Lastname, string Password, string Email, string Phone,int ins_del_id,int lastModifier);
+        Task<UserMaster> UpdateUser(int flag, int cb_pk_id, string Firstname, string Lastname, string Password, string Email, string Phone,int ins_del_id,string username,int lastModifier);
         Task<UserMaster> GetUserById(int id);
         #endregion
         #region Company Method

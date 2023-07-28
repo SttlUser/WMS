@@ -22,9 +22,9 @@ export class EditRoleAccessComponent implements OnInit {
 	role_id: any;
 	id: any;
 	checkboxValues: { [key: string]: boolean } = {};
-	rbacCheckboxArr: Number[] = [];
+	rbacCheckboxArr: number[] = [];
 	defaultSelectedRoles: number[] = [];
-	checkboxValuesbool: boolean[] = Array(11).fill(false);
+	checkboxValuesbool: boolean[] = [];
 	Access = [{ "id": 0, "value": "Full Access" }, { "id": 1, "value": "No Access" }];
 	showNavbar: boolean = true;
 	ngOnInit() {
@@ -58,17 +58,18 @@ export class EditRoleAccessComponent implements OnInit {
 	}
 
 
+
 	initializeCheckboxes() {
-
-		this.defaultSelectedRoles.forEach((position) => {
-			this.checkboxValuesbool[position ] = true;
-		});
 		this.roleForm = this.formBuilder.group({});
+		this.rbacCheckboxArr = this.defaultSelectedRoles; // Initialize the rbacCheckboxArr first
+	  
 		this.Accessdata.forEach((_rol: any, i: number) => {
-			this.roleForm.addControl(`checkbox_${i}`, new FormControl(this.checkboxValuesbool[i]));
+		  const checkboxValue = this.defaultSelectedRoles.includes(i);
+		  this.roleForm.addControl(`checkbox_${i}`, new FormControl(checkboxValue));
 		});
-
-	}
+	  
+		console.log(this.rbacCheckboxArr);
+	  }
 
 	GetAccessData(http: HttpClient) {
 		this.route.queryParams.subscribe(params => {
@@ -82,6 +83,7 @@ export class EditRoleAccessComponent implements OnInit {
 					if (String(i.roleid) === String(this.id)) {
 						this.defaultSelectedRoles.push(i.documentid);
 					}
+					
 				});
 				this.initializeCheckboxes();
 			},
@@ -97,28 +99,26 @@ export class EditRoleAccessComponent implements OnInit {
 			}
 		);
 	}
-
 	onCheckboxChange(documentId: number) {
-		const control = this.roleForm.get('checkbox_' + documentId);
-		if (control) {
-		  if (control.value) {
-			this.rbacCheckboxArr.push(documentId);
-		  } else {
-			this.rbacCheckboxArr = this.rbacCheckboxArr.filter(
-			  (id) => id !== documentId
-			);
-			console.log("else");
-		  }
+		console.log(documentId);
+		//console.log(this.rbacCheckboxArr);
+		if (!this.rbacCheckboxArr.includes(documentId)) {
+		  this.rbacCheckboxArr.push(documentId); // Add the documentId to the array
+		} else {
+		  this.rbacCheckboxArr = this.rbacCheckboxArr.filter((id) => id !== documentId); // Remove the documentId from the array
 		}
 		console.log(this.rbacCheckboxArr);
 	  }
+	  
+	
+	  
 	rbacCheckBox(rol: any) {
 		this.role_id = rol.roleid;
-		
-			if (rol.checked) {
-				this.rbacCheckboxArr.push(rol.documentid);
-				console.log('Checked');
-			} 
+
+		if (rol.checked) {
+			this.rbacCheckboxArr.push(rol.documentid);
+			console.log('Checked');
+		}
 		else {
 			const index = this.rbacCheckboxArr.indexOf(rol.documentid);
 			if (index !== -1) {
@@ -134,7 +134,7 @@ export class EditRoleAccessComponent implements OnInit {
 			console.log(this.rbacCheckboxArr);
 		}
 	}
-	
+
 
 	CloseBtn() {
 		// this.router.navigate(['/RoleAccessList']);
@@ -142,9 +142,16 @@ export class EditRoleAccessComponent implements OnInit {
 	}
 
 	PostrbacData() {
-		
 
-		this.rbacCheckboxArr = Array.from(new Set([...this.defaultSelectedRoles, ...this.rbacCheckboxArr]));
+
+		const defaultSet = new Set(this.defaultSelectedRoles);
+		this.rbacCheckboxArr = Array.from(
+			new Set([
+				...this.rbacCheckboxArr.filter((id) => defaultSet.has(id)),
+				...defaultSet,
+			])
+		);
+
 		console.log("roleid", this.rbacCheckboxArr);
 		this.resto.PostRoleAccessData(this.id, this.rbacCheckboxArr).subscribe(
 			(res) => {
