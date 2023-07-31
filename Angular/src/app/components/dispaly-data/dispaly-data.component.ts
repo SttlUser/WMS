@@ -109,7 +109,8 @@ export class DispalyDataComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false
+        paging: false,
+        order: [[ 2, "desc" ]]
       });
     });
   }
@@ -129,11 +130,11 @@ export class DispalyDataComponent {
         (res) => {
           console.log(res);
           this.GetRoleMasterData();
-          const message = 'Role Activated Successfully';
+          const message = 'Role De-activated Successfully';
           this.snackBar.openFromComponent(ToastComponent, {
             data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
+            duration: 50000000, // Toast duration in milliseconds
+            horizontalPosition: 'right',
             verticalPosition: 'top',
           });
           // this.toastService.recieve(this.activate);

@@ -19,33 +19,31 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    
+
                     <th>Form Name</th>
                     <th>Access Type</th>
                 </tr>
             </thead>
-            <tbody>
-                <ng-container *ngFor="let rol of   Accessdata">
+            <tbody [formGroup]="roleForm">
+                <ng-container *ngFor="let rol of Accessdata; let i = index">
                     <tr>
                         <td>{{rol?.documentmasterfield}}</td>
-                        <td><input class="form-check-input mt-0" type="checkbox"  [(ngModel)]="rol.checked" (change)="rbacCheckBox(rol)" [checked]="checkboxValues[rol.documentid]" value="" aria-label="Checkbox for following text input" style="border: solid black; height: 15px; width: 15px; margin-left: 20px;"></td>
-                       
-                        <!-- <td><input class="form-check-input mt-0" type="checkbox"  [(ngModel)]="rol.checked" (change)="rbacCheckBox(rol)" value="" aria-label="Checkbox for following text input" style="border: solid black; height: 15px; width: 15px; margin-left: 20px;"></td> -->
-                 
+                        <td>
+                            <input class="form-check-input mt-0" type="checkbox" [formControlName]="'checkbox_' + i+1"
+                            [formControlName]="'checkbox_' + rol.documentid"
+                            (change)="onCheckboxChange(rol.documentid)"
+                            [checked]="roleForm.get('checkbox_' + rol.documentid)?.value"
+                                aria-label="Checkbox for following text input"
+                                style="border: solid black; height: 15px; width: 15px; margin-left: 20px;">
+                                
+                        </td>
                     </tr>
                 </ng-container>
-                
             </tbody>
         </table>
         <button type="submit" class="btn btn-primary m-5" (click)="PostrbacData()">Save</button>
-        
+
         <button type="button" class="btn btn-secondary m-5" (click)="CloseBtn()">Close</button>
-    
+
     </div>
 </div>
-
-
-
-
-
-

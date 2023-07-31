@@ -7,6 +7,8 @@ import { CustomerService } from '../../customer.service';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
+import { ToastComponent } from '../toast/toast.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usermaster',
@@ -50,7 +52,8 @@ export class UsermasterComponent {
   constructor(
     private router: Router,
     private resto: CustomerService,
-    public http: HttpClient
+    public http: HttpClient,
+    private snackBar: MatSnackBar
   ) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -96,7 +99,7 @@ export class UsermasterComponent {
     this.UserdataUpdate.ins_del_id = row.roleId;
     this.UserdataUpdate.Password = row.password;
     this.UserdataUpdate.roleName = row.roleName;
-   // console.log(this.UserdataUpdate)
+   console.log(this.UserdataUpdate)
   }
   initializeDataTable() {
     $(document).ready(() => {
@@ -104,7 +107,8 @@ export class UsermasterComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false
+        paging: false,
+        order: [[ 5, "desc" ]]
       });
      
     });
@@ -146,8 +150,16 @@ export class UsermasterComponent {
           this.resto.UpdateUserData(data).subscribe(
         (res) => {
           //console.log(res);
-          alert('Data updated successfully');
+
+          // alert('Data updated successfully');
           this.GetUserDetail()
+          const message = 'Data updated successfully.';
+          this.snackBar.openFromComponent(ToastComponent, {
+            data: { message },
+            duration: 2000, // Toast duration in milliseconds
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          });
         },
         (err) => {
           console.log(err);

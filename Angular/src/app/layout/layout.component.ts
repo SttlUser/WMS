@@ -14,13 +14,13 @@ import { DataService } from '../data.service';
       <h1>{{ header }}</h1>
       <h3>{{ subheader }}</h3>
     </div>
-    <router-outlet></router-outlet>
+    <app-toast></app-toast>
+    <router- ></router-outlet>
   `
 })
 export class LayoutComponent  implements OnInit {
   title = 'WMS';
   showNavbar = true;
-  toasts: Toast[] = [];
   header!: string;
   subheader!:string;
   constructor(private toastService: ToastService,private router:Router, private activatedRoute: ActivatedRoute,private appComponent: AppComponent,private dataService: DataService) { }
@@ -30,6 +30,5 @@ export class LayoutComponent  implements OnInit {
       this.header = data.header;
       this.subheader = data.subheader;
     });
-  }
-  
+  }  
 }

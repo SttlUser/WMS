@@ -96,8 +96,8 @@ namespace WebApplication2.Controllers
                 //JsonObject obj = JsonNode.Parse(role).AsObject();
                 int roletype = Convert.ToInt32(role["roleid"].ToString()); // (int)role["roleid"];
                 string roleName = (string)role["name"];
-                //roleMaster = await _dBHelperRepo.CreateRole(2,roleName,roletype);
-                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype,1);
+                int createdBy = Convert.ToInt32(role["createdBy"].ToString());
+                roleMaster = await _dBHelperRepo.CreateRole(2, roleName, roletype, createdBy);
 
                 roleMaster.Error = ReturnError(0, string.Empty);
             }
@@ -120,6 +120,11 @@ namespace WebApplication2.Controllers
         {
             RoleMaster roleMaster = new RoleMaster();
 
+            RoleMasterData roleMaster = new RoleMasterData();
+            int id = (int)usr[1];
+            //int LastModifiedById = (int)usr[0];
+            int LastModifiedById = Convert.ToInt32(usr[0].ToString());
+            int flag = (int)usr[2];
             try
             {               
                 RoleMaster roleType = await _dBHelperRepo.DeleteRole(4,roletype, "" , 1);   //1 is the dummy data for lastModified field                
@@ -142,12 +147,34 @@ namespace WebApplication2.Controllers
             //lstroleMaster.Add(new RoleMaster { Id = 3, Name = "Role3" });
             try
             {
-                lstroleMaster = await _dBHelperRepo.GetAllRoleMaster(1);
+                lstroleMaster = await _dBHelperRepo.GetAllRoleMaster(flag);
             }
             catch  (Exception ex){
             }
             return lstroleMaster;
         }
+
+        [HttpPut("UpdateRoleMaster")]
+        public async Task<RoleMasterData> UpdateRoleMaster([FromBody] JsonObject user)
+        {
+            RoleMasterData rolemasterdata = new RoleMasterData();
+            try
+            {
+                string roleName = (string)user["Name"];
+                int roletype = Convert.ToInt32(user["RoleTypeid"].ToString());
+                int cb_pk_id = Convert.ToInt32(user["Id"].ToString());
+                int lastModifier = Convert.ToInt32(user["lastModifier"].ToString());
+
+                rolemasterdata = await _dBHelperRepo.UpdateRoleData(3, roleName, roletype, cb_pk_id, lastModifier);
+                rolemasterdata.Error = ReturnError(0, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                rolemasterdata.Error = ReturnError(400, ex.ToString());
+            }
+            return rolemasterdata;
+        }
+
 
         private Error ReturnError(int code, string strError)
         {

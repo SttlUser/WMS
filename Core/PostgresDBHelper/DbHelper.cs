@@ -66,6 +66,61 @@ namespace PostgresDBHelper
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetUserMasterDetails\" ( @flag,@ins_del_id,@cb_pk_id)", new { flag, ins_del_id, cb_pk_id  });
 
         }
+        public async Task<UserMaster> CreateUser(int flag, string firstname, string lastname, string username, string email, string password, string phone, int cb_pk_id, int ins_del_id)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@ins_del_id,@cb_pk_id,@firstname,@lastname,@password,@email,@phone,@username) ", new {
+                flag,
+                cb_pk_id,
+                ins_del_id,
+                firstname,
+                lastname,
+                password,
+                email,
+                phone,
+                username,
+            });
+        }
+
+        public async Task<UserMaster> UpdateUser(int flag, int cb_pk_id, string Firstname, string Lastname, string Password, string Email, string Phone, int ins_del_id, string username, int lastModifier)
+        {
+
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag, @ins_del_id , @cb_pk_id,@firstname,@lastname,@password,@email,@phone,@username,@lastModifier)", new { flag, ins_del_id, cb_pk_id, Firstname, Lastname, Password, Email, Phone ,username,lastModifier});
+
+        }
+
+
+        public async Task<UserMaster> GetUserById(int id)
+        {
+            return await _pgDbDapperHelperRepo.GetId<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"UserMaster\" where \"ID\" = " + id, 0);
+        }
+        #endregion
+        #region Company Master
+        public async Task<List<GetCompanyMaster>> GetCompanyDetail(int flag)
+        {
+            return await _pgDbDapperHelperRepo.GetAll<GetCompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag)", new { flag });
+        }
+        public async Task<List<CompanyMaster>> RegisterCompany(int flag, string? company_name, string? slurl, string? slusername, string? slpassword, int lastmodifiedby, string? phone, string? email, string? db_type, List<string>? sapcompanyname, List<string>? sldbname, int comp_id, bool? has_put_away_proc, bool? has_sscc_no_management, bool? has_carton_no_management, bool? has_auto_batch_configurator, int default_warehouse_code)
+        {
+            return await _pgDbDapperHelperRepo.GetAll<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id,@has_put_away_proc,@has_sscc_no_management,@has_carton_no_management,@has_auto_batch_configurator,@default_warehouse_code)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, comp_id, has_put_away_proc, has_sscc_no_management, has_carton_no_management, has_auto_batch_configurator, default_warehouse_code });
+        }
+
+        
+
+        public async Task<CompanyMaster> DeleteCompanyDb(int flag, string? company_name, string? slurl, string? slusername, string? slpassword, int lastmodifiedby, string? phone, string? email, string? db_type, List<string>? sapcompanyname, List<string>? sldbname, int comp_id)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, comp_id });
+        }
+        public async Task<CompanyMaster> UpdateComapnyDetail(int flag, string? company_name, string? slurl, string? slusername, string? slpassword, int lastmodifiedby, string? phone, string? email, string? db_type, List<string>? sapcompanyname, List<string>? sldbname, int company_id, bool? has_put_away_proc, bool? has_sscc_no_management, bool? has_carton_no_management, bool? has_auto_batch_configurator, int default_warehouse_code)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id,@has_put_away_proc,@has_sscc_no_management,@has_carton_no_management,@has_auto_batch_configurator,@default_warehouse_code)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, company_id, has_put_away_proc, has_sscc_no_management, has_carton_no_management, has_auto_batch_configurator, default_warehouse_code });
+        }
+
+        public async Task<List<CompanyMaster>> GetCompanyDataByID(int flag, string? company_name, string? slurl, string? slusername, string? slpassword, int lastmodifiedby, string? phone, string? email, string? db_type, List<string>? sapcompanyname, List<string>? sldbname, int comp_id)
+        {
+            return await _pgDbDapperHelperRepo.GetAll<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, comp_id });
+        }
+
+
 
         #endregion
     }

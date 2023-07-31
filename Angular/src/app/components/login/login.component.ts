@@ -1,6 +1,8 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+// import * as toastr from 'toastr';
+
 import {
   AbstractControl,
   FormBuilder,
@@ -117,13 +119,25 @@ export class LoginComponent implements OnInit {
         } else if (res?.errorInfo?.code == 0) {
           console.log('loggin in');
           console.log(res);
-          const message = 'Login Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 50000, // Toast duration in milliseconds
-            horizontalPosition: 'left',
-            verticalPosition: 'top',
-          });
+          // toastr.options = {
+          //   "closeButton": true,
+          //   "debug": false,
+          //   "newestOnTop": false,
+          //   "progressBar": false,
+          //   "positionClass": "toast-top-right",
+          //   "preventDuplicates": false,
+          //   "onclick": null,
+          //   "showDuration": "300",
+          //   "hideDuration": "1000",
+          //   "timeOut": "5000",
+          //   "extendedTimeOut": "1000",
+          //   "showEasing": "swing",
+          //   "hideEasing": "linear",
+          //   "showMethod": "fadeIn",
+          //   "hideMethod": "fadeOut"
+          // };
+          
+          // toastr.error("Successfully login");
           sessionStorage.setItem('loggedInId', res.id);
           this.router.navigate(['/DispayRoleMaster']);
 
