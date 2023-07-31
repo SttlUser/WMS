@@ -49,7 +49,7 @@ namespace Models
         public int Lastmodifiedby { get; set; }
         public string? phone { get; set; }
         public string email { get; set; }
-        public string db_type { get; set; }
+        public string DatabaseType { get; set; }
         public string sapcompanyname { get; set; }
         public string SLDbName { get; set; }
         public int CompanyID { get; set; }

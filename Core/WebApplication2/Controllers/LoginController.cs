@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using B1SLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 //using Microsoft.IdentityModel.Tokens;
@@ -49,7 +50,31 @@ namespace WebApplication2.Controllers
             
             return loginResponse;
         }
-        private Error ReturnError(int code, string strError)
+
+        public async Task<ChangePassword> UserPassword([FromBody] ChangePassword ChanegPass)
+        {
+            ChangePassword loginpassreq = new ChangePassword();
+            try
+            {
+                UserMaster userMaster = await _dBHelperRepo.UpdatePassword(ChanegPass.OldPassword, ChanegPass.NewPassword, ChanegPass.ConPassword);
+                if (userMaster == null)
+                {
+                    loginpassreq.ErrorInfo = ReturnError(1000, "User Invalid");
+               }
+               else
+                {
+                    loginpassreq.NewPassword = userMaster.UserName;
+                }
+            }
+            catch (Exception ex)
+            {
+                loginpassreq.ErrorInfo = ReturnError(1001, ex.ToString());
+            }
+
+            return loginpassreq;
+
+        }
+            private Error ReturnError(int code, string strError)
         {
             return new Error()
             {

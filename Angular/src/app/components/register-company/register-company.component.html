@@ -3,13 +3,8 @@
     <br>
     <div class="row">
       <div class="col-sm-8">
-        <h4>Register Company</h4>
-      </div>
-      <div class="row">
-
-        <a routerLink="/DisplayCompany" class="back_btn">
-          <img src="../assets/media/arrow-left.png" alt="BCK_BTN" width="20px" height="20px"
-            style="margin-left: 600px;">
+        <a routerLink="/DisplayCompany">
+          <i  class="flaticon2-arrow-2 text-dark"  ></i> 
         </a>
       </div>
     </div>
@@ -34,7 +29,7 @@
               <td><input class="form-check-input" type="checkbox" id="putCheckbox" value="true"
                   formControlName="putCheckbox"
                   style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" /></td>
-              <td><label class="form-check-label" for="putCheckbox">Put away process
+              <td><label class="form-check-label" for="putCheckbox">Put away process<span style="color: red;">*</span>
                 </label></td>
             </tr>
 
@@ -42,7 +37,8 @@
               <td><input class="form-check-input" type="checkbox" id="ssccCheckbox" value="true"
                   formControlName="ssccCheckbox"
                   style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" /></td>
-              <td> <label class="form-check-label" for="ssccCheckbox">SSCC No. Management</label></td>
+              <td> <label class="form-check-label" for="ssccCheckbox">SSCC No. Management<span
+                    style="color: red;">*</span></label></td>
             </tr>
 
             <tr>
@@ -52,7 +48,8 @@
                   style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" />
               </td>
               <td>
-                <label class="form-check-label" for="cartonCheckbox">Cartoon No. management</label>
+                <label class="form-check-label" for="cartonCheckbox">Cartoon No. management<span
+                    style="color: red;">*</span></label>
               </td>
             </tr>
             <tr>
@@ -62,7 +59,8 @@
                   style=" height: 15px; width: 15px; margin-left: 20px; margin-top: 7px;" />
               </td>
               <td>
-                <label class="form-check-label" for="autoCheckbox">Autp Batch Configurator</label>
+                <label class="form-check-label" for="autoCheckbox">Autp Batch Configurator<span
+                    style="color: red;">*</span></label>
               </td>
             </tr>
           </table>
@@ -70,7 +68,7 @@
         </div>
         <div class="col">
           <div class="form-group">
-            <label for="whsInput">Defualt WHS</label>
+            <label for="whsInput">Defualt WHS<span style="color: red;">*</span></label>
             <input type="text" class="form-control" id="whsInput" formControlName="whsInput" />
           </div>
         </div>
@@ -83,41 +81,42 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="companyName">Company Name:</label>
+            <label for="companyName">Company Name:<span style="color: red;">*</span></label>
             <input type="text" class="form-control" id="companyName" formControlName="companyName" name="companyName"
               required />
           </div>
           <div class="form-group">
-            <label for="phone">Phone No:</label>
+            <label for="phone">Phone No:<span style="color: red;">*</span></label>
             <input type="tel" class="form-control" id="phone" formControlName="phone" name="phone" required />
           </div>
           <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="email">Email:<span style="color: red;">*</span></label>
             <input type="email" class="form-control" id="email" formControlName="email" name="email" required />
           </div>
           <div class="form-group">
-            <label>Live Service Layer URL:</label>
+            <label>Live Service Layer URL:<span style="color: red;">*</span></label>
             <input type="text" class="form-control" id="SLUrl" formControlName="SLUrl" name="SLUrl" required />
           </div>
           <div class="form-group">
-            <label for="db_type">Database type:</label>
-            <select class="form-select" id="db_type" formControlName="db_type" name="db_type" required>
-              <option value="hana" selected>HANA</option>
+            <label for="db_type">Database type:<span style="color: red;">*</span></label>
+            <select class="form-control" id="db_type" formControlName="db_type" name="db_type" required>
+              <option value="Default" selected>select</option>
+              <option value="hana" >HANA</option>
               <option value="sql">SQL</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="slusername">Company Registration No (User Name):</label>
+            <label for="slusername">Company Registration No (User Name):<span style="color: red;">*</span></label>
             <input type="text" class="form-control" id="slusername" formControlName="slusername" name="slusername"
               required />
           </div>
           <div class="form-group">
-            <label for="SLPassword">Password:</label>
+            <label for="SLPassword">Password:<span style="color: red;">*</span></label>
             <input type="password" class="form-control" id="SLPassword" formControlName="SLPassword" name="SLPassword"
               required />
           </div>
-          <button type="submit" class="btn btn-primary mb-5">Register</button>
-          <button type="button" class="btn btn-danger mb-5">Clear</button>
+          <button type="submit" class="btn btn-success mb-5 mr-3">Register</button>
+          <button type="button" class="btn btn-danger mb-5" (click)="clearForm()">Clear</button>
         </div>
 
         <div class="col">
@@ -142,7 +141,7 @@
                     <input type="text" formControlName="sapCompanyName" class="sapCompanyName" />
                   </td>
                   <td>
-                    false
+                    <i  class="flaticon2-cancel-music text-danger icon-nm" ></i> 
                     <!-- <img
                         *ngIf="row.get('status')?.value"
                         src=""
@@ -156,7 +155,7 @@
                   </td>
                   <td>
                     <!-- <button class="btn btn-primary" (click)="addRow()"> -->
-                    <button id="register" type="button" class="btn btn-primary" (click)="addRow()">
+                    <button id="register" type="button" class="btn btn-primary  mr-3" (click)="addRow()">
                       Add
                     </button>
                     <!-- <button class="btn btn-danger" (click)="deleteRow(i)"> -->

@@ -32,9 +32,11 @@
                         <td>{{rol?.createdDate}}</td>
                         <td>{{rol?.createdByName}}</td>
                         <td>{{rol?.lastModifiedByName}}</td>
-                        <td>
-                            {{rol?.isActive ? 'Active' : 'Inactive' }}
-                        </td>
+                        <td>                        
+                             <i *ngIf="rol.isActive else activeicon" class="flaticon2-check-mark text-success" ></i> 
+                             <ng-template #activeicon>
+                                <i class="flaticon2-cancel-music text-danger" ></i> 
+                             </ng-template>
                         <td >
                             <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" (click)="UpdateRole(rol)">Edit</button>-->
@@ -91,13 +93,13 @@
                     <input hidden class="form-control form-control-sm" type="text" #id [(ngModel)]="RoledataUpdate.id"
                         name="id" aria-label=".form-control-sm example">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Role Name*</label>
+                        <label for="name" class="form-label">Role Name<span style="color: red;">*</span></label>
                         <input class="form-control form-control-sm" type="text" [(ngModel)]="RoledataUpdate.name" name="name"
                         placeholder="Role Name" aria-label=".form-control-sm example" #name="ngModel" required>
                         
                     </div>
                     <div class="mb-3">
-                        <label for="roleid" class="form-label">Role Type*</label>
+                        <label for="roleid" class="form-label">Role Type<span style="color: red;">*</span></label>
                         <select class="form-select" aria-label="Default select example" #roleTypeid name="RoleTypeid"
                             [(ngModel)]="RoledataUpdate.roleTypeid" >
                             <option value="Default">select</option>

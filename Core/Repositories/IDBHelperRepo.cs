@@ -16,6 +16,7 @@ namespace Repositories
         AppSettings AppSettings { get; set; }
         #region "Login Methods"
         Task<UserMaster> GetUser(string username, string password);
+        Task<UserMaster> UpdatePassword(string UserName, string Password, string CPassword);
         #endregion
         #region "Role Methods"
         Task<List<RoleType>> GetRoleType();

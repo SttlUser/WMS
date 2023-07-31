@@ -26,6 +26,11 @@ namespace PostgresDBHelper
 
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserDetails\"(@username,@password)", new { username, password });
         }
+        public async Task<UserMaster> UpdatePassword(string oldpass, string NPassword, string cpassword)
+        {
+
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserDetails\"(@oldpass,@NPassword,@cpassword)", new { oldpass, NPassword, cpassword });
+        }
         #endregion
 
         #region "Role Management"

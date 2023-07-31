@@ -93,7 +93,7 @@ namespace WebApplication2.Controllers
             }
             catch (Exception ex)
             {
-                userMaster.Error = ReturnError(400, ex.ToString());
+                userMaster.Error = ReturnError(400, "Please Enter unique Username");
             }
             return userMaster;
         }
