@@ -6,13 +6,14 @@
                 <div class="col-sm-8">
                     <h4>Role Based Access Control</h4>
                 </div>
+                
             </div>
         </div>
         
-        <div class="row">
+        <div class="row mb-3 ml-2">
 
-            <a routerLink="/RoleAccessList" class="back_btn">
-                <img src="../assets/media/arrow-left.png" alt="BCK_BTN" width="20px" height="20px"  style="margin-left: 600px;">
+            <a routerLink="/RoleAccessList">
+                <i  class="flaticon2-arrow-2 text-dark"  ></i> 
               </a>
         </div>
        
@@ -29,12 +30,13 @@
                     <tr>
                         <td>{{rol?.documentmasterfield}}</td>
                         <td>
-                            <input class="form-check-input mt-0" type="checkbox" [formControlName]="'checkbox_' + i"
+                            <input class="form-check-input mt-0" type="checkbox" [formControlName]="'checkbox_' + i+1"
                             [formControlName]="'checkbox_' + rol.documentid"
                             (change)="onCheckboxChange(rol.documentid)"
                             [checked]="roleForm.get('checkbox_' + rol.documentid)?.value"
                                 aria-label="Checkbox for following text input"
                                 style="border: solid black; height: 15px; width: 15px; margin-left: 20px;">
+                                
                         </td>
                     </tr>
                 </ng-container>

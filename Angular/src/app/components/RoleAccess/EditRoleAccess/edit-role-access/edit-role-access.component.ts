@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer.service';
-import { ToastService } from 'src/app/components/toast/toast.service';
-import { ToastComponent } from 'src/app/components/toast/toast.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -34,7 +32,7 @@ export class EditRoleAccessComponent implements OnInit {
 
 	}
 
-	constructor(private router: Router, private resto: CustomerService, private formBuilder: FormBuilder, public http: HttpClient, private route: ActivatedRoute, private toastService: ToastService, private snackBar: MatSnackBar, private location: Location) {
+	constructor(private router: Router, private resto: CustomerService, private formBuilder: FormBuilder, public http: HttpClient, private route: ActivatedRoute, private snackBar: MatSnackBar, private location: Location) {
 		this.GetAccessData(http);
 		//this.initializeCheckboxes();
 
@@ -64,8 +62,9 @@ export class EditRoleAccessComponent implements OnInit {
 		this.rbacCheckboxArr = this.defaultSelectedRoles; // Initialize the rbacCheckboxArr first
 	  
 		this.Accessdata.forEach((_rol: any, i: number) => {
-		  const checkboxValue = this.defaultSelectedRoles.includes(i);
-		  this.roleForm.addControl(`checkbox_${i}`, new FormControl(checkboxValue));
+			console.log("i value: ",i,_rol.roleid, _rol.documentid);
+		  const checkboxValue = this.defaultSelectedRoles.includes(i+1);
+		  this.roleForm.addControl(`checkbox_${i+1}`, new FormControl(checkboxValue));
 		});
 	  
 		console.log(this.rbacCheckboxArr);
@@ -89,13 +88,7 @@ export class EditRoleAccessComponent implements OnInit {
 			},
 			(error) => {
 				console.error('Error retrieving data:', error);
-				const message = 'Something went wrong.';
-				this.snackBar.openFromComponent(ToastComponent, {
-					data: { message },
-					duration: 2000, // Toast duration in milliseconds
-					horizontalPosition: 'end',
-					verticalPosition: 'top'
-				});
+				
 			}
 		);
 	}
@@ -144,38 +137,26 @@ export class EditRoleAccessComponent implements OnInit {
 	PostrbacData() {
 
 
-		const defaultSet = new Set(this.defaultSelectedRoles);
-		this.rbacCheckboxArr = Array.from(
-			new Set([
-				...this.rbacCheckboxArr.filter((id) => defaultSet.has(id)),
-				...defaultSet,
-			])
-		);
+		// const defaultSet = new Set(this.defaultSelectedRoles);
+		// this.rbacCheckboxArr = Array.from(
+		// 	new Set([
+		// 		...this.rbacCheckboxArr.filter((id) => defaultSet.has(id)),
+		// 		...defaultSet,
+		// 	])
+		// );
 
 		console.log("roleid", this.rbacCheckboxArr);
 		this.resto.PostRoleAccessData(this.id, this.rbacCheckboxArr).subscribe(
 			(res) => {
 				console.log(this.id, this.rbacCheckboxArr);
 				console.log(res);
-				const message = 'Data Posted Successfully';
-				this.snackBar.openFromComponent(ToastComponent, {
-					data: { message },
-					duration: 2000, // Toast duration in milliseconds
-					horizontalPosition: 'end',
-					verticalPosition: 'top'
-				});
+				
 				// this.toastService.recieve(this.edit_role_access_posted);
 				this.router.navigate(['/RoleAccessList'])
 			},
 			(err) => {
 				console.log(err);
-				const message = 'Something went wrong.';
-				this.snackBar.openFromComponent(ToastComponent, {
-					data: { message },
-					duration: 2000, // Toast duration in milliseconds
-					horizontalPosition: 'end',
-					verticalPosition: 'top'
-				});
+				
 			}
 		)
 	}

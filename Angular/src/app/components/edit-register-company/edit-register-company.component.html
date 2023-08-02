@@ -132,16 +132,27 @@
             <input type="email" class="form-control" id="email" formControlName="email" name="email" required />
           </div>
           <div class="form-group">
-            <label>Live Service Layer URL<span style="color: red;">*</span></label>
-            <input type="text" class="form-control" id="slUrl" formControlName="slUrl" name="slUrl" required />
+            <label>Live Service Layer URL:<span style="color: red;">*</span><br><span>Example url: https://Service Layer URL/b1s/v1</span></label>
+            <input type="text" class="form-control" id="SLUrl" formControlName="SLUrl" name="SLUrl" required />
           </div>
           <div class="form-group">
-            <label for="db_type">Database type<span style="color: red;">*</span></label>
-            <select class="form-control" id="databaseType" formControlName="databaseType" name="databaseType" required>
-              <option value="Default" selected>select</option>
-              <option value="HANA" selected>HANA</option>
-              <option value="SQL">SQL</option>
-            </select>
+            <label for="db_type">Database type:</label>
+            <span class="required-field">*</span>
+
+            <div class="custom-select-wrapper">
+              <select
+              class="form-select"
+                id="db_type"
+                formControlName="db_type"
+                name="db_type"
+                required
+              >
+                <option value="hana" selected>HANA</option>
+                <option value="sql">SQL</option>
+              </select>
+              
+
+            </div>
           </div>
           <div class="form-group">
             <label for="slusername">Company Registration No (User Name)<span style="color: red;">*</span></label>
@@ -153,8 +164,8 @@
             <input type="password" class="form-control" id="slPassword" formControlName="slPassword" name="slPassword"
               autocomplete="off" required />
           </div>
-          <button type="submit" class="btn btn-success mb-5" id="register">Register</button>
-          <button type="button" class="btn btn-danger mb-5 ml-3"  routerLink="/DisplayCompany">Cancel</button> 
+          <button type="submit" class="btn btn-primary" id="register">Register</button>
+          <button type="button" class="btn btn-danger  " routerLink="/DisplayCompany" > Cancel</button>
         </div>
 
         <div class="col">
@@ -198,5 +209,15 @@
     </div>
   </form>
 </div>
+
+<!-- 
+    [(ngModel)]="objectData.companyName"
+  [(ngModel)]="objectData.companyName"
+  [(ngModel)]="objectData.phone"
+  [(ngModel)]="objectData.SLPassword"
+  [(ngModel)]="objectData.slusername"
+  [(ngModel)]="objectData.db_type"
+  [(ngModel)]="objectData.slUrl" -->
+
 
 

@@ -1,6 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
+// import toastr from 'toastr';
+
 import {
   AbstractControl,
   FormBuilder,
@@ -10,8 +13,7 @@ import {
 } from '@angular/forms';
 import { environment } from 'src/environment';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { ToastService } from 'src/app/components/toast/toast.service';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
@@ -21,8 +23,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
   ngForm!: FormGroup;
+  showForgotPassword: boolean = false;
+  forgotUsername: string = '';
+  forgotEmail: string = '';
 
-  loginid:any;
+  loginid: any;
   OnInit(): void {
     this.ngForm = this.formbuilder.group({
       username: ['', Validators.required],
@@ -63,7 +68,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private toastService: ToastService,
     private formbuilder: FormBuilder,
     private snackBar: MatSnackBar
   ) {
@@ -91,6 +95,7 @@ export class LoginComponent implements OnInit {
 
     if (!username || !password) {
       alert('Please enter both username and password');
+      //console.log(username)
       return;
     }
     // console.log('ngForm.value', Form.value)
@@ -107,37 +112,52 @@ export class LoginComponent implements OnInit {
         if (res?.errorInfo?.code !== 0) {
           console.log('Errorx');
           alert('Username or Password is wrong');
-          const message = 'Username or Password is wrong';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-          });
         } else if (res?.errorInfo?.code == 0) {
           console.log('loggin in');
           console.log(res);
-          const message = 'Login Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 50000, // Toast duration in milliseconds
-            horizontalPosition: 'left',
-            verticalPosition: 'top',
-          });
+          // toastr.options = {
+          //   "closeButton": true,
+          //   "debug": false,
+          //   "newestOnTop": false,
+          //   "progressBar": false,
+          //   "positionClass": "toast-top-right",
+          //   "preventDuplicates": false,
+          //   "showDuration": 300,
+          //   "hideDuration": 1000,
+          //   "timeOut": 5000,
+          //   "extendedTimeOut": 1000,
+          //   "showEasing": "swing",
+          //   "hideEasing": "linear",
+          //   "showMethod": "fadeIn",
+          //   "hideMethod": "fadeOut"
+          // };
+
+          // toastr.error("Successfully login");
           sessionStorage.setItem('loggedInId', res.id);
           this.router.navigate(['/DispayRoleMaster']);
 
           // this.toastService.recieve(this.logged_in);
         } else {
-          const message = 'Something Went Wrong.';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
         }
       });
     // console.log("Authenticated, Now navigating to home page", this.router)
+  }
+
+  
+
+  // Function to toggle the display of the "Forgot Password" sectioc
+  showForgotPasswordForm() {
+    this.showForgotPassword = true;
+  }
+
+  backToLoginForm() {
+    this.showForgotPassword = false;
+  }
+
+  submitForgotPassword(form: any) {
+    // Handle forgot password form submission logic here
+    console.log('Forgot Password Form Data:', form.value);
+    this.forgotUsername = form.value.forgotUsername;
+    this.forgotEmail = form.value.forgotEmail;
   }
 }

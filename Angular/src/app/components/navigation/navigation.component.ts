@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ToastService } from 'src/app/components/toast/toast.service';
 import { CustomerService } from 'src/app/customer.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class NavigationComponent {
   loginText = JSON.parse(localStorage.getItem('error') || "{}")?.code === 0 ? true : false;
   loginStatus = localStorage.getItem('loginStatus') === 'true' ? true : false;
   
-  constructor(private router: Router,private toastService: ToastService) {
+  constructor(private router: Router) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
       console.log("Error", err);
@@ -37,12 +36,13 @@ export class NavigationComponent {
     
   }
   logout() {
-    if (window.confirm('Do you really want to Logout?')) {
-      localStorage.removeItem('error');
-      //this.toastService.recieve(this.logged_out);
-      this.loginText = false;
-      this.isLoggedIn = false;
-      this.router.navigate(['/login']);
+    if (window.confirm("Do you really want to Logout?")) {
+    localStorage.removeItem('error');
+    console.log("logging out");
+    //this.toastService.recieve(this.logged_out);
+    this.loginText = false;
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
     }
   }
   updateForm(){

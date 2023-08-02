@@ -55,7 +55,7 @@
           </div>
           <div class="form-group" style="width: 45%; margin-left: 10px;">
             <label for="ins_del_id">Select Role<span style="color: red;">*</span></label>
-            <select id="ins_del_id" formControlName="ins_del_id" class="form-select">
+            <select id="ins_del_id" formControlName="ins_del_id" class="form-control">
               <option value="Default">Select</option>
               <option *ngFor="let i of items" [value]="i.id">{{i.name}}</option>
             </select>

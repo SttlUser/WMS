@@ -4,13 +4,12 @@ import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { CustomerService } from '../../customer.service';
-import { ToastService } from '../toast/toast.service';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToastComponent } from '../toast/toast.component';
+
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
-
 @Component({
   selector: 'app-dispaly-data',
   templateUrl: './dispaly-data.component.html',
@@ -49,7 +48,7 @@ export class DispalyDataComponent {
     private router: Router,
     private resto: CustomerService,
     public http: HttpClient,
-    private toastService: ToastService,
+   
     private snackBar: MatSnackBar
   ) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
@@ -57,7 +56,6 @@ export class DispalyDataComponent {
       console.log('Error', err);
       this.router.navigate(['/login']);
     }
-
     //for navbar hiding
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
@@ -84,13 +82,7 @@ export class DispalyDataComponent {
       },
       (error) => {
         console.error('Error retrieving data:', error);
-        const message = 'oops! something went wrong.';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+       
       }
     );
   }
@@ -109,10 +101,12 @@ export class DispalyDataComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: true
+        paging: true,
+        order: [[ 2, "desc" ]]
       });
     });
   }
+  
 
   UpdateRole(RoleData: any) {
     this.RoledataUpdate.id = RoleData.id;
@@ -129,26 +123,14 @@ export class DispalyDataComponent {
         (res) => {
           console.log(res);
           this.GetRoleMasterData();
-          const message = 'Role Activated Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+        
           // this.toastService.recieve(this.activate);
           // this.toastService.showSuccessToast('API call was successful!');
         },
         (err) => {
           console.log(err);
           // this.toastService.showError('API call was unsuccessful!');
-          const message = 'Something went wrong.';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+        
         }
       );
     } else {
@@ -158,31 +140,18 @@ export class DispalyDataComponent {
 
   ActiveRole(rol: any) {
     if (window.confirm('Do you really want to Activate?')) {
-      console.log(rol.id,this.loggedInId,5);
+      console.log(rol);
       this.resto.DeleteRoleMasterData(rol.id, this.loggedInId, 5).subscribe(
         (res) => {
           console.log(res);
           this.GetRoleMasterData();
-          const message = 'Role Activated Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
           // this.toastService.recieve(this.activate);
           // this.toastService.showSuccessToast('API call was successful!');
         },
         (err) => {
           console.log(err);
           // this.toastService.showError('API call was unsuccessful!');
-          const message = 'Something went wrong.';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+         
         }
       );
     } else {
@@ -209,25 +178,13 @@ export class DispalyDataComponent {
         (res) => {
           alert('Role updated');
           // this.toastService.recieve(this.updade);
-          const message = 'Role Updated Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
+         
           console.log(res, 'Role Updated Successfully');
           this.GetRoleMasterData();
         },
         (err) => {
           console.log(err);
-          const message = 'Something Went wrong.';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+         
         }
       );
     }

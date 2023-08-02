@@ -8,6 +8,8 @@ import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-usermaster',
   templateUrl: './usermaster.component.html',
@@ -50,7 +52,8 @@ export class UsermasterComponent {
   constructor(
     private router: Router,
     private resto: CustomerService,
-    public http: HttpClient
+    public http: HttpClient,
+    private snackBar: MatSnackBar
   ) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -96,7 +99,7 @@ export class UsermasterComponent {
     this.UserdataUpdate.ins_del_id = row.roleId;
     this.UserdataUpdate.Password = row.password;
     this.UserdataUpdate.roleName = row.roleName;
-   // console.log(this.UserdataUpdate)
+   console.log(this.UserdataUpdate)
   }
   initializeDataTable() {
     $(document).ready(() => {
@@ -104,8 +107,8 @@ export class UsermasterComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false,
-        
+        paging: true,
+        order: [[ 5, "desc" ]]
       });
      
     });
@@ -147,8 +150,10 @@ export class UsermasterComponent {
           this.resto.UpdateUserData(data).subscribe(
         (res) => {
           //console.log(res);
-          alert('Data updated successfully');
+
+          // alert('Data updated successfully');
           this.GetUserDetail()
+        
         },
         (err) => {
           console.log(err);
@@ -190,7 +195,7 @@ export class UsermasterComponent {
   }
 
   Getdata(http: HttpClient) {
-    http.get(this.url).subscribe((res: any) => {
+    this.resto.getRoleMaster(6).subscribe((res: any) => {
       console.log(res)
       this.items = res;
       return this.items;

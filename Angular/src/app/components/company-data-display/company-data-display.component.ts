@@ -5,7 +5,7 @@ import { CustomerService } from 'src/app/customer.service';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { environment } from 'src/environment';
 import { Injectable } from '@angular/core';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as $ from 'jquery';
 import 'datatables.net';
@@ -84,13 +84,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         },
         (err) => {
           console.log(err);
-          const message = 'Something went wrong.';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+         
         }
       );
   }
@@ -101,7 +95,8 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false
+        paging: true,
+        order: [[ 4, "desc" ]]
       });
     });
   }
@@ -130,24 +125,12 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         .DeleteCompanyData(4, loggedInId, row.companyID).subscribe(
           (res) => {
             this.GetComapnyMasterData(this.http);
-            const message = 'Company De-activated Successfully';
             alert("Company De-activated Successfully")
-            this.snackBar.openFromComponent(ToastComponent, {
-              data: { message },
-              duration: 2000, // Toast duration in milliseconds
-              horizontalPosition: 'end',
-              verticalPosition: 'top'
-            });
+           
           },
           (err) => {
             console.log(err);
-            const message = 'Something went wrong.';
-            this.snackBar.openFromComponent(ToastComponent, {
-              data: { message },
-              duration: 2000, // Toast duration in milliseconds
-              horizontalPosition: 'end',
-              verticalPosition: 'top'
-            });
+            
           }
         );
     }
@@ -161,22 +144,10 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         .ActivateCompanyData(5, loggedInId, row.companyID).subscribe(
           (res) => {
             this.GetComapnyMasterData(this.http);
-            const message = 'Company Activated Successfully';
-            this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+           
           },
           (err) => {
-            const message = 'Something wnent wrong.';
-              this.snackBar.openFromComponent(ToastComponent, {
-              data: { message },
-              duration: 2000, // Toast duration in milliseconds
-              horizontalPosition: 'end',
-              verticalPosition: 'top'
-            });
+           
           }
         );
 		

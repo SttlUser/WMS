@@ -4,11 +4,11 @@
       <br>
       <div class="row">
         <div class="col-sm-8">
-          <h4>Comapany Master Data</h4>
+          <h4>Comapany  Listing</h4>
         </div>
       </div>
     </div>
-    <div class="btn-outline-secondary me-3 p-2" style="float: right">
+    <div class="mb-3" style="float: right">
       <button type="button" id="add" class="btn btn-primary" (click)="GotoCompanypage()">Add New Company</button>
     </div>
     <table class="table table-bordered" id="mytable">
@@ -30,13 +30,18 @@
             <td>{{ i?.email }}</td>
             <td>{{ i?.slUrl }}</td>
             <td>{{ i?.databaseType }}</td>
-            <td>{{ i?.slUsername }}</td>
-            <td>{{ i?.isDelete ? "Inactive" : "Active" }}</td>
+            <td>{{ i?.slusername }}</td>
+            <td>
+              <i *ngIf="i.isActive else activeicon"  class="flaticon2-check-mark text-success" ></i> 
+                             <ng-template #activeicon>
+                                <i  class="flaticon2-cancel-music text-danger" ></i> 
+                             </ng-template>            
+            </td>
             <td>
               <!-- <button
                 type="button"class="btn btn-outline-primary"data-bs-toggle="modal"data-bs-target="#exampleModal"(click)="UpdateCompany()">Edit</button> -->
 
-              <a type="button" (click)="UpdateCompany(i)">
+              <a *ngIf="i.isActive;" type="button" (click)="UpdateCompany(i)">
                 <i class="far fa-edit text-primary mr-5"></i>
               </a>
 
