@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Options;
 using Models;
 using Repositories;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json.Nodes;
 
 namespace WebApplication2.Controllers
@@ -72,7 +74,7 @@ namespace WebApplication2.Controllers
             UserMaster userMaster = new UserMaster();
             try
             {
-                 int userid = Convert.ToInt32(role["cb_pk_id"].ToString()); // (int)role["roleid"];
+                int userid = Convert.ToInt32(role["cb_pk_id"].ToString()); // (int)role["roleid"];
                 string firstname = (string)role["firstname"];
 
                 string lastname = (string)role["lastname"];
@@ -80,12 +82,17 @@ namespace WebApplication2.Controllers
 
                 string password = (string)role["password"];
 
+
                 string email = (string)role["email"];
 
                 string phone = (string)role["phone"];
 
                 int ins_del_id = Convert.ToInt32(role["ins_del_id"].ToString());
                 //int createdBy = Convert.ToInt32(role["createdBy"].ToString());
+
+                password = EncryptMethod.encrypt(password);
+                Console.WriteLine(password);
+
 
                 userMaster = await _dBHelperRepo.CreateUser(2, firstname, lastname, username, password, email, phone, userid, ins_del_id);
 
@@ -108,6 +115,7 @@ namespace WebApplication2.Controllers
                 string Firstname = (string)user["Firstname"];
                 string Lastname = (string)user["Lastname"];
                 string Password = (string)user["Password"];
+                Password = EncryptMethod.encrypt(Password);
                 string Email = (string)user["Email"];
                 string Phone = (string)user["Phone"];
                 int ins_del_id = Convert.ToInt32(user["ins_del_id"].ToString());
@@ -123,6 +131,8 @@ namespace WebApplication2.Controllers
             return userMaster;
         }
 
+
+
         [HttpGet("GetUserById/{id}")]
         public async Task<UserMaster> Get(int id)
         {
@@ -131,6 +141,7 @@ namespace WebApplication2.Controllers
             try
             {
                 userMaster = await _dBHelperRepo.GetUserById(id);
+                //userMaster.Password = EncryptMethod.Decrypt(userMaster.Password);
                 
             }
             catch (Exception ex)

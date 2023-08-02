@@ -90,8 +90,8 @@ namespace WebApplication2.Controllers
                 }
                 if (count == 0)
                 {
-                    companyMasters = await _dBHelperRepo.RegisterCompany(2, user.Name, user.SLUrl, user.slusername, user.SLPassword, user.Lastmodifiedby, user.phone, user.email, user.DatabaseType, new List<string>(),
-                   new List<string>(), user.comp_id, user.hasPutAwayProc, user.hasSsccNoManagement, user.hasCartonNoManagement, user.hasAutoBatchConfigurator, user.defaultWarehouseCode);
+                    companyMasters = await _dBHelperRepo.RegisterCompany(2, user.Name, user.SLUrl, user.slusername, user.SLPassword, user.Lastmodifiedby, user.phone, user.email, user.DatabaseType, sapcompanyname,
+                   DbName, user.comp_id, user.hasPutAwayProc, user.hasSsccNoManagement, user.hasCartonNoManagement, user.hasAutoBatchConfigurator, user.defaultWarehouseCode);
                 }
 
                
@@ -209,8 +209,8 @@ namespace WebApplication2.Controllers
                 }
                 if (count == 0)
                 {
-                    companyMasters = await _dBHelperRepo.RegisterCompany(3, user.Name, user.SLUrl, user.slusername, user.SLPassword, user.Lastmodifiedby, user.phone, user.email, user.DatabaseType, new List<string>(),
-                   new List<string>(), user.comp_id, user.hasPutAwayProc, user.hasSsccNoManagement, user.hasCartonNoManagement, user.hasAutoBatchConfigurator, user.defaultWarehouseCode);
+                    companyMasters = await _dBHelperRepo.RegisterCompany(3, user.Name, user.SLUrl, user.slusername, user.SLPassword, user.Lastmodifiedby, user.phone, user.email, user.DatabaseType, sapcompanyname,
+                  DbName, user.comp_id, user.hasPutAwayProc, user.hasSsccNoManagement, user.hasCartonNoManagement, user.hasAutoBatchConfigurator, user.defaultWarehouseCode);
                 }
 
                     

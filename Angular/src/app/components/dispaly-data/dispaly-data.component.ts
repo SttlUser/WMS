@@ -109,7 +109,7 @@ export class DispalyDataComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false
+        paging: true
       });
     });
   }
@@ -158,7 +158,7 @@ export class DispalyDataComponent {
 
   ActiveRole(rol: any) {
     if (window.confirm('Do you really want to Activate?')) {
-      console.log(rol);
+      console.log(rol.id,this.loggedInId,5);
       this.resto.DeleteRoleMasterData(rol.id, this.loggedInId, 5).subscribe(
         (res) => {
           console.log(res);

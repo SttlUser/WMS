@@ -26,10 +26,14 @@ namespace PostgresDBHelper
 
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserDetails\"(@username,@password)", new { username, password });
         }
-        public async Task<UserMaster> UpdatePassword(string oldpass, string NPassword, string cpassword)
+        public async Task<ChangePassword> UpdatePassword(int flag,int id ,int GC, string oldpass, string NPassword)
         {
 
-            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserDetails\"(@oldpass,@NPassword,@cpassword)", new { oldpass, NPassword, cpassword });
+            return await _pgDbDapperHelperRepo.GetAsync<ChangePassword>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@id,@GC,@oldpass,@NPassword)", new {flag,id ,GC,oldpass, NPassword });
+        }
+        public async Task<UserMaster> Forgotpasss(int flag,int id ,string username,string password)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@id,@username,@password)", new { flag, id, username,password });
         }
         #endregion
 
@@ -87,7 +91,7 @@ namespace PostgresDBHelper
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetUserMasterDetails\" ( @flag,@ins_del_id,@cb_pk_id)", new { flag, ins_del_id, cb_pk_id });
 
         }
-        public async Task<UserMaster> CreateUser(int flag, string firstname, string lastname, string username, string email, string password, string phone, int cb_pk_id, int ins_del_id)
+        public async Task<UserMaster> CreateUser(int flag, string firstname, string lastname, string username, string password, string email, string phone, int cb_pk_id, int ins_del_id)
         {
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@ins_del_id,@cb_pk_id,@firstname,@lastname,@password,@email,@phone,@username) ", new {
                 flag,

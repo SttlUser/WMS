@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.VisualBasic;
 //using Microsoft.IdentityModel.Tokens;
 using Models;
 //using Models.Request;
@@ -10,6 +11,7 @@ using Repositories;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Nodes;
 
 namespace WebApplication2.Controllers
 {
@@ -31,6 +33,9 @@ namespace WebApplication2.Controllers
             LoginResponse loginResponse = new LoginResponse();
             try
             {
+                //Commented below code to remove the error while testing
+                loginRequest.password = EncryptMethod.encrypt(loginRequest.password);
+                
                 UserMaster userMaster = await _dBHelperRepo.GetUser(loginRequest.username, loginRequest.password);
                 if (userMaster == null)
                 {
@@ -50,31 +55,65 @@ namespace WebApplication2.Controllers
             
             return loginResponse;
         }
-
-        public async Task<ChangePassword> UserPassword([FromBody] ChangePassword ChanegPass)
+        [HttpPost("ChangePassword")]
+        public async Task<ChangePassword> UserPassword([FromBody] JsonObject role)
         {
-            ChangePassword loginpassreq = new ChangePassword();
+            ChangePassword changerespo = new ChangePassword();
+            UserMaster usermaster = new UserMaster();
+            try
+            { 
+                int id = Convert.ToInt32(role["loggedInId"].ToString());
+                int flag = Convert.ToInt32(role["flag"].ToString());
+                string oldPassword = (string)role["oldPassword"];
+                string newPassword = (string)role["newPassword"];
+
+                //ChanegPass.OldPassword=EncryptMethod.encrypt(ChanegPass.OldPassword);
+                //ChanegPass.NewPassword=EncryptMethod.encrypt(ChanegPass.NewPassword);
+                changerespo = await _dBHelperRepo.UpdatePassword(flag,id,0, oldPassword, newPassword);
+
+            }
+            catch
+            {
+                // changerespo.ErrorInfo = ReturnError(1001, ex.ToString());
+                changerespo.ErrorInfo = ReturnError(400, "Not able to change Password"); 
+            }
+
+            return changerespo;
+        }
+
+        [HttpPost("Forgot/Password")]
+        public async Task<ChangePassRes> ForgotPass([FromBody] JsonObject role)
+        {
+            ChangePassRes changerespo = new ChangePassRes();
+
             try
             {
-                UserMaster userMaster = await _dBHelperRepo.UpdatePassword(ChanegPass.OldPassword, ChanegPass.NewPassword, ChanegPass.ConPassword);
+                int id = Convert.ToInt32(role["id"].ToString());
+                string username= (string)role["username"];  
+                string password= (string)role["password"];
+
+                //ChanegPass.OldPassword=EncryptMethod.encrypt(ChanegPass.OldPassword);
+                //ChanegPass.NewPassword=EncryptMethod.encrypt(ChanegPass.NewPassword);
+                UserMaster userMaster = await _dBHelperRepo.Forgotpasss(3,id,username,password);
+
                 if (userMaster == null)
                 {
-                    loginpassreq.ErrorInfo = ReturnError(1000, "User Invalid");
-               }
-               else
+                    changerespo.ErrorInfo = ReturnError(1002, "User not found or password update failed.");
+                }
+                else
                 {
-                    loginpassreq.NewPassword = userMaster.UserName;
+                    
+                    changerespo.Message = "Password Successfully Updated";
                 }
             }
             catch (Exception ex)
             {
-                loginpassreq.ErrorInfo = ReturnError(1001, ex.ToString());
+                changerespo.ErrorInfo = ReturnError(1001, ex.ToString());
             }
 
-            return loginpassreq;
-
+            return changerespo;
         }
-            private Error ReturnError(int code, string strError)
+        private Error ReturnError(int code, string strError)
         {
             return new Error()
             {

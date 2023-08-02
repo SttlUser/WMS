@@ -26,9 +26,14 @@ namespace Models
     }
     public class ChangePassword
     {
-        public string OldPassword { get; set; }
-        public string NewPassword { get; set; }
-        public string ConPassword { get; set; }
+        //public int id { get; set; }
+        //public string OldPassword { get; set; }
+        //public string NewPassword { get; set; }
+        public Error ErrorInfo { get; set; }
+    }
+    public class ChangePassRes
+    {
+        public string Message { get; set; }
         public Error ErrorInfo { get; set; }
     }
 }
