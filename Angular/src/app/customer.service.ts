@@ -111,7 +111,15 @@ export class CustomerService {
     return this.http.post(this.Dispaly_url+'RoleBasedAccess/UpdateRoleAccessData',requestBody);
   }
 
-
+  public changePassword(loggedInId:any,oldPassword:any,newPassword:any):Observable<any> {
+    const requestBody = {
+      flag:6,
+      loggedInId: loggedInId,
+      oldPassword: oldPassword,
+      newPassword:newPassword
+    };
+    return this.http.post(this.Dispaly_url+'Login/ChangePassword',requestBody);
+  }
 }
 
 

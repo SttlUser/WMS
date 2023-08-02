@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -13,6 +14,11 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
+=======
+using Microsoft.Extensions.Options;
+using Models;
+using Repositories;
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
 
 namespace WebApplication2.Controllers
 {
@@ -29,6 +35,7 @@ namespace WebApplication2.Controllers
             _appSettings = appSettings.Value;
         }
         [HttpGet("GetRoleBasedAccessData")]
+<<<<<<< HEAD
         public async Task<List<RoleAccess>> Get(int flag,int roleid)
         {
             List<RoleAccess> roleAccess = new List<RoleAccess>();
@@ -73,6 +80,22 @@ namespace WebApplication2.Controllers
         }
 
 
+=======
+        public async Task<List<RoleMasterData>> Get()
+        {
+            try
+            {
+                List<RoleMasterData> roleBsed = await _dBHelperRepo.GetRoleBasedAccess(1);
+                return roleBsed;
+            }
+            catch (Exception)
+            {
+                return new List<RoleMasterData>();
+            }
+        }
+
+        
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
 
     }
 }

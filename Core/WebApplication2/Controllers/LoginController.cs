@@ -37,7 +37,6 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
-
                     loginResponse.ErrorInfo = ReturnError(0, string.Empty);
                 }
             }

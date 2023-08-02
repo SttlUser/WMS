@@ -7,7 +7,7 @@ import { CustomerService } from '../../customer.service';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -153,13 +153,7 @@ export class UsermasterComponent {
 
           // alert('Data updated successfully');
           this.GetUserDetail()
-          const message = 'Data updated successfully.';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+        
         },
         (err) => {
           console.log(err);

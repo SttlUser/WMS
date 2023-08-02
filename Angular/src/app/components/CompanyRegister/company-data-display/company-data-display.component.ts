@@ -5,7 +5,7 @@ import { CustomerService } from 'src/app/customer.service';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
-import { ToastComponent } from '../../toast/toast.component';
+
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 @Component({
@@ -47,13 +47,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
       },
       (err)=>{
         console.log(err);
-        const message = 'Something went wrong.';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+       
       }
     )
   }

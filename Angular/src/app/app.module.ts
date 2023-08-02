@@ -20,12 +20,12 @@ import { CompanyDataDisplayComponent } from './components/company-data-display/c
 import { EditRegisterCompanyComponent } from './components/edit-register-company/edit-register-company.component';
 import { RoleAcessListComponent } from './components/RoleAccess/ListingOfData/role-acess-list/role-acess-list.component';
 import { EditRoleAccessComponent } from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component';
-import { ToastComponent } from './components/toast/toast.component';
-import { ToastService } from './components/toast/toast.service';
+
 import { CapitalizePipe } from './capitalize.pipe';
 import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutComponent } from './layout/layout.component';
 import { DataService } from './data.service';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 
@@ -47,9 +47,9 @@ import { DataService } from './data.service';
     EditRegisterCompanyComponent,
     RoleAcessListComponent,
     EditRoleAccessComponent,
-    ToastComponent,
     CapitalizePipe,
-    LayoutComponent
+    LayoutComponent,
+    ChangePasswordComponent
       
     
   ],
@@ -65,7 +65,7 @@ import { DataService } from './data.service';
     BrowserAnimationsModule,
     MatSnackBarModule
   ],
-  providers: [CustomerService, ToastService, { provide: MAT_SNACK_BAR_DATA, useValue: {} },DataService ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { 

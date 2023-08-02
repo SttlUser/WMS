@@ -1,6 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ToastService } from './components/toast/toast.service';
-import { Toast } from './components/toast/toast.model';
 import { NavigationEnd, Router ,ActivatedRoute} from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { DataService } from './data.service';
@@ -20,12 +18,11 @@ export class AppComponent implements OnInit {
 
   title = 'WMS';
   showNavbar = true;
-  toasts: Toast[] = [];
    HeaderName: string = 'Header';
   SubHeaderName:string='Sub Header'
    
 
-  constructor(private toastService: ToastService,private router:Router, private activatedRoute: ActivatedRoute,private dataService: DataService) { 
+  constructor(private router:Router, private activatedRoute: ActivatedRoute,private dataService: DataService) { 
    
     router.events.subscribe(
       (val)=>{

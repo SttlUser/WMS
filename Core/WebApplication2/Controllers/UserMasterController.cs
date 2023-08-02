@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Models;
 using Repositories;
+using System.Text.Json.Nodes;
 
 namespace WebApplication2.Controllers
 {
@@ -39,15 +40,22 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("DeleteUserMaster")]
-        public async Task<UserMaster> DeleteUser(int ins_del_id,int cb_pk_id)
+        //public async Task<UserMaster> DeleteUser(int ins_del_id,int cb_pk_id)
+        public async Task<UserMaster> DeleteUser([FromBody] JsonArray usr)
+
+
         {
+<<<<<<< HEAD
             int ins_del_id = Convert.ToInt32(usr[0].ToString());
+=======
+            int ins_del_id = (int)usr[0];
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
             int cb_pk_id = (int)usr[1];
             int flag = (int)usr[2];
             UserMaster userMaster = new UserMaster();
             try
             {
-                 userMaster = await _dBHelperRepo.DeleteUser(4, ins_del_id, cb_pk_id);   //1 is the dummy data for lastModified field                
+                 userMaster = await _dBHelperRepo.DeleteUser(flag, ins_del_id, cb_pk_id);   //1 is the dummy data for lastModified field                
             }
             catch (Exception ex)
             {
@@ -71,6 +79,10 @@ namespace WebApplication2.Controllers
             UserMaster userMaster = new UserMaster();
             try
             {
+<<<<<<< HEAD
+=======
+                //JsonObject obj = JsonNode.Parse(role).AsObject();
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
                  int userid = Convert.ToInt32(role["cb_pk_id"].ToString()); // (int)role["roleid"];
                 string firstname = (string)role["firstname"];
 
@@ -84,8 +96,13 @@ namespace WebApplication2.Controllers
                 string phone = (string)role["phone"];
 
                 int ins_del_id = Convert.ToInt32(role["ins_del_id"].ToString());
+<<<<<<< HEAD
                 //int createdBy = Convert.ToInt32(role["createdBy"].ToString());
 
+=======
+
+                //roleMaster = await _dBHelperRepo.CreateRole(2,roleName,roletype);
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
                 userMaster = await _dBHelperRepo.CreateUser(2, firstname, lastname, username, password, email, phone, userid, ins_del_id);
 
                 userMaster.Error = ReturnError(0, string.Empty);
@@ -103,6 +120,10 @@ namespace WebApplication2.Controllers
             UserMaster userMaster = new UserMaster();
             try
             {
+<<<<<<< HEAD
+=======
+                //JsonObject obj = JsonNode.Parse(role).AsObject();
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
                 int cb_pk_id = Convert.ToInt32(user["cb_pk_id"].ToString());
                 string Firstname = (string)user["Firstname"];
                 string Lastname = (string)user["Lastname"];
@@ -110,9 +131,14 @@ namespace WebApplication2.Controllers
                 string Email = (string)user["Email"];
                 string Phone = (string)user["Phone"];
                 int ins_del_id = Convert.ToInt32(user["ins_del_id"].ToString());
+<<<<<<< HEAD
                 int lastModifier = Convert.ToInt32(user["lastModifier"].ToString());
 
                 userMaster = await _dBHelperRepo.UpdateUser(3, cb_pk_id, Firstname, Lastname, Password, Email, Phone, ins_del_id, null,lastModifier);
+=======
+                //int ins_del_id = string.IsNullOrEmpty(user["ins_del_id"].ToString()) ? 0 : (int)user["ins_del_id"];
+                userMaster = await _dBHelperRepo.UpdateUser(3, cb_pk_id, Firstname, Lastname, Password, Email, Phone, ins_del_id);
+>>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
                 userMaster.Error = ReturnError(0, string.Empty);
             }
             catch (Exception ex)

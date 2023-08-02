@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from 'src/app/customer.service';
 import { environment } from 'src/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ConstantPool } from '@angular/compiler';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+//import { MatDialog } from '@angular/material/dialog';
+//import { MessageBoxComponent } from './components/message-box.component'; 
 
 @Component({
   selector: 'app-register-company',
@@ -27,7 +29,8 @@ export class RegisterCompanyComponent implements OnInit {
     private resto: CustomerService,
     public http: HttpClient,
     private router: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+   
   ) {
     this.applyForm = this.formBuilder.group({
       tableData: this.formBuilder.array([]),
@@ -41,12 +44,12 @@ export class RegisterCompanyComponent implements OnInit {
   ngOnInit() {
     this.applyForm = this.formBuilder.group({
       companyName: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d+$/), Validators.pattern(/^\d{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
       SLUrl: ['', Validators.required],
       db_type: ['Default', Validators.required],
       slusername: ['', Validators.required],
-      SLPassword: ['', Validators.required],
+      SLPassword: ['', [Validators.required]],
       tableData: this.formBuilder.array([this.createTableRow()]),
       putCheckbox: [true],
       ssccCheckbox: [true],
@@ -58,14 +61,108 @@ export class RegisterCompanyComponent implements OnInit {
   //innerClass: CompanyData | undefined;
   companyDataObj: CompanyData = new CompanyData();
   Sldbnamelistobj: Sldbname = new Sldbname();
+ 
+  clearForm1() {
+    this.applyForm.reset();
+    this.clearFormArray(this.applyForm.get('tableData') as FormArray); // Reset the formArray
+    this.applyForm.patchValue({ // Reset the checkboxes
+      putCheckbox: true,
+      ssccCheckbox: true,
+      cartonCheckbox: true,
+      autoCheckbox: true,
+    });
+  }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0);
+    }
+  }
+  
+  createTableRowForTableData(): FormGroup {
+    return this.formBuilder.group({
+      // Define the fields for each table row if applicable
+    });
+  } 
+    
+  
 
   onSubmit() {
+    
+
+    const companyNameControl = this.applyForm.get('companyName');
+    if (companyNameControl && companyNameControl.invalid /*&& companyNameControl.touched*/) {
+    if (companyNameControl.errors?.['required']) {
+      alert('Company Name is required.');
+    }
+    return;
+  }
+    const phoneControl = this.applyForm.get('phone');
+    if (phoneControl && phoneControl.invalid) {
+      if (phoneControl.errors?.['required']) {
+        alert('Please provide a phone number.');
+      } else if (phoneControl.errors?.['pattern']) {
+        const phoneNumber = phoneControl.value;
+        if (phoneNumber.length !== 10) {
+          alert('Please provide a phone number with exactly 10 digits.');
+        } else {
+          alert('Please provide a valid phone number.\n\nPhone number must contain only numeric digits.');
+        }
+      }
+      return;
+    }
+    const emailControl = this.applyForm.get('email');
+    if (emailControl && emailControl.invalid) {
+      
+      alert('Please provide a valid email address.');
+    
+      
+      return;
+    }
+   const SLUrlNameControl = this.applyForm.get('SLUrl');
+    if (SLUrlNameControl && SLUrlNameControl.invalid /*&& SLUrlNameControl.touched*/) {
+    if (SLUrlNameControl.errors?.['required']) {
+      alert('Url is required.');
+    }
+    return;
+  }
+   const UsernameNameControl = this.applyForm.get('slusername');
+    if (UsernameNameControl && UsernameNameControl.invalid /*&& UsernameNameControl.touched*/) {
+    if (UsernameNameControl.errors?.['required']) {
+      alert('Username is required.');
+    }
+    return;
+  }
+  const passwordNameControl = this.applyForm.get('SLPassword');
+    if (passwordNameControl && passwordNameControl.invalid /*&& passwordNameControl.touched*/) {
+    if (passwordNameControl.errors?.['required']) {
+      alert('Password is required.');
+    }
+    return;
+  }
+  const DBControl = this.applyForm.get('dbName');
+    if (DBControl && DBControl.invalid /*&& passwordNameControl.touched*/) {
+    alert("db name askjdkas")
+    return;
+  }
+  if (this.isFormFieldsEmpty(this.applyForm)) {
+
+    alert('Please fill in all the required fields.');
+    return;
+  }
+  
+  
+  
+    
+    
+    
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
     );
     this.sapcompanyname = this.tableData.controls.map(
       (control) => (control as FormGroup).get('sapCompanyName')?.value || ''
     );
+
     for (let i = 0; i < this.SLDbName.length; i++) {
       const sldbname: Sldbname = new Sldbname();
       sldbname.DbName = this.SLDbName[i];
@@ -101,9 +198,12 @@ export class RegisterCompanyComponent implements OnInit {
 
     const serializedData: string = JSON.stringify(this.companyDataObj);
     const headers = {
-      'Content-Type': 'application/json', // Set the Content-Type header to application/json
+      'Content-Type': 'application/json', 
     };
+
     console.log(serializedData);
+
+
     this.resto.postRegisterCompany(serializedData, headers).subscribe(
       (response: any) => {
 
@@ -132,16 +232,54 @@ export class RegisterCompanyComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
-        const message = 'Something went wrong.';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+       
       }
     );
   }
+
+  ClearForm() {
+    this.applyForm.reset(); // Reset the form to its initial state
+  }
+
+  isFormFieldsEmpty(control: AbstractControl): boolean {
+    if (control instanceof FormGroup) {
+      for (const key in control.controls) {
+        if (control.controls.hasOwnProperty(key)) {
+          if (this.isFormFieldsEmpty(control.controls[key])) {
+            return true; 
+          }
+        }
+      }
+    } else if (control instanceof FormArray) {
+      for (const formControl of control.controls) {
+        if (this.isFormFieldsEmpty(formControl)) {
+          return true;
+        }
+      }
+    } else {
+      if (control.invalid || control.value === null || control.value === '') {
+        return true;
+      }
+    }
+
+    return false; 
+  }
+  // validateEmail(email: string): boolean {
+    
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return emailRegex.test(email);
+  // }
+
+  // validatePassword(password: string): boolean {
+
+  //   return password.length >= 8; 
+  // }
+  // validatePhone(phone: string): boolean {
+
+  //   const phoneRegex = /^\d{10}$/;
+  //   return phoneRegex.test(phone);
+  // }
+
 
   get tableData() {
     return this.applyForm.get('tableData') as FormArray;
@@ -149,15 +287,61 @@ export class RegisterCompanyComponent implements OnInit {
 
   createTableRow(): FormGroup {
     return this.formBuilder.group({
-      dbName: ['', Validators.required],
-      sapCompanyName: ['', Validators.required],
+      dbName: ['', Validators.required, Validators.minLength(1)],
+      sapCompanyName: ['', Validators.required, Validators.minLength(1)],
       status: [false],
     });
   }
 
-  addRow() {
-    this.tableData.push(this.createTableRow());
+  addRow(row: any) {
+    this.SLDbName = this.tableData.controls.map(
+      (control) => (control as FormGroup).get('dbName')?.value || ''
+    );
+    this.sapcompanyname = this.tableData.controls.map(
+      (control) => (control as FormGroup).get('sapCompanyName')?.value || ''
+    );
+
+    for (let i = 0; i < this.SLDbName.length; i++) {
+      const sldbname: Sldbname = new Sldbname();
+      sldbname.DbName = this.SLDbName[i];
+      sldbname.sapCompanyName = this.sapcompanyname[i];
+      this.NewList.push(sldbname);
+    }
+
+    if (this.NewList.length === 0) {
+      window.alert("Please enter at least one valid record.");
+      console.log("here");
+      this.NewList = [];
+    } else {
+      let hasEmptyFields = false;
+      for (const sldbname of this.NewList) {
+        if (sldbname.DbName === '' || sldbname.sapCompanyName === '') {
+          hasEmptyFields = true;
+          break;
+        }
+      }
+      if (hasEmptyFields) {
+        window.alert("Please enter both record.");
+        this.NewList = [];
+      } else {
+        const newRow = this.createTableRow();
+        const dbNameControl = this.applyForm.value;
+        console.log(dbNameControl);
+        this.tableData.push(newRow);
+      }
+    }
+
+
   }
+
+
+
+
+
+
+
+
+
 
   deleteRow(index: number) {
     if (index != 0) {
@@ -173,7 +357,7 @@ export class RegisterCompanyComponent implements OnInit {
 
 export class CompanyData {
   [x: string]: any;
-  constructor() {}
+  constructor() { }
   //   sldbnameList: Sldbname[] = [];
 
   id!: number;

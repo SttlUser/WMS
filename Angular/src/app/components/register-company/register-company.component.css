@@ -1,0 +1,52 @@
+.btn-extra-spacing {
+    margin-left: 2 px; 
+  }
+
+  
+  button {
+    margin-bottom: 16px;
+    margin-left: 2 px; 
+  }
+ 
+.btn-primary {
+  margin-right: 5px; 
+}
+
+.btn-danger {
+  margin-left: 5px; 
+}
+
+
+
+  
+  
+ 
+  
+    
+ 
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  padding-right: 30px;
+  
+}
+
+.required-field {
+  color: red; 
+  margin-left: 5px; 
+  font-size: 1.2em;
+}
+
+.add-button {
+  margin-right: 5px; 
+}
+
+.delete-button {
+  margin-left: 5px; 
+}
+
+
+
+

@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../customer.service';
-import { ToastService } from '../toast/toast.service';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
@@ -34,7 +33,7 @@ export class RoleMasterComponent {
     private router: Router,
     http: HttpClient,
     private resto: CustomerService,
-    private toastService: ToastService,
+   
     private snackBar: MatSnackBar
   ) {
 
@@ -56,6 +55,8 @@ export class RoleMasterComponent {
       return this.items;
     });
   }
+
+
 
   PostDataForm() {
     const formData = { ...this.ngForm.value , createdBy: this.loggedInId};
@@ -85,18 +86,9 @@ export class RoleMasterComponent {
       this.resto.postdata(formData).subscribe((data) => {
         alert('data saved');
         console.log('get data', data);
-        const message = 'Role Created Successfully';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+        
         this.router.navigate(['/DispayRoleMaster']);
-      });
+      }); 
     }
   }
-}
-function GetRolesDetail() {
-  throw new Error('Function not implemented.');
 }

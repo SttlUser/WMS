@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastService } from '../components/toast/toast.service';
-import { Toast } from '../components/toast/toast.model';
+
 import { AppComponent } from '../app.component';
 import { DataService } from '../data.service';
 
@@ -23,7 +22,7 @@ export class LayoutComponent  implements OnInit {
   showNavbar = true;
   header!: string;
   subheader!:string;
-  constructor(private toastService: ToastService,private router:Router, private activatedRoute: ActivatedRoute,private appComponent: AppComponent,private dataService: DataService) { }
+  constructor(private router:Router, private activatedRoute: ActivatedRoute,private appComponent: AppComponent,private dataService: DataService) { }
   ngOnInit() {
     // Subscribe to the headerData$ observable to receive the data
     this.dataService.headerData$.subscribe(data => {

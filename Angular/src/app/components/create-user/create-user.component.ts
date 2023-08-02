@@ -4,8 +4,7 @@ import { CustomerService } from '../../customer.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
-import { ToastService } from '../toast/toast.service';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 @Component({
@@ -25,7 +24,7 @@ export class CreateUserComponent {
     private resto: CustomerService,
     private router: Router,
     public http: HttpClient,
-    private toastService: ToastService,
+    
     @Inject(MAT_SNACK_BAR_DATA) public data: any
   ) {
     this.Getdata(http);
@@ -53,13 +52,7 @@ export class CreateUserComponent {
       },
       (error) => {
         console.error('Error retrieving data:', error);
-        const message = 'oops! something went wrong.';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+       
       }
     );
 }
@@ -145,18 +138,12 @@ export class CreateUserComponent {
     this.resto.PostUserData(formData).subscribe(
       (res) => {
         console.log(res);
-        this.toastService.recieve(this.message);
+      
         this.router.navigate(['/UserMaster']);
       },
       (err) => {
         console.log(err);
-        const message = 'Something went wrong.';
-        this.snackBar.openFromComponent(ToastComponent, {
-          data: { message },
-          duration: 2000, // Toast duration in milliseconds
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
+        
       }
     );
   }

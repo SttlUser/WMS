@@ -15,7 +15,9 @@ import { RoleAcessListComponent } from './components/RoleAccess/ListingOfData/ro
 import { EditRoleAccessComponent } from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component'
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutComponent } from './layout/layout.component';
-import { ToastComponent } from './components/toast/toast.component';
+// import { ToastComponent } from './components/toast/toast.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,6 +36,7 @@ const routes: Routes = [
       { path: 'RoleAccessList', component: RoleAcessListComponent ,data: { header: 'Role Access Master', subheader:'Role Access List'}},
       { path: 'EditRoleAccess', component: EditRoleAccessComponent ,data: { header: 'Edit Role Access', subheader:'Edit Role'}},
       { path: 'EditRegisteredCompany', component: EditRegisterCompanyComponent ,data: { header: 'Edit Company Details', subheader:'Edit Company'}},
+      { path: 'ChangePassword', component: ChangePasswordComponent ,data: { header: 'User', subheader:'Change Password'}},
     ],
   },
  

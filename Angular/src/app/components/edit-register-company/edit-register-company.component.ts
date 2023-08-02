@@ -5,12 +5,13 @@ import {
   FormGroup,
   Validators,
   FormControl,
+  AbstractControl,
 } from '@angular/forms';
 import { CustomerService } from 'src/app/customer.service';
 import { environment } from 'src/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { ToastComponent } from '../toast/toast.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -73,8 +74,8 @@ export class EditRegisterCompanyComponent {
   ngOnInit() {
     this.applyForm = this.formBuilder.group({
       name: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d+$/),Validators.pattern(/^\d{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
       slUrl: ['', Validators.required],
       databaseType: ['Default', Validators.required],
       slusername: ['', Validators.required],
@@ -88,6 +89,7 @@ export class EditRegisterCompanyComponent {
       DataTable: this.formBuilder.array([]),
     });
   }
+  
   getTableDataControls(): FormArray {
     return this.applyForm.get('tableData') as FormArray;
   }
@@ -149,8 +151,85 @@ export class EditRegisterCompanyComponent {
       this.tableData.removeAt(index);
     }
   }
-
   onSubmit() {
+   console.log(this.applyForm.get('SLPassword'));
+   
+    
+
+
+
+
+
+   const phoneControl = this.applyForm.get('phone');
+   if (phoneControl && phoneControl.invalid) {
+    if (phoneControl.errors?.['required']) {
+    alert('Please provide a phone number.');
+   } else if (phoneControl.errors?.['pattern']) {
+    const phoneNumber = phoneControl.value;
+    if (phoneNumber.length !== 10) {
+      alert('Please provide a phone number with exactly 10 digits.');
+    } else {
+      alert('Please provide a valid phone number.\n\nPhone number must contain only numeric digits.');
+    }
+  }
+  return;
+}
+const emailControl = this.applyForm.get('email');
+if (emailControl && emailControl.invalid) {
+  alert('Please provide a valid email address.');
+  return;
+}
+const slUsernameControl = this.applyForm.get('slusername');
+if (slUsernameControl && slUsernameControl.invalid) {
+  if (slUsernameControl.errors?.['required']) {
+    alert('Please provide a username.');
+  } else if (slUsernameControl.errors?.['pattern']) {
+    alert('Please provide a valid username.\n\nUsername must contain only numeric digits.');
+  }
+  return;
+}
+// const slPasswordControl = this.applyForm.get('SLPassword');
+// if (slPasswordControl && slPasswordControl.invalid) {
+//   alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
+//   return;
+// }
+const passwordNameControl = this.applyForm.get('SLPassword');
+    if (passwordNameControl && passwordNameControl.invalid /*&& passwordNameControl.touched*/) {
+    if (passwordNameControl.errors?.['required']) {
+      alert('Password is required.');
+    }
+    return;
+  }
+// if (this.isFormFieldsEmpty(this.applyForm)) {
+        
+//   alert('Please fill in all the required fields.');
+//   return;
+// }
+    // if (this.isFormFieldsEmpty(this.applyForm)) {
+    //   // Form is invalid, display an alert or handle the error
+    //   alert('Please fill in all the required fields.');
+    //   return;
+    // }
+    // const emailValue = this.applyForm.get('email')?.value;
+    // const passwordValue = this.applyForm.get('slPassword')?.value;
+    // const phoneValue = this.applyForm.get('phone')?.value;
+
+    // if (!this.validatePhone(phoneValue)) {
+    //   // Invalid phone number format, display an alert or handle the error
+    //   alert('Please enter a valid phone number.');
+    //   return;
+    // }
+    // if (!this.validateEmail(emailValue)) {
+    //   // Invalid email format, display an alert or handle the error
+    //   alert('Please enter a valid email address.');
+    //   return;
+    // }
+  
+    // if (!this.validatePassword(passwordValue)) {
+    //   // Invalid password format, display an alert or handle the error
+    //   alert('Please enter a valid password.');
+    //   return;
+    // }
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
     );
@@ -203,7 +282,7 @@ export class EditRegisterCompanyComponent {
     const headers = {
       'Content-Type': 'application/json', // Set the Content-Type header to application/json
     };
-    // console.log(serializedData);
+    console.log(serializedData);
     this.resto.postUpdateCompany(serializedData, headers).subscribe(
       (response: any) => {
         let counter = 0;
@@ -213,27 +292,19 @@ export class EditRegisterCompanyComponent {
           }
         });
         if (counter == 0) {
-          const message = 'Company Edited Successfully';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+          
         } else {
-          const message = 'error while updating';
-          this.snackBar.openFromComponent(ToastComponent, {
-            data: { message },
-            duration: 2000, // Toast duration in milliseconds
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-          });
+         
         }
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
       }
     );
+
+    
+    
+  
   }
 
 
