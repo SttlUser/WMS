@@ -26,6 +26,7 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-b
 import { LayoutComponent } from './layout/layout.component';
 import { DataService } from './data.service';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 
 
@@ -49,7 +50,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     EditRoleAccessComponent,
     CapitalizePipe,
     LayoutComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ForgetPasswordComponent
       
     
   ],

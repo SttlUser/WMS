@@ -16,6 +16,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomerService } from 'src/app/customer.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -64,13 +65,15 @@ export class LoginComponent implements OnInit {
 
   login_error = 'USERNAME AND PASSWORD IS INCORRECT';
   logged_in = 'LOGED IN SUCCESSFULLY';
+  forgetRecievedData :any;
 
   constructor(
     private router: Router,
     private http: HttpClient,
 
     private formbuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private resto: CustomerService
   ) {
     console.log(this.showNavbar);
   }
@@ -144,8 +147,6 @@ export class LoginComponent implements OnInit {
     // console.log("Authenticated, Now navigating to home page", this.router)
   }
 
-  
-
   // Function to toggle the display of the "Forgot Password" sectioc
   showForgotPasswordForm() {
     this.showForgotPassword = true;
@@ -153,12 +154,26 @@ export class LoginComponent implements OnInit {
 
   backToLoginForm() {
     this.showForgotPassword = false;
-  }
+  } 
 
   submitForgotPassword(form: any) {
     // Handle forgot password form submission logic here
     console.log('Forgot Password Form Data:', form.value);
     this.forgotUsername = form.value.forgotUsername;
-    this.forgotEmail = form.value.forgotEmail;
+    
+
+    this.resto.forgetPassword(this.forgotUsername).subscribe(
+      (response: any) => {
+        console.log('receved table data', response);
+        const queryParams = {
+          recievedResponse: response.id,
+        };
+        this.router.navigate(['/ForgetPasswordComponent'],{ queryParams })
+        
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 }
