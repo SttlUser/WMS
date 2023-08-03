@@ -20,6 +20,8 @@ export class ChangePasswordComponent implements OnInit{
       newPassword: ['', [Validators.required]],
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
+
+    
   }
 
   onSubmit(): void {

@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
   forgotEmail: string = '';
 
   loginid: any;
+  isLoading: boolean = false;
+
   OnInit(): void {
     this.ngForm = this.formbuilder.group({
       username: ['', Validators.required],
@@ -65,7 +67,7 @@ export class LoginComponent implements OnInit {
 
   login_error = 'USERNAME AND PASSWORD IS INCORRECT';
   logged_in = 'LOGED IN SUCCESSFULLY';
-  forgetRecievedData :any;
+  forgetRecievedData: any;
 
   constructor(
     private router: Router,
@@ -88,35 +90,33 @@ export class LoginComponent implements OnInit {
     : false;
 
   Authenticate(Form: NgForm) {
+    
     if (Form.invalid) {
       // Mark the form as touched to display validation errors
       Form.control.markAllAsTouched();
       return;
     }
-
+    
     const username = Form.value.username;
     const password = Form.value.password;
-
+    
     if (!username || !password) {
       alert('Please enter both username and password');
       //console.log(username)
       return;
     }
     // console.log('ngForm.value', Form.value)
+    this.isLoading = true;
     this.http
-      .post(`${environment.api.server}/Login/UserLogin`, Form.value)
-      .subscribe((res: any) => {
-        localStorage.setItem(
-          'error',
-          JSON.stringify({
-            code: res?.errorInfo?.code,
-            message: res?.errorInfo?.message,
-          })
-        );
+    .post(`${environment.api.server}/Login/UserLogin`, Form.value)
+    .subscribe((res: any) => {
+      localStorage.setItem('error',JSON.stringify({code: res?.errorInfo?.code,message: res?.errorInfo?.message,}));
         if (res?.errorInfo?.code !== 0) {
           console.log('Errorx');
           alert('Username or Password is wrong');
-        } else if (res?.errorInfo?.code == 0) {
+          this.isLoading = false;
+        } 
+        else if (res?.errorInfo?.code == 0) {
           console.log('loggin in');
           console.log(res);
           // toastr.options = {
@@ -138,10 +138,12 @@ export class LoginComponent implements OnInit {
 
           // toastr.error("Successfully login");
           sessionStorage.setItem('loggedInId', res.id);
+          this.isLoading = false;
           this.router.navigate(['/DispayRoleMaster']);
 
           // this.toastService.recieve(this.logged_in);
         } else {
+          this.isLoading = false;
         }
       });
     // console.log("Authenticated, Now navigating to home page", this.router)
@@ -154,24 +156,32 @@ export class LoginComponent implements OnInit {
 
   backToLoginForm() {
     this.showForgotPassword = false;
-  } 
+  }
 
   submitForgotPassword(form: any) {
+
     // Handle forgot password form submission logic here
     console.log('Forgot Password Form Data:', form.value);
     this.forgotUsername = form.value.forgotUsername;
-    
 
+    if (!this.forgotUsername) {
+      alert('Please enter username or email');
+      //console.log(username)
+      return;
+    }
+
+    this.isLoading = true;
     this.resto.forgetPassword(this.forgotUsername).subscribe(
       (response: any) => {
         console.log('receved table data', response);
         const queryParams = {
           recievedResponse: response.id,
         };
-        this.router.navigate(['/ForgetPasswordComponent'],{ queryParams })
-        
+        this.isLoading = false;
+        this.router.navigate(['/ForgetPasswordComponent'], { queryParams });
       },
       (error) => {
+        this.isLoading = false;
         console.error('Error retrieving data:', error);
       }
     );

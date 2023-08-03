@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/customer.service';
 export class ForgetPasswordComponent {
   forgetForm!: FormGroup;
   recievedData:any;
+  isLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private resto: CustomerService,private router: Router) { }
 
@@ -32,13 +33,16 @@ export class ForgetPasswordComponent {
       const newPassword = this.forgetForm.value.newPassword;
       console.log('New Password:', newPassword," id ",this.recievedData);
 
+      this.isLoading= true;
       // Perform the password reset logic here...
       this.resto.updatePassword(newPassword,this.recievedData).subscribe(
         (response: any) => {
           console.log('receved table data', response);
+          this.isLoading= false;
           this.router.navigate(['/home'])
         },
         (error) => {
+          this.isLoading= false;
           console.error('Error retrieving data:', error);
         }
       );

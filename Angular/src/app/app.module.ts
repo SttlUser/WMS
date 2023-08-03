@@ -27,6 +27,9 @@ import { LayoutComponent } from './layout/layout.component';
 import { DataService } from './data.service';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the MatProgressSpinnerModule
+
 
 
 
@@ -65,7 +68,10 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   
   bootstrap: [AppComponent]
