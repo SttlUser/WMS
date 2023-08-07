@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer.service';
+import { CustomToastrService } from 'src/custom-toastr.service' 
+
 
 @Component({
   selector: 'app-change-password',
@@ -12,7 +14,7 @@ export class ChangePasswordComponent implements OnInit{
 
   changePasswordForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private router: Router,private resto: CustomerService) {}
+  constructor(private formBuilder: FormBuilder,private router: Router,private resto: CustomerService,private toastrService: CustomToastrService) {}
 
   ngOnInit(): void {
     this.changePasswordForm = this.formBuilder.group({
@@ -20,6 +22,8 @@ export class ChangePasswordComponent implements OnInit{
       newPassword: ['', [Validators.required]],
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
+
+    
   }
 
   onSubmit(): void {
@@ -32,14 +36,15 @@ export class ChangePasswordComponent implements OnInit{
       console.log('New Password:', newPassword);
 
       this.resto.changePassword(loggedInId,oldPassword,newPassword).subscribe((data) => {
-        alert('Password changed');
-        console.log('get data', data);
-        
+        this.toastrService.logInSuccess("Password changed successfully");
+        console.log('get data', data);        
         this.router.navigate(['/DispayRoleMaster']);
+      },(error)=>{
+        this.toastrService.showErrorMessage("Something went wrong");
       }); 
     }
     else{
-      alert("Fill all details")
+      alert("Fill all details");
     }
   }
 

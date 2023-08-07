@@ -17,10 +17,11 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { LayoutComponent } from './layout/layout.component';
 // import { ToastComponent } from './components/toast/toast.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
-
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'ForgetPasswordComponent', component: ForgetPasswordComponent ,data: { header: 'User', subheader:'Forget Password'}},
   {
     path: '',
     component: LayoutComponent,
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: 'EditRoleAccess', component: EditRoleAccessComponent ,data: { header: 'Edit Role Access', subheader:'Edit Role'}},
       { path: 'EditRegisteredCompany', component: EditRegisterCompanyComponent ,data: { header: 'Edit Company Details', subheader:'Edit Company'}},
       { path: 'ChangePassword', component: ChangePasswordComponent ,data: { header: 'User', subheader:'Change Password'}},
+      
     ],
   },
  

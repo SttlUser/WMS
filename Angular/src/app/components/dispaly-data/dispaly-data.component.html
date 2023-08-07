@@ -7,11 +7,18 @@
                     <h4>Role Listing</h4>
                 </div>
             </div>
+            <div *ngIf="loading" class="loading-spinner d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="" style="float: right" *ngIf="!loading">
+                <button type="button" class="btn btn-primary mb-3" (click)="GotoRoleMaster()">Add</button>
+            </div>
         </div>
-        <div class="" style="float: right">
-            <button type="button" class="btn btn-primary mb-3" (click)="GotoRoleMaster()">Add</button>
-        </div>
-        <table class="table table-striped table-hover" id="myTable">
+
+
+        <table class="table table-striped table-hover" id="myTable" *ngIf="!loading">
             <thead>
                 <tr>
                     <th>Name</th>

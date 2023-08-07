@@ -120,6 +120,25 @@ export class CustomerService {
     };
     return this.http.post(this.Dispaly_url+'Login/ChangePassword',requestBody);
   }
+
+  
+  public forgetPassword(forgotUsername :any):Observable<any> {
+    const requestBody = {
+      flag:7,
+      forgotUsername: forgotUsername
+    };
+    return this.http.post(this.Dispaly_url+'Login/forgetPassword',requestBody);
+  }
+
+  public updatePassword(newPassword :any,id:any):Observable<any> {
+    const requestBody = {
+      flag:8,
+      newPassword: newPassword,
+      id:id
+    };
+    return this.http.post(this.Dispaly_url+'Login/UpdateForgotpassword',requestBody);
+  }
+
 }
 
 

@@ -6,6 +6,7 @@ import { environment } from 'src/environment';
 import { CustomerService } from '../../customer.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomToastrService } from 'src/custom-toastr.service' 
 
 import * as $ from 'jquery';
 import 'datatables.net';
@@ -16,6 +17,7 @@ import 'datatables.net-dt';
   styleUrls: ['./dispaly-data.component.css'],
 })
 export class DispalyDataComponent {
+  loading: boolean = true;
   isLoggedIn: boolean = true;
   updade = 'UPDATE API SUCCESS';
   activate = 'Activate API SUCCESS';
@@ -48,8 +50,8 @@ export class DispalyDataComponent {
     private router: Router,
     private resto: CustomerService,
     public http: HttpClient,
-   
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private toastrService: CustomToastrService
   ) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -79,10 +81,10 @@ export class DispalyDataComponent {
         console.log('receved table data', response);
         this.RoleData = response;
         this.initializeDataTable();
+        this.loading = false;
       },
       (error) => {
-        console.error('Error retrieving data:', error);
-       
+        console.error('Error retrieving data:', error); 
       }
     );
   }
@@ -123,14 +125,12 @@ export class DispalyDataComponent {
         (res) => {
           console.log(res);
           this.GetRoleMasterData();
-        
+          this.toastrService.logInSuccess("Role deactivated successfully");
           // this.toastService.recieve(this.activate);
           // this.toastService.showSuccessToast('API call was successful!');
         },
         (err) => {
-          console.log(err);
-          // this.toastService.showError('API call was unsuccessful!');
-        
+          this.toastrService.showErrorMessage("Something went wrong");
         }
       );
     } else {
@@ -143,15 +143,19 @@ export class DispalyDataComponent {
       console.log(rol);
       this.resto.DeleteRoleMasterData(rol.id, this.loggedInId, 5).subscribe(
         (res) => {
-          console.log(res);
-          this.GetRoleMasterData();
-          // this.toastService.recieve(this.activate);
-          // this.toastService.showSuccessToast('API call was successful!');
+          if(res){
+            console.log(res);
+            this.GetRoleMasterData();
+            this.toastrService.logInSuccess("Role activated successfully");
+          }
+          else{
+            this.toastrService.showErrorMessage("Something went wrong");
+          }
+            
         },
         (err) => {
           console.log(err);
-          // this.toastService.showError('API call was unsuccessful!');
-         
+          this.toastrService.showErrorMessage("Something went wrong");
         }
       );
     } else {
@@ -176,15 +180,17 @@ export class DispalyDataComponent {
     } else {
       this.resto.UpdateRoleMasdterData(UpdateRole).subscribe(
         (res) => {
-          alert('Role updated');
-          // this.toastService.recieve(this.updade);
-         
-          console.log(res, 'Role Updated Successfully');
-          this.GetRoleMasterData();
+          if(res){
+            this.toastrService.logInSuccess("Role updated successfully");         
+            this.GetRoleMasterData();
+          }
+          else{
+            this.toastrService.showErrorMessage("Something went wrong");
+          }
         },
         (err) => {
           console.log(err);
-         
+          this.toastrService.showErrorMessage("Something went wrong");         
         }
       );
     }

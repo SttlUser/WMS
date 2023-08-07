@@ -1,34 +1,44 @@
-<div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
-    <div class="table-wrapper"  style="padding: 2vh;">
-        <div class="table-title">
-            <br>
-            <div class="row">
-                <div class="col-sm-8">
-                    <h4>Roles</h4>
-                </div>
-            </div>
+<div class="container" style="background-color: rgb(253, 253, 253); border-radius: 15px;">
+    <div class="table-wrapper" style="padding: 2vh; position: relative;">
+      <div class="table-title">
+        <br>
+        <div class="row">
+          <div class="col-sm-8">
+            <h4>Roles</h4>
+          </div>
         </div>
-    
-        <table class="table table-bordered" id="myTable">
-            <thead>
-                <tr>
-                    <th>Role</th>
-                    <th>Role Type</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-             <tbody>
-                <ng-container *ngFor="let rol of RoleData">
-                    <tr>
-                        
-                        <td>{{rol?.name}}</td>
-                        <td>{{rol?.roleName}}</td>
-                        <td>
-                            <a type="button"  (click)="Editpage(rol)"><i class="far fa-edit text-primary mr-5"></i></a>
-                        </td>
-                    </tr>
-                </ng-container>
-            </tbody> 
-        </table>
+      </div>
+  
+      <div *ngIf="loading" class="loading-spinner">
+        <!-- Show loading spinner while data is being fetched -->
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div> 
+      </div>
+  
+      <table class="table table-bordered" id="myTable" *ngIf="!loading">
+        <!-- Display the table once data is received and loading is false -->
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Role Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let rol of RoleData">
+            <tr>
+              <td>{{rol?.name}}</td>
+              <td>{{rol?.roleName}}</td>
+              <td>
+                <a type="button" (click)="Editpage(rol)">
+                  <i class="far fa-edit text-primary mr-5"></i>
+                </a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
+  

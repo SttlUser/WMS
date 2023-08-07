@@ -7,7 +7,7 @@ import { CustomerService } from '../../customer.service';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
-
+import { CustomToastrService } from 'src/custom-toastr.service' 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UsermasterComponent {
   @Input() data: any[] = [];
   @Output() editRowEvent = new EventEmitter<any>();
+  loading: boolean = true;
 
   UserdataUpdate = {
     cb_pk_id: Number,
@@ -53,7 +54,9 @@ export class UsermasterComponent {
     private router: Router,
     private resto: CustomerService,
     public http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private toastrService: CustomToastrService
+
   ) {
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -73,6 +76,7 @@ export class UsermasterComponent {
         console.log('receved table data', response);
         this.Userdata = response;
         this.initializeDataTable();
+        this.loading = false;
       },
       (error) => {
         console.error('Error retrieving data:', error);
@@ -149,14 +153,13 @@ export class UsermasterComponent {
           //console.log(UpdateUser);
           this.resto.UpdateUserData(data).subscribe(
         (res) => {
-          //console.log(res);
-
-          // alert('Data updated successfully');
+          this.toastrService.logInSuccess("User updated successfully");
           this.GetUserDetail()
         
         },
         (err) => {
           console.log(err);
+          this.toastrService.showErrorMessage("Something went wrong");
         }
       );
     }
@@ -167,27 +170,31 @@ export class UsermasterComponent {
       this.resto.DeletUserData(this.loggedInId, usr.id, 4).subscribe(
         (res) => {
           console.log(res);
-          alert("User Deactivated Successfully")
+          this.toastrService.logInSuccess("User deactivated successfully");
           this.GetUserDetail();
         },
         (err) => {
-          console.log(err);
+          this.toastrService.showErrorMessage("Something went wrong");
+
         }
       );
     }
   }
 
   activebtn(usr: any) {
-    this.resto.DeletUserData(this.loggedInId, usr.id, 5).subscribe(
-      (res) => {
-        console.log(res);
-        alert("User Activated Successfully")
-        this.GetUserDetail();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    if (window.confirm('Do you really want to delete?')) {
+      this.resto.DeletUserData(this.loggedInId, usr.id, 5).subscribe(
+        (res) => {
+          console.log(res);
+          this.toastrService.logInSuccess("Role activated successfully");
+          this.GetUserDetail();
+        },
+        (err) => {
+          this.toastrService.showErrorMessage("Something went wrong");
+
+        }
+      );
+    }
   }
 
   addNewUserMaster() {

@@ -40,7 +40,10 @@
             <input ngModel  type="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
               id="password" name="password" placeholder="Password" />
           </div>
-          <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Login</button>
+          <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3" [disabled]="isLoading" >
+            <span *ngIf="!isLoading">Login</span>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>          
+          </button>
           <button type="button" class="btn btn-link" (click)="showForgotPassword = true">Forgot Password?</button>
         </form>
       </div>
@@ -54,16 +57,14 @@
         <h2 class="mb-4">Forgot Password</h2>
         <form #forgotPasswordForm="ngForm" (ngSubmit)="submitForgotPassword(forgotPasswordForm)">
           <div class="form-group">
-            <label for="forgotUsername">Username</label>
+            <label for="forgotUsername">Username or Email</label>
             <input ngModel type="text" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-              id="forgotUsername" name="forgotUsername" placeholder="Username"  autofocus/>
+              id="forgotUsername" name="forgotUsername" placeholder="Username or Email"  autofocus/>
           </div>
-          <div class="form-group">
-            <label for="forgotEmail">Email</label>
-            <input ngModel type="email" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-              id="forgotEmail" name="forgotEmail" placeholder="Email" />
-          </div>
-          <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Submit</button>
+          <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3" [disabled]="isLoading" >
+            <span *ngIf="!isLoading">Submit</span>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>          
+          </button>
           <button type="button" class="btn btn-link" (click)="showForgotPassword = false">Back to Login</button>
         </form>
       </div>

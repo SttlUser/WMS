@@ -12,6 +12,7 @@ import 'datatables.net-dt';
   styleUrls: ['./role-acess-list.component.css']
 })
 export class RoleAcessListComponent {
+  loading: boolean = true;
   isLoggedIn: boolean = true;
   RoleData:any;
   showNavbar: boolean=true;
@@ -47,9 +48,11 @@ export class RoleAcessListComponent {
         console.log("receved table data", response);
         this.RoleData = response;
         this.initializeDataTable();
+        this.loading = false; 
       },
       (error) => {
         console.error('Error retrieving data:', error);
+        this.loading = false;
       }
     );
   }

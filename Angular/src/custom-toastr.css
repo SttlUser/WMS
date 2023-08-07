@@ -1,0 +1,22 @@
+.toast-success {
+    background-color: #6fe06f; /* Green background color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Change background color and text color for error messages */
+  .toast-error {
+    background-color: #dc3545; /* Red background color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Change background color and text color for info messages */
+  .toast-info {
+    background-color: #17a2b8; /* Blue background color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Change background color and text color for warning messages */
+  .toast-warning {
+    background-color: #ffc107; /* Yellow background color */
+    color: #212529; /* Dark text color */
+  }

@@ -4,8 +4,8 @@ import { CustomerService } from '../../customer.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { CustomToastrService } from 'src/custom-toastr.service' 
+
 
 @Component({
   selector: 'app-create-user',
@@ -24,6 +24,8 @@ export class CreateUserComponent {
     private resto: CustomerService,
     private router: Router,
     public http: HttpClient,
+    private toastrService: CustomToastrService
+    
   ) {
     this.Getdata(http);
     this.loggedInId = sessionStorage.getItem('loggedInId');
@@ -136,12 +138,12 @@ export class CreateUserComponent {
     this.resto.PostUserData(formData).subscribe(
       (res) => {
         console.log(res);
-      
+        this.toastrService.logInSuccess("User created successfully");
         this.router.navigate(['/UserMaster']);
       },
       (err) => {
         console.log(err);
-        
+        this.toastrService.showErrorMessage("Something went wrong");
       }
     );
   }

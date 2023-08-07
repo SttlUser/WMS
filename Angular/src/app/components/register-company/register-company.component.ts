@@ -5,10 +5,7 @@ import { environment } from 'src/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ConstantPool } from '@angular/compiler';
-
-import { MatSnackBar } from '@angular/material/snack-bar';
-//import { MatDialog } from '@angular/material/dialog';
-//import { MessageBoxComponent } from './components/message-box.component'; 
+import { CustomToastrService } from 'src/custom-toastr.service' 
 
 @Component({
   selector: 'app-register-company',
@@ -29,7 +26,7 @@ export class RegisterCompanyComponent implements OnInit {
     private resto: CustomerService,
     public http: HttpClient,
     private router: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    private toastrService: CustomToastrService
    
   ) {
     this.applyForm = this.formBuilder.group({
@@ -216,23 +213,14 @@ export class RegisterCompanyComponent implements OnInit {
             alert("Data invalid");
             return;
           }
+          else{
+            this.toastrService.logInSuccess("Company added successfully");
+          }
 
         })
-
-        alert("Data registered successfully")
-
-        // const message = 'Company Added Successfully';
-        // this.snackBar.openFromComponent(ToastComponent, {
-        //   data: { message },
-        //   duration: 2000, // Toast duration in milliseconds
-        //   horizontalPosition: 'end',
-        //   verticalPosition: 'top',
-        // });
-        // this.NewList = [];
       },
       (error: any) => {
-        console.error('Error retrieving data:', error);
-       
+        this.toastrService.showErrorMessage("Something went wrong");       
       }
     );
   }
@@ -264,22 +252,7 @@ export class RegisterCompanyComponent implements OnInit {
 
     return false; 
   }
-  // validateEmail(email: string): boolean {
-    
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return emailRegex.test(email);
-  // }
-
-  // validatePassword(password: string): boolean {
-
-  //   return password.length >= 8; 
-  // }
-  // validatePhone(phone: string): boolean {
-
-  //   const phoneRegex = /^\d{10}$/;
-  //   return phoneRegex.test(phone);
-  // }
-
+  
 
   get tableData() {
     return this.applyForm.get('tableData') as FormArray;
