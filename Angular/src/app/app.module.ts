@@ -30,7 +30,7 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the MatProgressSpinnerModule
 
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -71,7 +71,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
     MatSnackBarModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot()
   ],
   
   bootstrap: [AppComponent]

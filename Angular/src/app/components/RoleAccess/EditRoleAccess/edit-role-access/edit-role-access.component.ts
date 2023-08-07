@@ -5,6 +5,8 @@ import { CustomerService } from 'src/app/customer.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CustomToastrService } from 'src/custom-toastr.service' 
+
 
 
 @Component({
@@ -13,6 +15,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 	styleUrls: ['./edit-role-access.component.css']
 })
 export class EditRoleAccessComponent implements OnInit {
+	loading: boolean = true;
+
 	isLoggedIn: boolean = true;
 	roleForm!: FormGroup;
 	@Output() close = new EventEmitter<void>();
@@ -32,7 +36,9 @@ export class EditRoleAccessComponent implements OnInit {
 
 	}
 
-	constructor(private router: Router, private resto: CustomerService, private formBuilder: FormBuilder, public http: HttpClient, private route: ActivatedRoute, private snackBar: MatSnackBar, private location: Location) {
+	constructor(private router: Router, private resto: CustomerService, private formBuilder: FormBuilder, public http: HttpClient, private route: ActivatedRoute, private snackBar: MatSnackBar, private location: Location
+		,private toastrService: CustomToastrService
+		) {
 		this.GetAccessData(http);
 		//this.initializeCheckboxes();
 
@@ -85,10 +91,13 @@ export class EditRoleAccessComponent implements OnInit {
 					
 				});
 				this.initializeCheckboxes();
+				this.loading = false;
+
 			},
 			(error) => {
 				console.error('Error retrieving data:', error);
-				
+				this.loading = false;
+
 			}
 		);
 	}
@@ -130,32 +139,23 @@ export class EditRoleAccessComponent implements OnInit {
 
 
 	CloseBtn() {
-		// this.router.navigate(['/RoleAccessList']);
 		this.location.back();
 	}
 
 	PostrbacData() {
 
 
-		// const defaultSet = new Set(this.defaultSelectedRoles);
-		// this.rbacCheckboxArr = Array.from(
-		// 	new Set([
-		// 		...this.rbacCheckboxArr.filter((id) => defaultSet.has(id)),
-		// 		...defaultSet,
-		// 	])
-		// );
-
 		console.log("roleid", this.rbacCheckboxArr);
 		this.resto.PostRoleAccessData(this.id, this.rbacCheckboxArr).subscribe(
 			(res) => {
 				console.log(this.id, this.rbacCheckboxArr);
 				console.log(res);
-				
-				// this.toastService.recieve(this.edit_role_access_posted);
+				this.toastrService.logInSuccess("Data saved successfully");
 				this.router.navigate(['/RoleAccessList'])
 			},
 			(err) => {
 				console.log(err);
+				this.toastrService.showErrorMessage("Something went wrong");
 				
 			}
 		)

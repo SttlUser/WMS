@@ -89,54 +89,7 @@
               </td>
             </tr>
           </table>
-          <!-- <div class="form-check">
-            <label class="form-check-label" for="putCheckbox"
-              >Put away process
-            </label>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="putCheckbox"
-              value="true"
-              formControlName="putCheckbox"
-            />
-          </div>
-          <div class="form-check">
-            <label class="form-check-label" for="ssccCheckbox"
-              >SSCC No. Management</label
-            >
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="ssccCheckbox"
-              value="true"
-              formControlName="ssccCheckbox"
-            />
-          </div>
-          <div class="form-check">
-            <label class="form-check-label" for="cartonCheckbox"
-              >Cartoon No. management</label
-            >
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="cartonCheckbox"
-              value="true"
-              formControlName="cartonCheckbox"
-            />
-          </div>
-          <div class="form-check">
-            <label class="form-check-label" for="autoCheckbox"
-              >Auto Batch Configurator</label
-            >
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="autoCheckbox"
-              value="true"
-              formControlName="autoCheckbox"
-            />
-          </div> -->
+          
         </div>
         <div class="col">
           <div class="form-group">
@@ -192,22 +145,23 @@
           </div>
           <div class="form-group">
             <label>Live Service Layer URL:<span style="color: red;">*</span><br><span>Example url: https://Service Layer URL/b1s/v1</span></label>
-            <input type="text" class="form-control" id="SLUrl" formControlName="SLUrl" name="SLUrl" required />
+            <input type="text" class="form-control" id="slUrl" formControlName="slUrl" name="slUrl" required />
           </div>
           <div class="form-group">
-            <label for="db_type">Database type:</label>
+            <label for="databaseType">Database type:</label>
             <span class="required-field">*</span>
 
             <div class="custom-select-wrapper">
               <select
               class="form-select"
-                id="db_type"
-                formControlName="db_type"
-                name="db_type"
+                id="databaseType"
+                formControlName="databaseType"
+                name="databaseType"
                 required
               >
-                <option value="hana" selected>HANA</option>
-                <option value="sql">SQL</option>
+              <option value="Defualt" selected>Select</option>
+                <option value="HANA" selected>HANA</option>
+                <option value="SQL">SQL</option>
               </select>
               
 

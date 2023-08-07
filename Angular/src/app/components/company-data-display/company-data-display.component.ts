@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer.service';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { environment } from 'src/environment';
+import { CustomToastrService } from 'src/custom-toastr.service' 
 import { Injectable } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,6 +22,8 @@ import 'datatables.net-dt';
 })
 export class CompanyDataDisplayComponent implements AfterViewInit {
   Dispaly_url = `${environment.api.server}/`;
+  loading: boolean = true;
+
 
   Comapnydata: any;
   loggedInId:any
@@ -54,7 +57,8 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
   dataLoaded = true;
 
 
-  constructor(private router: Router,private resto: CustomerService,public http: HttpClient,private snackBar: MatSnackBar) {
+    
+    constructor(private router: Router,private resto: CustomerService,public http: HttpClient,private snackBar: MatSnackBar,private toastrService: CustomToastrService) {
     
     const err = JSON.parse(localStorage.getItem('error') || '{}');
     if (err.code !== 0) {
@@ -81,6 +85,8 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
           console.log(res)
           this.Comapnydata = res;
           this.initializeDataTable();
+          this.loading = false;
+
         },
         (err) => {
           console.log(err);
@@ -125,12 +131,11 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         .DeleteCompanyData(4, loggedInId, row.companyID).subscribe(
           (res) => {
             this.GetComapnyMasterData(this.http);
-            alert("Company De-activated Successfully")
-           
+            this.toastrService.logInSuccess("Company deactivated successfully");
           },
           (err) => {
             console.log(err);
-            
+            this.toastrService.showErrorMessage("Something went wrong");
           }
         );
     }
@@ -143,10 +148,12 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
 		this.resto
         .ActivateCompanyData(5, loggedInId, row.companyID).subscribe(
           (res) => {
+            this.toastrService.logInSuccess("Company activated successfully");
             this.GetComapnyMasterData(this.http);
            
           },
           (err) => {
+            this.toastrService.showErrorMessage("Something went wrong");
            
           }
         );

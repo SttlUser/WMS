@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer.service';
+import { CustomToastrService } from 'src/custom-toastr.service' 
 
 @Component({
   selector: 'app-forget-password',
@@ -13,7 +14,7 @@ export class ForgetPasswordComponent {
   recievedData:any;
   isLoading: boolean = false;
 
-  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private resto: CustomerService,private router: Router) { }
+  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private resto: CustomerService,private router: Router,private toastrService: CustomToastrService) { }
 
   ngOnInit() {
     this.forgetForm = this.formBuilder.group({
@@ -38,11 +39,13 @@ export class ForgetPasswordComponent {
       this.resto.updatePassword(newPassword,this.recievedData).subscribe(
         (response: any) => {
           console.log('receved table data', response);
+          this.toastrService.showSuccessMessage("Password reset successfully");
           this.isLoading= false;
           this.router.navigate(['/home'])
         },
         (error) => {
           this.isLoading= false;
+          this.toastrService.showErrorMessage("Something went wrong");
           console.error('Error retrieving data:', error);
         }
       );

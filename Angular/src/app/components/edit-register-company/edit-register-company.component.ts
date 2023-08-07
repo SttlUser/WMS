@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/customer.service';
 import { environment } from 'src/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { CustomToastrService } from 'src/custom-toastr.service' 
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -38,7 +39,8 @@ export class EditRegisterCompanyComponent {
     public http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private toastrService: CustomToastrService
+
   ) {
     // this.applyForm = this.formBuilder.group({
     //   dbName: this.formBuilder.array([]),
@@ -188,11 +190,7 @@ if (slUsernameControl && slUsernameControl.invalid) {
   }
   return;
 }
-// const slPasswordControl = this.applyForm.get('SLPassword');
-// if (slPasswordControl && slPasswordControl.invalid) {
-//   alert('Please provide a valid password.\n\nPassword must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.');
-//   return;
-// }
+
 const passwordNameControl = this.applyForm.get('SLPassword');
     if (passwordNameControl && passwordNameControl.invalid /*&& passwordNameControl.touched*/) {
     if (passwordNameControl.errors?.['required']) {
@@ -200,36 +198,7 @@ const passwordNameControl = this.applyForm.get('SLPassword');
     }
     return;
   }
-// if (this.isFormFieldsEmpty(this.applyForm)) {
-        
-//   alert('Please fill in all the required fields.');
-//   return;
-// }
-    // if (this.isFormFieldsEmpty(this.applyForm)) {
-    //   // Form is invalid, display an alert or handle the error
-    //   alert('Please fill in all the required fields.');
-    //   return;
-    // }
-    // const emailValue = this.applyForm.get('email')?.value;
-    // const passwordValue = this.applyForm.get('slPassword')?.value;
-    // const phoneValue = this.applyForm.get('phone')?.value;
 
-    // if (!this.validatePhone(phoneValue)) {
-    //   // Invalid phone number format, display an alert or handle the error
-    //   alert('Please enter a valid phone number.');
-    //   return;
-    // }
-    // if (!this.validateEmail(emailValue)) {
-    //   // Invalid email format, display an alert or handle the error
-    //   alert('Please enter a valid email address.');
-    //   return;
-    // }
-  
-    // if (!this.validatePassword(passwordValue)) {
-    //   // Invalid password format, display an alert or handle the error
-    //   alert('Please enter a valid password.');
-    //   return;
-    // }
     this.SLDbName = this.tableData.controls.map(
       (control) => (control as FormGroup).get('dbName')?.value || ''
     );
@@ -255,7 +224,7 @@ const passwordNameControl = this.applyForm.get('SLPassword');
     this.companyDataObj!.slPassword = this.applyForm.value.slPassword;
     this.companyDataObj!.phone = this.applyForm.value.phone;
     this.companyDataObj!.email = this.applyForm.value.email;
-    this.companyDataObj!.DatabaseType = this.applyForm.value.databaseType;
+    this.companyDataObj!.DatabaseType = this.applyForm.value.db_type;
     this.companyDataObj!.DbName = this.NewList;
     this.companyDataObj!.hasPutAwayProc = this.applyForm.value.putCheckbox;
     this.companyDataObj!.hasSsccNoManagement =
@@ -292,13 +261,16 @@ const passwordNameControl = this.applyForm.get('SLPassword');
           }
         });
         if (counter == 0) {
+          this.toastrService.showErrorMessage("Not valid Connection");
           
         } else {
-         
+          this.toastrService.logInSuccess("Connection Successful");
         }
       },
       (error: any) => {
         console.error('Error retrieving data:', error);
+        this.toastrService.showErrorMessage("Something went wrong");
+
       }
     );
 

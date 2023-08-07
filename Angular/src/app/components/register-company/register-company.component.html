@@ -104,26 +104,12 @@
           </div>
           <div class="form-group">
             <label for="db_type">Database type:<span style="color: red;">*</span></label>
-            <select class="form-control" id="db_type" formControlName="db_type" name="db_type" required>
+            <select class="form-select" id="db_type" formControlName="db_type" name="db_type" required>
               <option value="Default" selected>select</option>
               <option value="hana">HANA</option>
               <option value="sql">SQL</option>
             </select>
           </div>
-          <!-- <div class="form-group">
-            <label for="db_type">Database type:</label>
-            <span class="required-field">*</span>
-
-            <div class="custom-select-wrapper">
-              <select class="form-control custom-select" id="db_type" formControlName="db_type" name="db_type" required>
-                <option value="hana" selected>HANA</option>
-                <option value="sql">SQL</option>
-              </select>
-
-
-            </div>
-          </div> -->
-
           <div class="form-group">
             <label for="slusername">Company Registration No (User Name):<span style="color: red;">*</span></label>
             <input type="text" class="form-control" id="slusername" formControlName="slusername" name="slusername"
@@ -156,10 +142,10 @@
                 <tr *ngFor="let row of tableData.controls; let i = index" [formGroupName]="i">
                   <td>{{ i + 1 }}</td>
                   <td>
-                    <input type="text" formControlName="dbName" class="dbName" />
+                    <input type="text" formControlName="dbName" class="form-control" />
                   </td>
                   <td>
-                    <input type="text" formControlName="sapCompanyName" class="sapCompanyName" />
+                    <input type="text" formControlName="sapCompanyName" class="form-control" />
                   </td>
                   <td>
                     <i class="flaticon2-cancel-music text-danger icon-nm"></i>
@@ -184,29 +170,14 @@
                       Delete
                     </button>
                   </td>
-                  <!-- <td>
-                    <button id="register" type="button" class="btn btn-primary add-button" (click)="addRow(i)">
-                      Add
-                    </button>
-                    <button id="delet" type="button" class="btn btn-danger delete-button" (click)="deleteRow(i)">
-                      Delete
-                    </button>
-                  </td> -->
+                  
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <!-- </form>  -->
     </div>
   </form>
 </div>
 
-<!-- 
-[(ngModel)]="objectData.companyName"
-[(ngModel)]="objectData.phone"
-[(ngModel)]="objectData.SLPassword"
-[(ngModel)]="objectData.slusername"
-[(ngModel)]="objectData.db_type"
-[(ngModel)]="objectData.slUrl" -->

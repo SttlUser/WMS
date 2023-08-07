@@ -6,6 +6,8 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../customer.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CustomToastrService } from 'src/custom-toastr.service' 
+
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 //import { FormGroup, FormBuilder, Validators,AbstractControl } from '@angular/forms';
@@ -33,7 +35,7 @@ export class RoleMasterComponent {
     private router: Router,
     http: HttpClient,
     private resto: CustomerService,
-   
+    private toastrService: CustomToastrService,
     private snackBar: MatSnackBar
   ) {
 
@@ -84,10 +86,16 @@ export class RoleMasterComponent {
       console.log(formData)
       
       this.resto.postdata(formData).subscribe((data) => {
-        alert('data saved');
-        console.log('get data', data);
-        
-        this.router.navigate(['/DispayRoleMaster']);
+        if(data){
+          this.toastrService.logInSuccess("Role added successfully");
+          this.router.navigate(['/DispayRoleMaster']);
+        }
+        else{
+          this.toastrService.showErrorMessage("Something went wrong");
+        }
+      },
+      (err)=>{
+          this.toastrService.showErrorMessage("Something went wrong");
       }); 
     }
   }

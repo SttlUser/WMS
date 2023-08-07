@@ -6,12 +6,17 @@
         <div class="col-sm-8">
           <h4>Comapany  Listing</h4>
         </div>
+        <div *ngIf="loading" class="loading-spinner d-flex justify-content-center align-items-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
       </div>
     </div>
-    <div class="mb-3" style="float: right">
+    <div class="mb-3" style="float: right" *ngIf="!loading">
       <button type="button" id="add" class="btn btn-primary" (click)="GotoCompanypage()">Add New Company</button>
     </div>
-    <table class="table table-bordered" id="mytable">
+    <table class="table table-bordered" id="mytable" *ngIf="!loading">
       <thead>
         <tr>
           <th>Company Name</th>

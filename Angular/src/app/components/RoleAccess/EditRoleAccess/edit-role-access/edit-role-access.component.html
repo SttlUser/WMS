@@ -6,18 +6,22 @@
                 <div class="col-sm-8">
                     <h4>Role Based Access Control</h4>
                 </div>
-                
+                <div *ngIf="loading" class="loading-spinner">
+                    <!-- Show loading spinner while data is being fetched -->
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                </div>   
             </div>
         </div>
         
         <div class="row mb-3 ml-2">
 
-            <a routerLink="/RoleAccessList">
+            <a routerLink="/RoleAccessList" *ngIf="!loading">
                 <i  class="flaticon2-arrow-2 text-dark"  ></i> 
               </a>
         </div>
        
-        <table class="table table-bordered">
+        <table class="table table-bordered" *ngIf="!loading"> 
             <thead>
                 <tr>
 
@@ -42,9 +46,8 @@
                 </ng-container>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-primary m-5" (click)="PostrbacData()">Save</button>
-
-        <button type="button" class="btn btn-secondary m-5" (click)="CloseBtn()">Close</button>
+        <button type="submit" class="btn btn-primary m-5" (click)="PostrbacData()" *ngIf="!loading">Save</button>
+        <button type="button" class="btn btn-secondary m-5" (click)="CloseBtn()" *ngIf="!loading">Close</button>
 
     </div>
 </div>

@@ -1,8 +1,10 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import * as toastr from 'toastr';
-// import toastr from 'toastr';
+import { ToastrService } from 'ngx-toastr';
+
+import { CustomToastrService } from 'src/custom-toastr.service' 
+
 
 import {
   AbstractControl,
@@ -75,7 +77,9 @@ export class LoginComponent implements OnInit {
 
     private formbuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private resto: CustomerService
+    private resto: CustomerService,
+    private toastr: ToastrService,
+    private toastrService: CustomToastrService
   ) {
     console.log(this.showNavbar);
   }
@@ -112,39 +116,27 @@ export class LoginComponent implements OnInit {
     .subscribe((res: any) => {
       localStorage.setItem('error',JSON.stringify({code: res?.errorInfo?.code,message: res?.errorInfo?.message,}));
         if (res?.errorInfo?.code !== 0) {
-          console.log('Errorx');
-          alert('Username or Password is wrong');
+          // console.log('Errorx');
+          this.toastrService.showErrorMessage("Username or password invalid")
           this.isLoading = false;
         } 
         else if (res?.errorInfo?.code == 0) {
           console.log('loggin in');
-          console.log(res);
-          // toastr.options = {
-          //   "closeButton": true,
-          //   "debug": false,
-          //   "newestOnTop": false,
-          //   "progressBar": false,
-          //   "positionClass": "toast-top-right",
-          //   "preventDuplicates": false,
-          //   "showDuration": 300,
-          //   "hideDuration": 1000,
-          //   "timeOut": 5000,
-          //   "extendedTimeOut": 1000,
-          //   "showEasing": "swing",
-          //   "hideEasing": "linear",
-          //   "showMethod": "fadeIn",
-          //   "hideMethod": "fadeOut"
-          // };
-
-          // toastr.error("Successfully login");
+          console.log(res)
           sessionStorage.setItem('loggedInId', res.id);
           this.isLoading = false;
+          this.toastrService.logInSuccess("Logged in successfully");
           this.router.navigate(['/DispayRoleMaster']);
 
           // this.toastService.recieve(this.logged_in);
         } else {
           this.isLoading = false;
+          this.toastrService.showErrorMessage("Something went wrong");
+
         }
+      },(error) => {
+        this.isLoading = false;
+        this.toastrService.showErrorMessage("Something went wrong");
       });
     // console.log("Authenticated, Now navigating to home page", this.router)
   }
@@ -174,16 +166,26 @@ export class LoginComponent implements OnInit {
     this.resto.forgetPassword(this.forgotUsername).subscribe(
       (response: any) => {
         console.log('receved table data', response);
-        const queryParams = {
-          recievedResponse: response.id,
-        };
-        this.isLoading = false;
-        this.router.navigate(['/ForgetPasswordComponent'], { queryParams });
+
+        if(response.id){
+          const queryParams = {
+            recievedResponse: response.id,
+          };
+          this.isLoading = false;
+          this.toastrService.showSuccessMessage("Change your password");
+          this.router.navigate(['/ForgetPasswordComponent'], { queryParams });
+        }
+        else{
+          this.toastrService.showErrorMessage("Invalid username or email");
+          this.isLoading = false;
+        }
       },
       (error) => {
         this.isLoading = false;
+        this.toastrService.showErrorMessage("Something went wrong");
         console.error('Error retrieving data:', error);
       }
     );
   }
+
 }
