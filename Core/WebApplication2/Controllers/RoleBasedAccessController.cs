@@ -42,6 +42,33 @@ namespace WebApplication2.Controllers
             }
             return roleAccess;
         }
+        [HttpGet("RoleAccessBasedOnParent")]
+        public async Task<List<RoleAccess>> ParentBasedAccess(int flag, int roleid)
+        {
+            List<RoleAccess> roleAccess = new List<RoleAccess>();
+            try
+            {
+                roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
+                for (int i = 0; i < roleAccess.Count; i++)
+                {
+                    if (roleAccess[i].ParentId != 0)
+                    {
+                        roleAccess[i].ParentChildData.Add(roleAccess[i].ParentId);
+                    }
+                }
+                roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
+
+                var filteredRoleAccess = roleAccess.Where(ra => ra.ParentId != 0).ToList();
+
+                filteredRoleAccess.ForEach(ra => ra.ParentChildData.Add(ra.ParentId));
+
+            }
+            catch (Exception)
+            {
+                // roleAccess.Error = ReturnError(400, string.Empty);
+            }
+            return roleAccess;
+        }
 
         [HttpPost("UpdateRoleAccessData")]
         public async Task<UpdateRoleAccess> Update([FromBody] JsonObject user)

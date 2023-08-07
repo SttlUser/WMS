@@ -81,20 +81,20 @@ namespace WebApplication2.Controllers
             return changerespo;
         }
 
-        [HttpPost("Forgot/Password")]
+        [HttpPost("forgetPassword")]
         public async Task<ChangePassRes> ForgotPass([FromBody] JsonObject role)
         {
             ChangePassRes changerespo = new ChangePassRes();
-
+            UserMaster userMaster =new UserMaster();
             try
             {
-                int id = Convert.ToInt32(role["id"].ToString());
-                string username= (string)role["username"];  
-                string password= (string)role["password"];
+                int flag = Convert.ToInt32(role["flag"].ToString());
+                string username= (string)role["forgotUsername"];  
+               
 
-                //ChanegPass.OldPassword=EncryptMethod.encrypt(ChanegPass.OldPassword);
+                //ChanegPass.OldPassword=EncryptMethod.encrypt(ChanegPass.OldPassword);   
                 //ChanegPass.NewPassword=EncryptMethod.encrypt(ChanegPass.NewPassword);
-                UserMaster userMaster = await _dBHelperRepo.Forgotpasss(3,id,username,password);
+                userMaster = await _dBHelperRepo.Forgotpasss(flag,0,0,username);
 
                 if (userMaster == null)
                 {
@@ -102,8 +102,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
-                    
-                    changerespo.Message = "Password Successfully Updated";
+                    changerespo.id = userMaster.Id;
                 }
             }
             catch (Exception ex)
@@ -113,6 +112,37 @@ namespace WebApplication2.Controllers
 
             return changerespo;
         }
+
+        [HttpPost("UpdateForgotpassword")]
+        public async Task<ChangePassRes> Forgotchange([FromBody] JsonObject role)
+        {
+            ChangePassRes changerespo = new ChangePassRes();
+            UserMaster userMaster = new UserMaster();
+            try
+            {
+                int flag = Convert.ToInt32(role["flag"].ToString());
+                int id = Convert.ToInt32(role["id"].ToString());
+                string newPassword = (string)role["newPassword"];
+
+                //NewPassword=EncryptMethod.encrypt(NewPassword);
+                userMaster = await _dBHelperRepo.upadteForgotpasss(flag, id, 0, newPassword);
+
+                if (userMaster == null)
+                {
+                    changerespo.ErrorInfo = ReturnError(1002, "User not found or password update failed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                changerespo.ErrorInfo = ReturnError(1001, ex.ToString());
+            }
+
+            return changerespo;
+        }
+
+
+
+
         private Error ReturnError(int code, string strError)
         {
             return new Error()

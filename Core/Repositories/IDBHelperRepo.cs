@@ -17,7 +17,9 @@ namespace Repositories
         #region "Login Methods"
         Task<UserMaster> GetUser(string username, string password);
         Task<ChangePassword> UpdatePassword(int flag,int id,int GC,string UserName, string Password);
-        Task<UserMaster> Forgotpasss(int flag,int id,string UserName, string Password);
+        Task<UserMaster> Forgotpasss(int flag,int GC,int GC1,string UserName);
+        Task<UserMaster> upadteForgotpasss(int flag,int GC,int GC1,string UserName);
+        Task<UserMaster> SetNewPasss(int flag, string password);
         #endregion
         #region "Role Methods"
         Task<List<RoleType>> GetRoleType();
@@ -29,6 +31,7 @@ namespace Repositories
 
         Task<RoleMasterData> UpdateRoleData(int flag,string roleName, int roletype, int lastModifiedBy, int cb_pk_id);
         Task<List<RoleAccess>> GetRoleBasedAccess(int flag,int roleid);
+        Task<List<RoleAccess>> ParentBasedAccess(int flag, int roleid);
         Task<UpdateRoleAccess> UpdateRoleAccess(int flag, int id , List<int> list);
         #endregion
 

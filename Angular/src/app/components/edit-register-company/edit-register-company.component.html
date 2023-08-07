@@ -133,7 +133,7 @@
           </div>
           <div class="form-group">
             <label>Live Service Layer URL:<span style="color: red;">*</span><br><span>Example url: https://Service Layer URL/b1s/v1</span></label>
-            <input type="text" class="form-control" id="SLUrl" formControlName="SLUrl" name="SLUrl" required />
+            <input type="text" class="form-control" id="slUrl" formControlName="slUrl" name="slUrl" required />
           </div>
           <div class="form-group">
             <label for="db_type">Database type:</label>
@@ -142,13 +142,14 @@
             <div class="custom-select-wrapper">
               <select
               class="form-select"
-                id="db_type"
-                formControlName="db_type"
-                name="db_type"
+                id="databaseType"
+                formControlName="databaseType"
+                name="databaseType"
                 required
               >
-                <option value="hana" selected>HANA</option>
-                <option value="sql">SQL</option>
+              <option value="Defualt" selected>Select</option>
+                <option value="HANA" selected>HANA</option>
+                <option value="SQL">SQL</option>
               </select>
               
 

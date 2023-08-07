@@ -109,13 +109,15 @@ namespace WebApplication2.Controllers
         public async Task<CompanyMaster> DeleteCompanyDb([FromBody] JsonArray usr)
        {
 
-            CompanyMaster comapnydelete = new CompanyMaster();
-            int flag = (int)usr[0];
-            int  company_id = (int)usr[2];
-            int LastModifiedById = (int)usr[1];
 
+                CompanyMaster comapnydelete = new CompanyMaster();
             try
             {
+                int flag = (int)usr[0];
+                int  company_id = (int)usr[2];
+                int LastModifiedById = Convert.ToInt32((usr[1]).ToString());
+               
+
                 comapnydelete = await _dBHelperRepo.DeleteCompanyDb(flag, null, null, null, null, LastModifiedById, null, null, null, null, null, company_id);   //1 is the dummy data for lastModified field                
             }
             catch (Exception ex)

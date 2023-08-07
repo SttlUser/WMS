@@ -22,10 +22,11 @@ import { RoleAcessListComponent } from './components/RoleAccess/ListingOfData/ro
 import { EditRoleAccessComponent } from './components/RoleAccess/EditRoleAccess/edit-role-access/edit-role-access.component';
 
 import { CapitalizePipe } from './capitalize.pipe';
-import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-bar';
+import {  MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutComponent } from './layout/layout.component';
 import { DataService } from './data.service';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+
 
 
 
