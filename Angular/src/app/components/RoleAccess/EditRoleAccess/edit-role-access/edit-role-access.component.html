@@ -20,19 +20,65 @@
                 <i  class="flaticon2-arrow-2 text-dark"  ></i> 
               </a>
         </div>
-       
-        <table class="table table-bordered" *ngIf="!loading"> 
-            <thead>
-                <tr>
 
-                    <th>Form Name</th>
-                    <th>Access Type</th>
+        <form [formGroup]="roleForm" (ngSubmit)="PostrbacData()" *ngIf="!loading">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th>Document</th>
+                  <th>Select</th>
                 </tr>
-            </thead>
-            <tbody [formGroup]="roleForm">
-                <ng-container *ngFor="let rol of Accessdata; let i = index">
-                    <tr>
-                        <td>{{rol?.documentmasterfield}}</td>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let document of Accessdata; let i = index">
+                  <tr>
+                    <td>
+                      {{ document.documentmasterfield }}
+                      <div *ngIf="document.parentChildData && document.parentChildData.length > 0">
+                        <table class="table table-borderless">
+                          <tr *ngFor="let child of document.parentChildData; let j = index">
+                            <td>{{ child.text }}</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </td>
+                    <td >
+                        <div *ngIf="document.flag ; else checkBox">
+                          <input type="checkbox" [checked]="document.flag" #checkboxRef id="{{document.documentid}}" (change)="checkboxChange($event, document.documentid)">
+                        </div>
+                        <ng-template #checkBox>
+                          <input type="checkbox"  #checkboxRef id="{{document.documentid}}" (change)="checkboxChange($event, document.documentid)">
+                        </ng-template>
+                        <div *ngIf="document.parentChildData && document.parentChildData.length > 0">
+                          <table class="table table-borderless">
+                            <tr *ngFor="let child of document.parentChildData; let j = index">
+                              <div *ngIf="child.disabled; else childCheckBox">
+                                <input type="checkbox" [checked]="child.disabled" #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, document.documentid, child.value)">
+                              </div>   
+                              <ng-template #childCheckBox>
+                                <input type="checkbox"  #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, document.documentid, child.value)">
+                              </ng-template>                    
+                            </tr>
+                          </table>
+                        </div>
+                    </td>
+                  </tr>
+                  
+                </ng-container>
+              </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+</div>
+
+<!-- <tr>
+                        <td>{{rol?.documentmasterfield}}
+                        <tr>
+                            <th *ngIf="rol?.parentChildData > 0">Sub-Child Access</th>
+                        </tr>
+                        </td>
+
                         <td>
                             <input class="form-check-input mt-0" type="checkbox" [formControlName]="'checkbox_' + i+1"
                             [formControlName]="'checkbox_' + rol.documentid"
@@ -42,12 +88,39 @@
                                 style="border: solid black; height: 15px; width: 15px; margin-left: 20px;">
                                 
                         </td>
-                    </tr>
-                </ng-container>
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-primary m-5" (click)="PostrbacData()" *ngIf="!loading">Save</button>
-        <button type="button" class="btn btn-secondary m-5" (click)="CloseBtn()" *ngIf="!loading">Close</button>
-
-    </div>
-</div>
+                    </tr>  [formControlName]="subItem.value" (change)="checkSubField(i)" -->
+<!-- 
+                    <table class="table table-bordered" *ngIf="!loading">
+                        <thead>
+                          <tr>
+                            <th>Form Name</th>
+                            <th>Access Type</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let rol of Accessdata; let i = index">
+                              <tr>
+                                <td>{{ rol?.documentmasterfield }}
+                                    <ng-container *ngIf="rol?.parentChildData.length > 0">
+                                        <div *ngFor="let subItem of rol.parentChildData; let j = index">
+                                          <label>
+                                            {{ subItem.text }}
+                                          </label>
+                                        </div>
+                                      </ng-container>
+            
+                                </td>
+                                <td>
+                                  <div [formGroup]="roleForm">
+                                    <input type="checkbox" [formControlName]="'parent_' + rol.roleid">   
+                                    <ng-container *ngIf="rol?.parentChildData.length > 0">
+                                      <div *ngFor="let subItem of rol.parentChildData; let j = index">                            
+                                          <input type="checkbox" [formControlName]="'subField_' + subItem.value">                              
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                      </table> -->

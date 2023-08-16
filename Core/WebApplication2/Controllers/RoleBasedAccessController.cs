@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -34,7 +35,7 @@ namespace WebApplication2.Controllers
             List<RoleAccess> roleAccess = new List<RoleAccess>();
             try
             {
-                roleAccess = await _dBHelperRepo.GetRoleBasedAccess(1,roleid);                
+                roleAccess = await _dBHelperRepo.GetRoleBasedAccess(flag, roleid);                
             }
             catch (Exception)
             {
@@ -48,22 +49,57 @@ namespace WebApplication2.Controllers
             List<RoleAccess> roleAccess = new List<RoleAccess>();
             try
             {
-                roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
+                roleAccess = await _dBHelperRepo.ParentBasedAccess(flag, roleid);
+                
                 for (int i = 0; i < roleAccess.Count; i++)
                 {
+                    roleAccess[i].flag = roleAccess[i].roleid != 0 ? true : false;
                     if (roleAccess[i].ParentId != 0)
                     {
-                        roleAccess[i].ParentChildData.Add(roleAccess[i].ParentId);
+                        //roleAccess.Where(x => x.documentid == roleAccess[i].ParentId).FirstOrDefault().ParentChildData.Add(roleAccess[i].documentid);
+
+                       
+                        if(roleAccess.Where(x => x.documentid == roleAccess[i].ParentId).FirstOrDefault().ParentChildData == null)
+                        {
+                            List<SelectListItem> child = new List<SelectListItem>();
+                            
+                            child.Add(new SelectListItem
+                            {
+                                Text = roleAccess[i].documentmasterfield,
+                                Value = roleAccess[i].documentid.ToString(),
+                                Disabled= roleAccess[i].roleid  == roleid ? true:false,
+
+                            });
+                            roleAccess.Where(x => x.documentid == roleAccess[i].ParentId).FirstOrDefault().ParentChildData = child;
+                        }
+                        else
+                        {
+                            roleAccess.Where(x => x.documentid == roleAccess[i].ParentId).FirstOrDefault().ParentChildData.Add(new SelectListItem
+                            {
+                                Text = roleAccess[i].documentmasterfield,
+                                Value = roleAccess[i].documentid.ToString(),
+                                Disabled = roleAccess[i].roleid == roleid ? true : false,
+                            });
+                        }
+                        
+                        //roleAccess.RemoveAt(i);
+                        //roleAccess[i].ParentChildData.Add(roleAccess[i].documentid);
+                        //roleAccess[i].ParentChildData.Append(roleAccess[i].documentid);
+                    }
+                    else
+                    {
+                        roleAccess[i].ParentChildData = new List<SelectListItem>(); 
                     }
                 }
-                roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
+                roleAccess=roleAccess.Where(x=>x.ParentId == 0).ToList();
+                //roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
 
-                var filteredRoleAccess = roleAccess.Where(ra => ra.ParentId != 0).ToList();
+                //var filteredRoleAccess = roleAccess.Where(ra => ra.ParentId != 0).ToList();
 
-                filteredRoleAccess.ForEach(ra => ra.ParentChildData.Add(ra.ParentId));
+                //filteredRoleAccess.ForEach(ra => ra.ParentChildData.Add(ra.ParentId));
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // roleAccess.Error = ReturnError(400, string.Empty);
             }
@@ -80,7 +116,10 @@ namespace WebApplication2.Controllers
             {
                 int roleid = Convert.ToInt32(user["roleid"].ToString());
                 JArray documentIdArray = JsonConvert.DeserializeObject<JArray>(user["Documentid"].ToString());
-                documentIds = documentIdArray.ToObject<List<int>>();
+                //documentIds = documentIdArray.ToObject<List<int>>().Select(int.Parse).ToList();
+                documentIds = documentIdArray.ToObject<List<string>>()
+                                              .Select(id => int.Parse(id))
+                                              .ToList();
                 roleAccess = await _dBHelperRepo.UpdateRoleAccess(2, roleid, documentIds);
             }
             catch (Exception e) 
