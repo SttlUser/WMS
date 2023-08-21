@@ -50,7 +50,7 @@ export class RegisterCompanyComponent implements OnInit {
       tableData: this.formBuilder.array([this.createTableRow()]),
       putCheckbox: [true],
       ssccCheckbox: [true],
-      cartonCheckbox: [true],
+      cartonCheckbox: [true], 
       autoCheckbox: [true],
       whsInput: ['1'],
     });
