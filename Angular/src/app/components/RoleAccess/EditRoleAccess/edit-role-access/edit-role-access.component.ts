@@ -48,11 +48,9 @@ export class EditRoleAccessComponent implements OnInit, AfterViewInit  {
 
   ngAfterViewInit() {
     this.checkboxes!.forEach(checkbox => {
-      // Your logic here
     });
   
     this.childCheckboxes!.forEach(childCheckbox => {
-      // Your logic here
     });
   }
 
@@ -80,21 +78,10 @@ export class EditRoleAccessComponent implements OnInit, AfterViewInit  {
     if (err.code !== 0) {
       console.log('Error', err);
       this.router.navigate(['/login']);
-      // console.log(this.data);
     }
-    // this.GetAccessData(http);
+  
   }
-  private initForm() {
-    this.roleForm = this.formBuilder.group({
-      documents: this.formBuilder.array([])
-    });
-  }
-
-  private initializeFormControls() {
-    const documentControls = this.Accessdata.map(() => this.formBuilder.control(false));
-    this.roleForm.setControl('documents', this.formBuilder.array(documentControls));
-
-  }
+  
 
   GetAccessData(http: HttpClient) {
     this.route.queryParams.subscribe((params) => {
@@ -104,13 +91,6 @@ export class EditRoleAccessComponent implements OnInit, AfterViewInit  {
       (response: any) => {
         console.log('received table data', response);
         this.Accessdata = response;
-        // response.forEach((element: any) => {
-        //   if (element.parentChildData.length > 0) {
-        //     this.subAccessdata = element.parentChildData;
-        //     console.log(this.subAccessdata);
-        //   }
-        // });
-        //this.initializeFormControls();
         this.loading = false;
         
       },
@@ -123,19 +103,6 @@ export class EditRoleAccessComponent implements OnInit, AfterViewInit  {
 
   CloseBtn() {}
 
-  // PostrbacData() {
-  //   const selectedDocumentsFormArray = this.roleForm.get('documents') as FormArray;
-
-  //   if (selectedDocumentsFormArray) {
-  //     const selectedIndexes = selectedDocumentsFormArray.controls
-  //       .map((control, index) => control.value ? index : null)
-  //       .filter(index => index !== null);
-
-  //     console.log('Selected Checkbox Indexes:', selectedIndexes);
-  //     // You can send the selectedIndexes data to your server or process it as needed
-  //   }
-    
-  // }
   PostrbacData() {
  
   const checkedValues: string[] = [];
@@ -157,19 +124,53 @@ export class EditRoleAccessComponent implements OnInit, AfterViewInit  {
     console.log('Checked Values:', checkedValues);
     this.resto.PostRoleAccessData(this.id,checkedValues).subscribe((res:any)=>{
       console.log("data submited")
+      this.toastrService.showSuccessMessage("User updated successfully");
+      this.router.navigate(['/RoleAccessList']);
     },
     (err)=>{
       console.log("data not submitted")
+    this.toastrService.showErrorMessage("Something went wrong");
     })
   }
 
-  checkboxChange(event: any, documentIndex: number) {
-    // Access the checkbox value using event.target.checked and the document index
-    console.log(`Checkbox at document index ${documentIndex} changed to ${event.target.checked}`);
-  }
+  // checkboxChange(event: any, documentIndex: number) {
+  //   // Access the checkbox value using event.target.checked and the document index
+  //   console.log(`Checkbox at document index ${documentIndex} changed to ${event.target.checked}`);
+  // }
   
+  // childCheckboxChange(event: any, documentIndex: number, childIndex: number) {
+  //   // Access the checkbox value using event.target.checked and the document and child indexes
+  //   console.log(`Child checkbox at document index ${documentIndex}, child index ${childIndex} changed to ${event.target.checked}`);
+  // }
+
+  parentCheckboxChange(event: any, documentIndex: number) {
+    // Update the parent checkbox's flag
+    this.Accessdata[documentIndex].flag = event.target.checked;
+  
+    // Update all child checkboxes' state
+    this.Accessdata[documentIndex].parentChildData.forEach((child:any) => {
+      child.disabled = event.target.checked;
+    });
+  
+    // Update the form control value
+    const parentFormControl = this.roleForm.get(`${this.Accessdata[documentIndex].documentid}`);
+    parentFormControl?.setValue(event.target.checked);
+  
+    this.cdRef.detectChanges(); // Detect changes to the view
+  }
+
   childCheckboxChange(event: any, documentIndex: number, childIndex: number) {
-    // Access the checkbox value using event.target.checked and the document and child indexes
-    console.log(`Child checkbox at document index ${documentIndex}, child index ${childIndex} changed to ${event.target.checked}`);
+    // Update the child checkbox's state
+    this.Accessdata[documentIndex].parentChildData[childIndex].disabled = event.target.checked;
+  
+    // Check if at least one child checkbox is selected, and update the parent checkbox accordingly
+    const atLeastOneChildSelected = this.Accessdata[documentIndex].parentChildData.some((child:any) => child.disabled);
+    this.Accessdata[documentIndex].flag = atLeastOneChildSelected;
+  
+    // Update the form control values
+    const parentFormControl = this.roleForm.get(`CheDoc_${this.Accessdata[documentIndex].documentid}`);
+    parentFormControl?.setValue(atLeastOneChildSelected);
+  
+    this.cdRef.detectChanges(); // Detect changes to the view
   }
 }

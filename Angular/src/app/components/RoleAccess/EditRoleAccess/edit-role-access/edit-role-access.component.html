@@ -44,19 +44,19 @@
                     </td>
                     <td >
                         <div *ngIf="document.flag ; else checkBox">
-                          <input type="checkbox" [checked]="document.flag" #checkboxRef id="{{document.documentid}}" (change)="checkboxChange($event, document.documentid)">
+                          <input type="checkbox" [checked]="document.flag" #checkboxRef id="{{document.documentid}}" (change)="parentCheckboxChange($event, i)">
                         </div>
                         <ng-template #checkBox>
-                          <input type="checkbox"  #checkboxRef id="{{document.documentid}}" (change)="checkboxChange($event, document.documentid)">
+                          <input type="checkbox"  #checkboxRef id="{{document.documentid}}" (change)="parentCheckboxChange($event, i)">
                         </ng-template>
                         <div *ngIf="document.parentChildData && document.parentChildData.length > 0">
                           <table class="table table-borderless">
                             <tr *ngFor="let child of document.parentChildData; let j = index">
                               <div *ngIf="child.disabled; else childCheckBox">
-                                <input type="checkbox" [checked]="child.disabled" #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, document.documentid, child.value)">
+                                <input type="checkbox" [checked]="child.disabled" #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, i, j)">
                               </div>   
                               <ng-template #childCheckBox>
-                                <input type="checkbox"  #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, document.documentid, child.value)">
+                                <input type="checkbox"  #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, i, j)">
                               </ng-template>                    
                             </tr>
                           </table>
