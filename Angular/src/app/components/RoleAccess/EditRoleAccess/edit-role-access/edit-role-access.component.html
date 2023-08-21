@@ -26,7 +26,7 @@
               <thead>
                 <tr>
                   <th>Document</th>
-                 
+                  <th>Select</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,8 +42,28 @@
                         </table>
                       </div>
                     </td>
-                    
+                    <td >
+                        <div *ngIf="document.flag ; else checkBox">
+                          <input type="checkbox" [checked]="document.flag" #checkboxRef id="{{document.documentid}}" (change)="checkboxChange($event, document.documentid)">
+                        </div>
+                        <ng-template #checkBox>
+                          <input type="checkbox"  #checkboxRef id="{{document.documentid}}" (change)="checkboxChange($event, document.documentid)">
+                        </ng-template>
+                        <div *ngIf="document.parentChildData && document.parentChildData.length > 0">
+                          <table class="table table-borderless">
+                            <tr *ngFor="let child of document.parentChildData; let j = index">
+                              <div *ngIf="child.disabled; else childCheckBox">
+                                <input type="checkbox" [checked]="child.disabled" #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, document.documentid, child.value)">
+                              </div>   
+                              <ng-template #childCheckBox>
+                                <input type="checkbox"  #childCheckboxRef id="{{child.value}}" (change)="childCheckboxChange($event, document.documentid, child.value)">
+                              </ng-template>                    
+                            </tr>
+                          </table>
+                        </div>
+                    </td>
                   </tr>
+                  
                 </ng-container>
               </tbody>
             </table>

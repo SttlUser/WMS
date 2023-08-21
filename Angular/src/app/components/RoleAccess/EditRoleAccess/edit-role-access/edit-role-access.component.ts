@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CustomerService } from 'src/app/customer.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,7 +12,10 @@ import { CustomToastrService } from 'src/custom-toastr.service';
   templateUrl: './edit-role-access.component.html',
   styleUrls: ['./edit-role-access.component.css'],
 })
-export class EditRoleAccessComponent implements OnInit {
+export class EditRoleAccessComponent implements OnInit, AfterViewInit  {
+
+  @ViewChildren('checkboxRef') checkboxes!: QueryList<ElementRef<HTMLInputElement>> ;
+  @ViewChildren('childCheckboxRef') childCheckboxes!: QueryList<ElementRef<HTMLInputElement>> ;
   loading: boolean = true;
   showNavbar: boolean = true;
   isLoggedIn: boolean = true;
@@ -28,7 +31,29 @@ export class EditRoleAccessComponent implements OnInit {
     });
 
     this.GetAccessData(this.http);
-    this.initForm();
+    //this.initForm();
+
+    this.roleForm = this.formBuilder.group({});
+
+  for (const document of this.Accessdata) {
+    this.roleForm.addControl(`CheDoc_${document.documentid}`, this.formBuilder.control(false));
+    
+    if (document.parentChildData && document.parentChildData.length > 0) {
+      for (const child of document.parentChildData) {
+        this.roleForm.addControl(`CheDoc_${document.documentid}_${child.value}`, this.formBuilder.control(false));
+      }
+    }
+  }
+  }
+
+  ngAfterViewInit() {
+    this.checkboxes!.forEach(checkbox => {
+      // Your logic here
+    });
+  
+    this.childCheckboxes!.forEach(childCheckbox => {
+      // Your logic here
+    });
   }
 
   constructor(
@@ -87,6 +112,7 @@ export class EditRoleAccessComponent implements OnInit {
         // });
         //this.initializeFormControls();
         this.loading = false;
+        
       },
       (error) => {
         console.error('Error retrieving data:', error);
@@ -97,17 +123,53 @@ export class EditRoleAccessComponent implements OnInit {
 
   CloseBtn() {}
 
-  PostrbacData() {
-    const selectedDocumentsFormArray = this.roleForm.get('documents') as FormArray;
+  // PostrbacData() {
+  //   const selectedDocumentsFormArray = this.roleForm.get('documents') as FormArray;
 
-    if (selectedDocumentsFormArray) {
-      const selectedIndexes = selectedDocumentsFormArray.controls
-        .map((control, index) => control.value ? index : null)
-        .filter(index => index !== null);
+  //   if (selectedDocumentsFormArray) {
+  //     const selectedIndexes = selectedDocumentsFormArray.controls
+  //       .map((control, index) => control.value ? index : null)
+  //       .filter(index => index !== null);
 
-      console.log('Selected Checkbox Indexes:', selectedIndexes);
-      // You can send the selectedIndexes data to your server or process it as needed
-    }
+  //     console.log('Selected Checkbox Indexes:', selectedIndexes);
+  //     // You can send the selectedIndexes data to your server or process it as needed
+  //   }
     
+  // }
+  PostrbacData() {
+ 
+  const checkedValues: string[] = [];
+
+    this.checkboxes.forEach(checkbox => {
+      if (checkbox.nativeElement.checked) {
+        console.log(checkbox.nativeElement.id)
+        checkedValues.push(checkbox.nativeElement.id);
+      }
+    });
+
+    this.childCheckboxes.forEach(childCheckbox => {
+      if (childCheckbox.nativeElement.checked) {
+        console.log(childCheckbox.nativeElement.checked)
+        checkedValues.push(childCheckbox.nativeElement.id);
+      }
+    });
+
+    console.log('Checked Values:', checkedValues);
+    this.resto.PostRoleAccessData(this.id,checkedValues).subscribe((res:any)=>{
+      console.log("data submited")
+    },
+    (err)=>{
+      console.log("data not submitted")
+    })
+  }
+
+  checkboxChange(event: any, documentIndex: number) {
+    // Access the checkbox value using event.target.checked and the document index
+    console.log(`Checkbox at document index ${documentIndex} changed to ${event.target.checked}`);
+  }
+  
+  childCheckboxChange(event: any, documentIndex: number, childIndex: number) {
+    // Access the checkbox value using event.target.checked and the document and child indexes
+    console.log(`Child checkbox at document index ${documentIndex}, child index ${childIndex} changed to ${event.target.checked}`);
   }
 }
