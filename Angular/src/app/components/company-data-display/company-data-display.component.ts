@@ -101,7 +101,7 @@ export class CompanyDataDisplayComponent implements AfterViewInit {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false,
+        paging: true,
         order: [[ 4, "desc" ]]
       });
     });

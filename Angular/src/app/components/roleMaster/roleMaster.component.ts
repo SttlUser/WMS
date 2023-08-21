@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CustomerService } from '../../customer.service';
-
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomToastrService } from 'src/custom-toastr.service' 
 
@@ -57,8 +56,6 @@ export class RoleMasterComponent {
       return this.items;
     });
   }
-
-
 
   PostDataForm() {
     const formData = { ...this.ngForm.value , createdBy: this.loggedInId};

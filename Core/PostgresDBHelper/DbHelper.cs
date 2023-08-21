@@ -22,6 +22,24 @@ namespace PostgresDBHelper
                 
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserDetails\"(@username,@password)", new { username, password });
         }
+        public async Task<ChangePassword> UpdatePassword(int flag,int id ,int GC, string oldpass, string NPassword)
+        {
+
+            return await _pgDbDapperHelperRepo.GetAsync<ChangePassword>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@id,@GC,@oldpass,@NPassword)", new {flag,id ,GC,oldpass, NPassword });
+        }
+        public async Task<UserMaster> Forgotpasss(int flag,int GC,int GC1 ,string username)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@GC,@GC1,@username)", new { flag, GC,GC1, username });
+        }
+        public async Task<UserMaster> upadteForgotpasss(int flag, int id, int GC1, string password)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@id,@GC1,@password)", new { flag, id, GC1, password });
+        }
+        public async Task<UserMaster> SetNewPasss(int flag, string username)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@username)", new { flag, username });
+        }
+
         #endregion
 
         #region "Role Management"
@@ -55,6 +73,18 @@ namespace PostgresDBHelper
         {
             return await _pgDbDapperHelperRepo.GetAsync<RoleMasterData>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetRoleMasterDetails\"(@flag,@roletype,@cb_pk_id, @roleName,@lastModifiedBy)", new { flag, roletype ,cb_pk_id,roleName,lastModifiedBy });
         }
+        public async Task<List<RoleAccess>> GetRoleBasedAccess(int flag, int roleid)
+        {
+            return await _pgDbDapperHelperRepo.GetAll<RoleAccess>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetRoleDocumentMappingDetails\"(@flag,@roleid)", new { flag, roleid });
+        }
+        public async Task<List<RoleAccess>> ParentBasedAccess(int flag, int roleid)
+        {
+            return await _pgDbDapperHelperRepo.GetAll<RoleAccess>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetRoleDocumentMappingDetails\"(@flag,@roleid)", new { flag, roleid });
+        }
+        public async Task<UpdateRoleAccess> UpdateRoleAccess(int flag, int roleid, List<int> data)
+        {
+            return await _pgDbDapperHelperRepo.GetAsync<UpdateRoleAccess>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * from \"SilverWMS\".\"GetRoleDocumentMappingDetails\"(@flag,@roleid,@data)", new { flag, roleid, data });
+        }
 
         public async Task<List<RoleMasterData>> GetRoleBasedAccess(int flag = 1)
         {
@@ -73,11 +103,10 @@ namespace PostgresDBHelper
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetUserMasterDetails\" ( @flag,@ins_del_id,@cb_pk_id)", new { flag, ins_del_id, cb_pk_id  });
 
         }
-<<<<<<< HEAD
-        public async Task<UserMaster> CreateUser(int flag, string firstname, string lastname, string username, string email, string password, string phone, int cb_pk_id, int ins_del_id)
-=======
+
         public async Task<UserMaster> CreateUser(int flag, string firstname, string lastname, string username, string email, string password, string phone, int cb_pk_id,int ins_del_id)
->>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
+
+
         {
             return await _pgDbDapperHelperRepo.GetAsync<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"GetUserMasterDetails\"(@flag,@ins_del_id,@cb_pk_id,@firstname,@lastname,@password,@email,@phone,@username) ", new {
                 flag,
@@ -88,7 +117,7 @@ namespace PostgresDBHelper
                 password,
                 email,
                 phone,
-<<<<<<< HEAD
+
                 username,
             });
         }
@@ -116,8 +145,6 @@ namespace PostgresDBHelper
             return await _pgDbDapperHelperRepo.GetAll<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id,@has_put_away_proc,@has_sscc_no_management,@has_carton_no_management,@has_auto_batch_configurator,@default_warehouse_code)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, comp_id, has_put_away_proc, has_sscc_no_management, has_carton_no_management, has_auto_batch_configurator, default_warehouse_code });
         }
 
-        
-
         public async Task<CompanyMaster> DeleteCompanyDb(int flag, string? company_name, string? slurl, string? slusername, string? slpassword, int lastmodifiedby, string? phone, string? email, string? db_type, List<string>? sapcompanyname, List<string>? sldbname, int comp_id)
         {
             return await _pgDbDapperHelperRepo.GetAsync<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, comp_id });
@@ -131,14 +158,7 @@ namespace PostgresDBHelper
         {
             return await _pgDbDapperHelperRepo.GetAll<CompanyMaster>(AppSettings.ConnectionStrings.PgDbConStr, "SELECT * FROM \"SilverWMS\".\"GetCompanyMasterDetails\"(@flag,@company_name,@slurl,@slusername,@slpassword,@lastmodifiedby,@phone,@email,@db_type,@sapcompanyname,@sldbname,@comp_id)", new { flag, company_name, slurl, slusername, slpassword, lastmodifiedby, phone, email, db_type, sapcompanyname, sldbname, comp_id });
         }
-
-
-=======
-                username,          
-            });
-        }
->>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
-
+ 
         public async Task<UserMaster> UpdateUser(int flag, int cb_pk_id, string Firstname, string Lastname, string Password, string Email, string Phone, int ins_del_id)
         {
 
@@ -147,10 +167,7 @@ namespace PostgresDBHelper
         }
 
 
-        public async Task<UserMaster> GetUserById(int id)
-        {
-            return await _pgDbDapperHelperRepo.GetId<UserMaster>(AppSettings.ConnectionStrings.PgDbConStr, "Select * from \"SilverWMS\".\"UserMaster\" where \"ID\" = " + id, 0);
-        }
+     
         #endregion
 
     }

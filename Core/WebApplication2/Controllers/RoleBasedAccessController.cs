@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -14,11 +13,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-=======
-using Microsoft.Extensions.Options;
-using Models;
-using Repositories;
->>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
 
 namespace WebApplication2.Controllers
 {
@@ -35,7 +29,6 @@ namespace WebApplication2.Controllers
             _appSettings = appSettings.Value;
         }
         [HttpGet("GetRoleBasedAccessData")]
-<<<<<<< HEAD
         public async Task<List<RoleAccess>> Get(int flag,int roleid)
         {
             List<RoleAccess> roleAccess = new List<RoleAccess>();
@@ -46,6 +39,33 @@ namespace WebApplication2.Controllers
             catch (Exception)
             {
                // roleAccess.Error = ReturnError(400, string.Empty);
+            }
+            return roleAccess;
+        }
+        [HttpGet("RoleAccessBasedOnParent")]
+        public async Task<List<RoleAccess>> ParentBasedAccess(int flag, int roleid)
+        {
+            List<RoleAccess> roleAccess = new List<RoleAccess>();
+            try
+            {
+                roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
+                for (int i = 0; i < roleAccess.Count; i++)
+                {
+                    if (roleAccess[i].ParentId != 0)
+                    {
+                        roleAccess[i].ParentChildData.Add(roleAccess[i].ParentId);
+                    }
+                }
+                roleAccess = await _dBHelperRepo.ParentBasedAccess(1, roleid);
+
+                var filteredRoleAccess = roleAccess.Where(ra => ra.ParentId != 0).ToList();
+
+                filteredRoleAccess.ForEach(ra => ra.ParentChildData.Add(ra.ParentId));
+
+            }
+            catch (Exception)
+            {
+                // roleAccess.Error = ReturnError(400, string.Empty);
             }
             return roleAccess;
         }
@@ -80,22 +100,6 @@ namespace WebApplication2.Controllers
         }
 
 
-=======
-        public async Task<List<RoleMasterData>> Get()
-        {
-            try
-            {
-                List<RoleMasterData> roleBsed = await _dBHelperRepo.GetRoleBasedAccess(1);
-                return roleBsed;
-            }
-            catch (Exception)
-            {
-                return new List<RoleMasterData>();
-            }
-        }
-
-        
->>>>>>> f22db514359c0218a4c5fb8afa48b86155668e1c
 
     }
 }

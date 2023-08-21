@@ -63,7 +63,7 @@ export class RoleAcessListComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false
+        paging: true
       });
     });
   }

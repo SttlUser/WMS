@@ -111,7 +111,7 @@ export class UsermasterComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false,
+        paging: true,
         order: [[ 5, "desc" ]]
       });
      

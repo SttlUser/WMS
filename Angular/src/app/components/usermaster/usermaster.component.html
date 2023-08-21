@@ -1,6 +1,8 @@
 <div class="container" style="background-color: rgb(253, 253, 253);border-radius: 15px;">
 
     <div class="table-wrapper" style="padding: 2vh;">
+        
+
         <div class="table-title">
             <br>
             <div class="row">
@@ -31,8 +33,6 @@
                     <th>Phone</th>
                     <th>CreatedDate</th>
                     <th>CreatedBy</th>
-                    <!-- <th>LastmodifiedDate</th> -->
-                    <!-- <th>LastmodifiedBy</th> -->
                     <th>Role</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -49,8 +49,6 @@
                         <td>{{usr?.phone}}</td>
                         <td>{{usr?.createdDate}}</td>
                         <td>{{usr?.createdByName}}</td>
-                        <!-- <td>{{usr?.LastmodifiedDate}}</td>
-                        <td>{{usr?.lastModifiedBy}}</td> -->
                         <td>{{usr?.roleName}}</td>
                         <td>
                             <i *ngIf="usr.isDelete else activeicon" class="flaticon2-cancel-music text-danger"></i> 

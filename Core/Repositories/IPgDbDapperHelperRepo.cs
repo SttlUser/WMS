@@ -15,7 +15,6 @@ namespace Repositories
         Task<T> GetAsync<T>(string pgDbConStr, string v);
         Task<List<T>> GetAll<T>(string constring, string command, object flag);
 
-        //Task<T> GetAsync<T>(string constring, string command, object parms);
 
     }
 }

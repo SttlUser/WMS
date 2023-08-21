@@ -29,5 +29,12 @@ export class LayoutComponent  implements OnInit {
       this.header = data.header;
       this.subheader = data.subheader;
     });
+
+   
   }  
+  isDrawerOpen: boolean = false;
+
+  toggleDrawer() {
+    this.isDrawerOpen = !this.isDrawerOpen;
+  }
 }

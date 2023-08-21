@@ -15,7 +15,7 @@ namespace Models
         public int CreatedBy { get; set; }
         public string LastModifiedDate { get; set;}
         public int LastModifiedBy { get; set; }
-        public string isActive { get; set; }
+        public bool? isActive { get; set; }
         public string CreatedByName { get; set; }
         public string LastModifiedByName { get; set; }
         public string RoleName { get; set; }

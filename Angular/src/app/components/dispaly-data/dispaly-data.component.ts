@@ -103,7 +103,7 @@ export class DispalyDataComponent {
         scrollX:true,
         autoWidth:true,
         retrieve: true,
-        paging: false,
+        paging: true,
         order: [[ 2, "desc" ]]
       });
     });
